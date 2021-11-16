@@ -5,9 +5,7 @@ module.exports = {
 	darkMode: false, // or 'media' or 'class'
 	theme: {
 		fontFamily: {
-			text: ["Kanit", "sans-serif"],
-			header: ["Fredoka One", "sans-serif"],
-			navbar: ["Fredoka One", "sans-serif"],
+			default: ["Kanit", "sans-serif"],
 		},
 		extend: {
 			colors: {

@@ -1,6 +1,6 @@
 import Character from "@components/Character";
 
-const CharacterPage = () => {
+const ViewCharacter = () => {
 	return (
 		<div className="flex justify-center w-full h-full">
 			<Character />
@@ -8,4 +8,4 @@ const CharacterPage = () => {
 	);
 };
 
-export default CharacterPage;
+export default ViewCharacter;

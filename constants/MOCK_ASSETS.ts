@@ -205,6 +205,6 @@ const PLAYER_TEXTURE: AssetTexture = {
 	},
 };
 
-const ABILITIES: any = ["q", "e", "w", "r", "space", "shift"];
+const ABILITIES: any = ["Default attack", "Spectral throw", "Rage", "Knock up", "Passive #1", "Passive #2"];
 
 export default { PLAYER, IDLE_ANIMATION, PLAYER_TEXTURE, ABILITIES };

@@ -7,15 +7,15 @@ import Stats from "./Stats";
 const Character: React.FC = () => {
 	return (
 		<div className="flex justify-between w-full">
-			<div className="card-secondary flex-col m-4 p-4 max-w-md rounded-md">
+			<div className="flex-col max-w-md p-4 m-4 rounded-md card-secondary">
 				<Header />
 				<Description />
 				<Animations />
 			</div>
-			<div className="card-secondary flex-col my-4 p-2 w-full">
+			<div className="w-full p-2 my-4 card-secondary">
 				<Abilities />
 			</div>
-			<div className="card-secondary m-4 p-4">
+			<div className="p-4 m-4 card-secondary">
 				<Stats />
 			</div>
 		</div>

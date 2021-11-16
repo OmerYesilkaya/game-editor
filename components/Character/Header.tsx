@@ -1,5 +1,5 @@
 const Header: React.FC = () => {
-	return <div className="navbar-pattern h-min relative flex-col px-4 py-2 text-gray-100 font-text text-2xl font-bold rounded-md">Tankart</div>;
+	return <div className="relative flex-col px-4 py-2 text-2xl font-bold text-gray-100 rounded-md navbar-pattern h-min font-default">Tankart</div>;
 };
 
 export default Header;

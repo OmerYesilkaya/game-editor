@@ -3,11 +3,11 @@ import Ability from "./Ability";
 
 const Abilities: React.FC = () => {
 	return (
-		<div className="card-primary flex-col h-full">
+		<div className="card-primary">
 			<p className="sub-header-primary">Abilities</p>
-			<div className="flex flex-col mt-1 h-full overflow-y-auto">
-				{MOCK_ASSETS.ABILITIES.map((_, index: number) => (
-					<Ability key={index} index={index} />
+			<div className="flex-col flex-auto min-h-0 mt-1 overflow-y-auto">
+				{MOCK_ASSETS.ABILITIES.map((ability: string, index: number) => (
+					<Ability key={index} ability={ability} />
 				))}
 			</div>
 		</div>
