@@ -1,12 +1,13 @@
 import MOCK_ASSETS from "constants/MOCK_ASSETS";
+import { AbilityType } from "types/ability";
 import Ability from "./Ability";
 
 const Abilities: React.FC = () => {
 	return (
 		<div className="card-primary">
 			<p className="sub-header-primary">Abilities</p>
-			<div className="flex-col flex-auto min-h-0 mt-1 overflow-y-auto">
-				{MOCK_ASSETS.ABILITIES.map((ability: string, index: number) => (
+			<div className="flex-col mt-1">
+				{MOCK_ASSETS.ABILITIES.map((ability: AbilityType, index: number) => (
 					<Ability key={index} ability={ability} />
 				))}
 			</div>

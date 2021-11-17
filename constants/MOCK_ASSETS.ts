@@ -1,5 +1,13 @@
+import { AbilityType } from "types/ability";
 import { AssetAnimation, AssetPlayer, AssetTexture } from "types/assets";
 import { AnimationPriority, AnimationTransitionType } from "types/asset_enums";
+
+import defaultAttack from "public/assets/svgs/skill1.svg";
+import skill2 from "public/assets/svgs/skill2.svg";
+import skill3 from "public/assets/svgs/skill3.svg";
+import skill4 from "public/assets/svgs/skill4.svg";
+import skill5 from "public/assets/svgs/skill5.svg";
+import skill6 from "public/assets/svgs/skill6.svg";
 
 const PLAYER: AssetPlayer = {
 	Health: 200,
@@ -205,6 +213,15 @@ const PLAYER_TEXTURE: AssetTexture = {
 	},
 };
 
-const ABILITIES: any = ["Default attack", "Spectral throw", "Rage", "Knock up", "Passive #1", "Passive #2"];
+const ABILITIES: AbilityType[] = [
+	{ name: "Default attack", icon: defaultAttack },
+	{ name: "Slam", icon: skill2 },
+	{ name: "Enchant Weapon", icon: skill3 },
+	{ name: "Knock up", icon: skill4 },
+	{ name: "Spectral throw", icon: skill6 },
+	{ name: "Rage", icon: skill5 },
+];
 
-export default { PLAYER, IDLE_ANIMATION, PLAYER_TEXTURE, ABILITIES };
+const exports = { PLAYER, IDLE_ANIMATION, PLAYER_TEXTURE, ABILITIES };
+export default exports;
+// ?? why is this a warning??!?!?

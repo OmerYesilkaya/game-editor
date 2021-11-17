@@ -11,17 +11,17 @@ const Animations = () => {
 
 	return (
 		<div className="mt-2">
-			<div className="card-primary flex-col">
+			<div className="flex-col card-primary">
 				<p className="sub-header-primary">Animations</p>
-				<select className="mt-2 pl-1 rounded-sm shadow-sm">
+				<select className="w-full pl-1 mt-2 rounded-sm shadow-sm">
 					<option>Idle</option>
 					<option>Walk</option>
 					<option>Attack</option>
 				</select>
-				<div className="card-secondary relative my-2">
+				<div className="relative my-2 card-secondary">
 					<AnimationPlayer texture={Player} width={250} height={250} />
 					<button
-						className="absolute right-1 top-1 px-1 py-0 w-12 text-blue-500 text-sm bg-gray-100 active:bg-gray-200 rounded-md shadow-md transition-colors"
+						className="absolute w-12 px-1 py-0 text-sm text-blue-500 transition-colors bg-gray-100 rounded-md shadow-md right-1 top-1 active:bg-gray-200"
 						onClick={() => nextAnimationSpeed()}
 					>
 						{animationSpeeds[speedIndex].label}

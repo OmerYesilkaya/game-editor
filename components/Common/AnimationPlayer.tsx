@@ -74,7 +74,7 @@ const AnimationPlayer: React.FC<AnimationPlayerProps> = ({ texture, width, heigh
 		return () => window.cancelAnimationFrame(lastAnimationRequestID);
 	}, [texture.src, width, height]);
 
-	return <canvas className="z-1" ref={canvasRef} width={width} height={height} />;
+	return <canvas className="z-10" ref={canvasRef} width={width} height={height} />;
 };
 
 export default AnimationPlayer;

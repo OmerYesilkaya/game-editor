@@ -1,16 +1,7 @@
 import { AnimationPriority, AnimationTransitionType } from "./asset_enums";
 
 export type AssetPlayer = {
-	Health: number;
-	Shield: number;
-	Armor: number;
-	Energy: number;
-	Power: number;
-	Mastery: number;
-	Speed: number;
-	CDR: number;
-	Haste: number;
-	TurnRate: number;
+	[key: string]: number;
 };
 
 type Position = {

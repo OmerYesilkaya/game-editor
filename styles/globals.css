@@ -11,12 +11,8 @@
 	}
 
 	.text-primary {
-		@apply flex p-3 font-semibold font-default;
+		@apply p-3 font-semibold font-default;
 	}
-	.button-primary {
-		@apply w-16 px-3 py-1 text-gray-100 bg-blue-600 rounded-md shadow-md;
-	}
-
 	.sub-header-primary {
 		@apply px-2 text-lg font-bold text-white bg-blue-500 rounded-md shadow-md font-default;
 	}

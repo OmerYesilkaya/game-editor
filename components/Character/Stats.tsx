@@ -29,13 +29,11 @@ const stats = [
 
 const Stats: React.FC = () => {
 	return (
-		<div>
-			<div className="card-primary flex flex-col w-96">
-				<div className="sub-header-primary flex mb-2 w-full">Stats</div>
-				{Object.keys(MOCK_ASSETS.PLAYER).map((stat, index: number) => {
-					return <InputWithIcon key={index} icon={stats[index].icon} label={stats[index].label} />;
-				})}
-			</div>
+		<div className="flex flex-col card-primary">
+			<div className="flex w-full mb-2 sub-header-primary">Stats</div>
+			{Object.keys(MOCK_ASSETS.PLAYER).map((stat, index: number) => {
+				return <InputWithIcon key={index} icon={stats[index].icon} label={stats[index].label} />;
+			})}
 		</div>
 	);
 };

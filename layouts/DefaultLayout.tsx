@@ -1,12 +1,13 @@
+import Footer from "@components/Footer";
 import Navbar from "@components/Navbar";
 import { NextPage } from "next";
 
 const DefaultLayout: NextPage = ({ children }) => {
 	return (
-		<div className="background-pattern flex flex-col w-screen h-screen bg-blue-900">
+		<div className="flex flex-col h-screen bg-blue-900 background-pattern">
 			<Navbar />
-			<main className="flex flex-grow">{children}</main>
-			{/* <Footer /> */}
+			<main className="flex flex-auto overflow-y-auto">{children}</main>
+			<Footer />
 		</div>
 	);
 };
