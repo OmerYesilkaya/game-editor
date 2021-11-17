@@ -50,19 +50,21 @@ const Upgrades: React.FC = () => {
 	return (
 		<div className="flex flex-col card-primary">
 			<p className="sub-header-primary">Upgrades</p>
-			{dummyUpgrades.map((upgrade, index) => (
-				<div
-					key={index}
-					className={`
+			<div className="flex flex-col gap-1.5 mt-1 card-secondary">
+				{dummyUpgrades.map((upgrade, index) => (
+					<div
+						key={index}
+						className={`
           bg-${RarityLookUp[upgrade.type].bg}
           text-${RarityLookUp[upgrade.type].text}
           border-${RarityLookUp[upgrade.type].border}
-          border-4  rounded-sm px-1 mt-1 flex items-center shadow-md h-10`}
-				>
-					<div className={`w-6 h-6 bg-${RarityLookUp[upgrade.type].border} rounded-sm`}>{RarityLookUp[upgrade.type].icon}</div>
-					<p className="ml-2 font-bold">{upgrade.name.toUpperCase()}</p>
-				</div>
-			))}
+          border-4  rounded-sm px-1 flex items-center  shadow-md h-10`}
+					>
+						<div className={`w-6 h-6 bg-${RarityLookUp[upgrade.type].border} rounded-sm`}>{RarityLookUp[upgrade.type].icon}</div>
+						<p className="ml-2 font-bold">{upgrade.name.toUpperCase()}</p>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
