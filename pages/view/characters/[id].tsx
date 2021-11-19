@@ -1,4 +1,5 @@
-import { Abilities, Animations, BaseStats, Description, Upgrades, Header } from "@components/Character";
+import { Header } from "@components/Character/Common";
+import { Abilities, Animations, Description, Stats, Upgrades } from "@components/Character/View";
 
 const ViewCharacter = () => {
 	return (
@@ -6,7 +7,7 @@ const ViewCharacter = () => {
 			<div className="flex justify-between w-full h-full ">
 				<div className="flex-col w-1/4 p-4 m-4 overflow-y-auto rounded-md card-secondary">
 					<Header />
-					<BaseStats />
+					<Stats />
 					<Description />
 					<Animations />
 				</div>

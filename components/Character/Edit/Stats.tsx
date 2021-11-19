@@ -1,4 +1,4 @@
-import InputWithIcon from "@components/Common/Editable";
+import { InputWithIcon } from "@components/Common";
 import {
 	ClockIcon,
 	CubeTransparentIcon,
@@ -29,11 +29,13 @@ const stats = [
 
 const Stats: React.FC = () => {
 	return (
-		<div className="flex flex-col card-primary">
+		<div className="flex flex-col mt-2 card-primary">
 			<div className="flex w-full mb-2 sub-header-primary">Stats</div>
-			{Object.keys(MOCK_ASSETS.PLAYER).map((stat, index: number) => {
-				return <InputWithIcon key={index} icon={stats[index].icon} label={stats[index].label} />;
-			})}
+			<div className="grid grid-cols-5 gap-2">
+				{Object.keys(MOCK_ASSETS.PLAYER).map((stat, index: number) => {
+					return <InputWithIcon key={index} icon={stats[index].icon} label={stats[index].label} />;
+				})}
+			</div>
 		</div>
 	);
 };

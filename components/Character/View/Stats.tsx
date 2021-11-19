@@ -1,6 +1,6 @@
 import MOCK_ASSETS from "constants/MOCK_ASSETS";
 
-const BaseStats: React.FC = () => {
+const Stats: React.FC = () => {
 	return (
 		<div className="flex flex-col mt-2 card-primary">
 			<p className="sub-header-primary">Base Stats</p>
@@ -16,4 +16,4 @@ const BaseStats: React.FC = () => {
 	);
 };
 
-export default BaseStats;
+export default Stats;

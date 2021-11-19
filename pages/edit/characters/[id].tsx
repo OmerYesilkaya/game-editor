@@ -1,10 +1,13 @@
+import { Header } from "@components/Character/Common";
+import { Stats, Abilities } from "@components/Character/Edit";
+
 const EditCharacter = () => {
 	return (
 		<div className="flex justify-center w-full h-full">
-			<div className="flex justify-between w-full h-full ">
-				<div className="flex-col w-1/4 p-4 m-4 overflow-y-auto rounded-md card-secondary"></div>
-				<div className="w-1/2 p-2 my-4 overflow-y-auto card-secondary"></div>
-				<div className="w-1/4 p-4 m-4 overflow-y-auto card-secondary"></div>
+			<div className="flex-col w-full p-4 m-4 overflow-y-auto rounded-md card-secondary">
+				<Header />
+				<Stats />
+				<Abilities />
 			</div>
 		</div>
 	);

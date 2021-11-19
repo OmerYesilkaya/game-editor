@@ -1,6 +1,6 @@
 import MOCK_ASSETS from "constants/MOCK_ASSETS";
 import { AbilityType } from "types/ability";
-import Ability from "./Ability";
+import Ability from "../Common/Ability";
 
 const Abilities: React.FC = () => {
 	return (
