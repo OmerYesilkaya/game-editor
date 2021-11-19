@@ -20,9 +20,9 @@ const View: NextPage = () => {
 					View
 				</p>
 				<Grid row={2} col={2}>
-					<MenuItem title="Monsters" image={monster} url="/edit/monsters" />
+					<MenuItem title="Monsters" image={monster} url="/view/monsters" />
 					<MenuItem title="Items" image={item} />
-					<MenuItem title="Characters" image={character} url="/edit/characters" />
+					<MenuItem title="Characters" image={character} url="/view/characters" />
 					<MenuItem title="Perks" image={perk} />
 				</Grid>
 			</div>
