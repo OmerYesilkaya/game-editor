@@ -8,6 +8,7 @@ import skill3 from "public/assets/svgs/skill3.svg";
 import skill4 from "public/assets/svgs/skill4.svg";
 import skill5 from "public/assets/svgs/skill5.svg";
 import skill6 from "public/assets/svgs/skill6.svg";
+import { MonsterType } from "types/monster";
 
 const PLAYER: AssetPlayer = {
 	Health: 200,
@@ -222,6 +223,12 @@ const ABILITIES: AbilityType[] = [
 	{ name: "Rage", icon: skill5 },
 ];
 
-const exports = { PLAYER, IDLE_ANIMATION, PLAYER_TEXTURE, ABILITIES };
+const MONSTERS: MonsterType[] = [
+	{ id: "monster1", name: "DotFrog", stats: [{ Health: 100, Armor: 10, DamageOverTime: 2.3, AI: 3 }] },
+	{ id: "monster2", name: "JumpFrog", stats: [{ Health: 110, Armor: 20, JumpDistance: 250, JumpSpeed: 12, AI: 3 }] },
+	{ id: "monster3", name: "DefaultFrog", stats: [{ Health: 100, Armor: 10, AI: 2 }] },
+];
+
+const exports = { PLAYER, IDLE_ANIMATION, PLAYER_TEXTURE, ABILITIES, MONSTERS };
 export default exports;
 // ?? why is this a warning??!?!?
