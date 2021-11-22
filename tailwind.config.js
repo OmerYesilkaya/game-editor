@@ -6,6 +6,7 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			default: ["Kanit", "sans-serif"],
+			input: ["Montserrat\\ Alternates", "sans-serif"],
 		},
 		extend: {
 			colors: {

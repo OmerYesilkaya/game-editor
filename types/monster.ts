@@ -1,5 +1,6 @@
 export type Stat = {
-	[key: string]: number;
+	name: string;
+	value: number;
 };
 
 export type MonsterType = {

@@ -19,7 +19,9 @@
 	.select-primary {
 		@apply relative px-2 mt-1 rounded-md shadow-md font-default;
 	}
-
+	.grid-cell {
+		@apply px-2 font-semibold text-gray-100 bg-gray-800 rounded-sm shadow-md;
+	}
 	.ability {
 		@apply flex items-center justify-center bg-gray-800 border-4 rounded-md shadow-md border-gray-50;
 	}

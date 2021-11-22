@@ -224,9 +224,36 @@ const ABILITIES: AbilityType[] = [
 ];
 
 const MONSTERS: MonsterType[] = [
-	{ id: "monster1", name: "DotFrog", stats: [{ Health: 100, Armor: 10, DamageOverTime: 2.3, AI: 3 }] },
-	{ id: "monster2", name: "JumpFrog", stats: [{ Health: 110, Armor: 20, JumpDistance: 250, JumpSpeed: 12, AI: 3 }] },
-	{ id: "monster3", name: "DefaultFrog", stats: [{ Health: 100, Armor: 10, AI: 2 }] },
+	{
+		id: "monster1",
+		name: "DotFrog",
+		stats: [
+			{ name: "Health", value: 120 },
+			{ name: "Armor", value: 10 },
+			{ name: "DamageOverTime", value: 2.3 },
+			{ name: "AI", value: 3 },
+		],
+	},
+	{
+		id: "monster2",
+		name: "JumpFrog",
+		stats: [
+			{ name: "Health", value: 110 },
+			{ name: "Armor", value: 10 },
+			{ name: "JumpDistance", value: 120 },
+			{ name: "JumpSpeed", value: 20.3 },
+			{ name: "AI", value: 3 },
+		],
+	},
+	{
+		id: "monster3",
+		name: "DefaultFrog",
+		stats: [
+			{ name: "Health", value: 100 },
+			{ name: "Armor", value: 10 },
+			{ name: "AI", value: 2 },
+		],
+	},
 ];
 
 const exports = { PLAYER, IDLE_ANIMATION, PLAYER_TEXTURE, ABILITIES, MONSTERS };
