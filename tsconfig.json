@@ -2,8 +2,15 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@components/*": ["components/*"],
-			"@pages/*": ["pages/*"]
+			"@app/api": ["api"],
+			"@app/components": ["components"],
+			"@app/pages": ["pages"],
+			"@app/layouts": ["layouts"],
+			"@app/constants": ["constants"],
+			"@app/hooks": ["hooks"],
+			"@app/styles": ["styles"],
+			"@app/types": ["types"],
+			"@app/store": ["store"]
 		},
 		"allowJs": true,
 		"alwaysStrict": true,

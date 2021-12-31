@@ -1,5 +1,4 @@
-import Footer from "@components/Footer";
-import Navbar from "@components/Navbar";
+import { Footer, Navbar } from "@app/components";
 import { NextPage } from "next";
 
 const DefaultLayout: NextPage = ({ children }) => {

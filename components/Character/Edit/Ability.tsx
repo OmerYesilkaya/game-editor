@@ -1,4 +1,3 @@
-import { InputWithIcon } from "@components/Common";
 import Image from "next/image";
 import { AbilityType } from "types/ability";
 
@@ -18,7 +17,7 @@ const MasteryInput: React.FC<MasteryInputPropTypes> = ({ skillFavored }) => {
 				type="number"
 				style={{ marginBottom: skillFavored ? 0 : "auto", marginTop: skillFavored ? 0 : "2px" }}
 			/>
-			{skillFavored && <div className="h-2 bg-yellow-600 rounded-md shadow-md " />}
+			{skillFavored && <div className="h-2 bg-amber-600 rounded-md shadow-md " />}
 		</div>
 	);
 };

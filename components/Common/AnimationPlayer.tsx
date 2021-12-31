@@ -1,6 +1,6 @@
 import MOCK_ASSETS from "constants/MOCK_ASSETS";
 import { useEffect, useRef } from "react";
-import { useAnimationStore } from "store/useAnimationStore";
+import { useAnimationStore } from "@app/store";
 
 let lastAnimationRequestID = 0;
 let lastFrameTime = 0;

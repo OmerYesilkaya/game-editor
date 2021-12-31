@@ -1,7 +1,5 @@
 // components
-import MenuItem from "@components/Common/MenuItem";
-import Center from "@components/Layout/Center";
-import Grid from "@components/Layout/Grid";
+import { Common, Layout } from "@app/components";
 
 // aseprite exports
 import monster from "public/assets/svgs/monsters.svg";
@@ -14,19 +12,19 @@ import type { NextPage } from "next";
 
 const Edit: NextPage = () => {
 	return (
-		<Center>
+		<Layout.Center className="w-full h-full">
 			<div className="flex flex-col items-center">
 				<p className="flex justify-center w-full mb-4 text-4xl font-bold card-primary font-text" style={{ background: "white" }}>
 					Edit
 				</p>
-				<Grid row={2} col={2}>
-					<MenuItem title="Monsters" image={monster} url="/edit/monsters" />
-					<MenuItem title="Items" image={item} />
-					<MenuItem title="Characters" image={character} url="/edit/characters" />
-					<MenuItem title="Perks" image={perk} />
-				</Grid>
+				<Layout.Grid row={2} col={2}>
+					<Common.MenuItem title="Monsters" image={monster} url="/edit/monsters" />
+					<Common.MenuItem title="Items" image={item} />
+					<Common.MenuItem title="Characters" image={character} url="/edit/characters" />
+					<Common.MenuItem title="Perks" image={perk} />
+				</Layout.Grid>
 			</div>
-		</Center>
+		</Layout.Center>
 	);
 };
 

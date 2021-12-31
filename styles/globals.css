@@ -27,7 +27,7 @@
 	}
 
 	.menu-card-primary {
-		@apply relative transition-all border-4 border-gray-200 rounded-lg shadow-lg cursor-pointer menu-card-pattern hover:shadow-xl transform-gpu hover:-translate-y-2;
+		@apply relative transition-all border-4 border-gray-200 rounded-lg shadow-lg cursor-pointer menu-card-pattern hover:shadow-xl hover:-translate-y-2;
 	}
 
 	.background-pattern {

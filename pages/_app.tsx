@@ -1,12 +1,19 @@
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import DefaultLayout from "layouts/DefaultLayout";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+import { DefaultLayout } from "@app/layouts";
+
+import "../styles/globals.css";
+
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<DefaultLayout>
-			<Component {...pageProps} />
-		</DefaultLayout>
+		<QueryClientProvider client={queryClient}>
+			<DefaultLayout>
+				<Component {...pageProps} />
+			</DefaultLayout>
+		</QueryClientProvider>
 	);
 }
 

@@ -81,7 +81,7 @@ const SkillTree: React.FC = () => {
 									key={index}
 									className={`relative w-16 h-16 transition-all brightness-${
 										upgrade.active ? 100 : 50
-									} cursor-pointer ability filter hover:brightness-150`}
+									} cursor-pointer ability hover:brightness-150`}
 									onClick={() => handleClick(level, upgrade.name)}
 								>
 									<Image src={upgrade.icon} alt={upgrade.name} objectFit="contain" layout="fill" />
@@ -92,10 +92,10 @@ const SkillTree: React.FC = () => {
 				))}
 			</div>
 			<div className="flex mt-1">
-				<button className="p-1 text-white transition-all bg-yellow-600 rounded-md shadow-md filter brightness-105 active:brightness-75">
+				<button className="p-1 text-white transition-all bg-yellow-600 rounded-md shadow-md brightness-105 active:brightness-75">
 					<RefreshIcon width={20} height={20} />
 				</button>
-				<button className="p-1 ml-1 text-white transition-all bg-green-600 rounded-md shadow-md filter brightness-105 active:brightness-75">
+				<button className="p-1 ml-1 text-white transition-all bg-emerald-600 rounded-md shadow-md brightness-105 active:brightness-75">
 					<KeyIcon width={20} height={20} />
 				</button>
 			</div>

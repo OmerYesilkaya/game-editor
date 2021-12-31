@@ -40,8 +40,8 @@ const dummyUpgrades = [
 ];
 
 const RarityLookUp = {
-	[UpgradeType.Legendary]: { bg: "yellow-800", border: "yellow-300", text: "white", icon: <ChipIcon /> },
-	[UpgradeType.Mythical]: { bg: "purple-900", border: "purple-500", text: "gray-100", icon: <EyeIcon /> },
+	[UpgradeType.Legendary]: { bg: "amber-800", border: "amber-300", text: "white", icon: <ChipIcon /> },
+	[UpgradeType.Mythical]: { bg: "violet-900", border: "violet-500", text: "gray-100", icon: <EyeIcon /> },
 	[UpgradeType.Magic]: { bg: "blue-700", border: "blue-300", text: "gray-200", icon: <MoonIcon /> },
 	[UpgradeType.Common]: { bg: "gray-600", border: "gray-50", text: "gray-200", icon: <MapIcon /> },
 };

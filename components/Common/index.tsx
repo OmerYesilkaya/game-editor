@@ -1,3 +1,7 @@
-export { default as AnimationPlayer } from "./AnimationPlayer";
-export { default as InputWithIcon } from "./InputWithIcon";
-export { default as MenuItem } from "./MenuItem";
+import AnimationPlayer from "./AnimationPlayer";
+import Header from "./Header";
+import InputWithIcon from "./InputWithIcon";
+import MenuItem from "./MenuItem";
+import SearchInput from "./SearchInput";
+
+export default { AnimationPlayer, Header, InputWithIcon, MenuItem, SearchInput };

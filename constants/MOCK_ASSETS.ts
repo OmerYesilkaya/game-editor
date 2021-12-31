@@ -254,6 +254,57 @@ const MONSTERS: MonsterType[] = [
 			{ name: "AI", value: 2 },
 		],
 	},
+	{
+		id: "monster4",
+		name: "MonsterFrog",
+		stats: [
+			{ name: "Health", value: 100 },
+			{ name: "Armor", value: 10 },
+			{ name: "JumpDistance", value: 120 },
+			{ name: "AI", value: 2 },
+		],
+	},
+	{
+		id: "monster5",
+		name: "Froggie",
+		stats: [
+			{ name: "Armor", value: 10 },
+			{ name: "JumpDistance", value: 120 },
+			{ name: "AI", value: 2 },
+		],
+	},
+	{
+		id: "monster6",
+		name: "Froggie",
+		stats: [
+			{ name: "Armor", value: 10 },
+			{ name: "Shield", value: 950 },
+			{ name: "ArmorPierce", value: 120 },
+			{ name: "AI", value: 2 },
+		],
+	},
+	{
+		id: "monster7",
+		name: "Beast",
+		stats: [
+			{ name: "Health", value: 2500 },
+			{ name: "Shield", value: 10 },
+			{ name: "Range", value: 1200 },
+			{ name: "AI", value: 2 },
+		],
+	},
+	{
+		id: "monster8",
+		name: "ChargingBeast",
+		stats: [
+			{ name: "Health", value: 2500 },
+			{ name: "Shield", value: 10 },
+			{ name: "ChargeRange", value: 1200 },
+			{ name: "ChargeSpeed", value: 50 },
+			{ name: "ChargeDamage", value: 110 },
+			{ name: "AI", value: 2 },
+		],
+	},
 ];
 
 const exports = { PLAYER, IDLE_ANIMATION, PLAYER_TEXTURE, ABILITIES, MONSTERS };

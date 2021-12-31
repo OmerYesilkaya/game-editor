@@ -1,21 +1,20 @@
-import { Header } from "@components/Character/Common";
-import { Abilities, Animations, Description, Stats, Upgrades } from "@components/Character/View";
+import { Common, Character as CharacterComponents } from "@app/components";
 
 const ViewCharacter = () => {
 	return (
 		<div className="flex justify-center">
 			<div className="flex justify-between w-full h-full ">
 				<div className="flex-col w-1/4 p-4 m-4 overflow-y-auto rounded-md card-secondary">
-					<Header />
-					<Stats />
-					<Description />
-					<Animations />
+					<Common.Header>Tankart</Common.Header>
+					<CharacterComponents.View.Stats />
+					<CharacterComponents.View.Description />
+					<CharacterComponents.View.Animations />
 				</div>
 				<div className="w-1/2 p-2 my-4 overflow-y-auto card-secondary">
-					<Abilities />
+					<CharacterComponents.View.Abilities />
 				</div>
 				<div className="w-1/4 p-4 m-4 overflow-y-auto card-secondary">
-					<Upgrades />
+					<CharacterComponents.View.Upgrades />
 				</div>
 			</div>
 		</div>

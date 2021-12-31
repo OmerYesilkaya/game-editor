@@ -1,27 +1,14 @@
-const colors = require("tailwindcss/colors");
-
 module.exports = {
-	purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
-	darkMode: false, // or 'media' or 'class'
+	content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./layouts/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		fontFamily: {
 			default: ["Kanit", "sans-serif"],
 			input: ["Montserrat\\ Alternates", "sans-serif"],
 		},
-		extend: {
-			colors: {
-				gray: colors.blueGray,
-				red: colors.red,
-				yellow: colors.amber,
-			},
-		},
+		extend: {},
 	},
-	variants: {
-		extend: {
-			backgroundColor: ["active"],
-			brightness: ["active"],
-			brightness: ["hover"],
-		},
+	corePlugins: {
+		preflight: false,
 	},
 	plugins: [],
 };

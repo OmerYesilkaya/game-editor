@@ -1,2 +1,5 @@
-export { default as Stats } from "./Stats";
-export { default as Abilities } from "./Abilities";
+import Abilities from "./Abilities";
+import Ability from "./Ability";
+import Stats from "./Stats";
+
+export default { Abilities, Ability, Stats };

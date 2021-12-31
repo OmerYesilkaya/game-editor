@@ -1,5 +1,16 @@
-const Center: React.FC = ({ children }) => {
-	return <div className="flex items-center justify-center w-full h-full">{children}</div>;
+import cn from "classnames";
+
+type CenterProps = {
+	className?: string;
+	[key: string]: any;
+};
+
+const Center: React.FC<CenterProps> = ({ className, children, ...restProps }) => {
+	return (
+		<div className={cn("flex items-center justify-center", className)} {...restProps}>
+			{children}
+		</div>
+	);
 };
 
 export default Center;
