@@ -30,7 +30,7 @@ const Modules: React.FC<ModulesProps> = ({ x }) => {
 		if (debouncedValue) {
 			message = "No modules found with given keyword";
 		}
-		return message;
+		return message ? <div className="border-dashed border-2 px-1.5 text-white">{message}</div> : null;
 	}
 
 	return (
@@ -38,22 +38,20 @@ const Modules: React.FC<ModulesProps> = ({ x }) => {
 			<Common.Header>Modules</Common.Header>
 			<Common.SearchInput placeholder="Module Name" query={query} setQuery={setQuery} isLoading={isLoading} />
 			<div className="flex flex-col gap-y-1 mt-1">
-				{filteredModules.length > 0 ? (
-					filteredModules.map((module) => (
-						<button
-							className="bg-sky-900 border-2 border-white rounded-md px-1.5 py-0.5 text-white flex items-center cursor-pointer transition hover:brightness-110"
-							key={module.id}
-							onClick={() => addModule(module.id)}
-						>
-							<ChevronLeftIcon className="w-5 h-5 bg-zinc-200 text-cyan-900 border-2 border-white rounded-sm shadow-md " />
-							<span className="ml-2">{module.name}</span>
-							<div className="bg-orange-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
-							<div className="bg-red-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div>
-						</button>
-					))
-				) : (
-					<div className="border-dashed border-2 px-1.5 text-white">{getMessage()}</div>
-				)}
+				{filteredModules.length > 0
+					? filteredModules.map((module) => (
+							<button
+								className="bg-sky-900 border-2 border-white rounded-md px-1.5 py-0.5 text-white flex items-center cursor-pointer transition hover:brightness-110"
+								key={module.id}
+								onClick={() => addModule(module.id)}
+							>
+								<ChevronLeftIcon className="w-5 h-5 bg-zinc-200 text-cyan-900 border-2 border-white rounded-sm shadow-md " />
+								<span className="ml-2">{module.name}</span>
+								<div className="bg-orange-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
+								<div className="bg-red-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div>
+							</button>
+					  ))
+					: getMessage()}
 			</div>
 		</div>
 	);

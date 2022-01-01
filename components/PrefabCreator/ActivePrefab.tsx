@@ -66,14 +66,14 @@ const ActivePrefab: React.FC<ActivePrefabProps> = ({ prefab }) => {
 	}));
 
 	return (
-		<div className="w-full p-2 my-4 overflow-y-auto card-secondary">
+		<>
 			<Common.Header>Enemy Boar</Common.Header>
 			<div className="flex flex-col gap-y-1 mt-1">
 				{moduleIds.map((id) => (
 					<Module key={id} moduleId={id} />
 				))}
 			</div>
-		</div>
+		</>
 	);
 };
 

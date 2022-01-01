@@ -3,7 +3,7 @@ import { NextPage } from "next";
 
 const DefaultLayout: NextPage = ({ children }) => {
 	return (
-		<div className="flex flex-col h-screen bg-blue-900 background-pattern">
+		<div className="flex flex-col h-screen bg-slate-900 background-pattern">
 			<Navbar />
 			<main className="flex flex-auto overflow-y-auto">{children}</main>
 			<Footer />
