@@ -22,7 +22,6 @@ const Module: React.FC<{ moduleId: number }> = ({ moduleId }) => {
 	}
 
 	if (!module) return null;
-	console.log("module", module);
 
 	return (
 		<button
