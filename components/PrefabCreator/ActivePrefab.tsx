@@ -13,6 +13,9 @@ type ActivePrefabProps = {
 
 const Module: React.FC<{ moduleId: number }> = ({ moduleId }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
+	const { removeModule } = usePrefabStore((state) => ({
+		removeModule: state.removeModule,
+	}));
 	const { data: module, isLoading } = api.useGetModuleById({
 		params: { id: moduleId },
 	});
@@ -53,7 +56,9 @@ const Module: React.FC<{ moduleId: number }> = ({ moduleId }) => {
 					<div className="flex flex-col w-full h-full items-start">
 						{module.children && module.children.map((child) => <div key={child.id}>{child.name}</div>)}
 					</div>
-					<button className="bg-red-600 px-1 shadow-md rounded-sm text-sm font-bold font-default">REMOVE</button>
+					<button className="bg-red-600 px-1 shadow-md rounded-sm text-sm font-bold font-default" onClick={() => removeModule(module.id)}>
+						REMOVE
+					</button>
 				</div>
 			)}
 		</button>
