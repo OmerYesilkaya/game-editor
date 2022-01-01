@@ -1,3 +1,4 @@
+import COLORS from "./colors";
 import URL from "./urls";
 
-export { URL };
+export { COLORS, URL };

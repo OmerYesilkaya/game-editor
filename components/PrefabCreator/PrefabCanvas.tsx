@@ -1,5 +1,5 @@
 import ReactFlow, { Background, BackgroundVariant, Elements } from "react-flow-renderer";
-import CustomNodeComponent from "./CustomNode";
+import PrefabNodeComponent from "./PrefabNodeComponent";
 
 const PrefabCanvas: React.FC = () => {
 	const elements: Elements = [
@@ -12,7 +12,7 @@ const PrefabCanvas: React.FC = () => {
 	];
 
 	const nodeTypes = {
-		special: CustomNodeComponent,
+		special: PrefabNodeComponent,
 	};
 
 	return (

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { NextPage } from "next";
 
 import { PencilAltIcon, EyeIcon } from "@heroicons/react/outline";
@@ -7,7 +6,7 @@ import { Layout } from "@app/components";
 
 const Home: NextPage = () => {
 	return (
-		<Layout.Center className="w-full h-full flex-col gap-4">
+		<Layout.Center className="w-full h-full flex-col gap-4 text-white">
 			<h2 className="font-default font-bold text-4xl text-white">RogueChampions Editor</h2>
 			<div className="flex w-full justify-center gap-2 select-none">
 				<a href="/edit" className="w-1/5 h-32">
