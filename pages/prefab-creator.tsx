@@ -7,7 +7,6 @@ const PrefabCreator: NextPage = () => {
 		<Layout.Center className="w-full h-full flex gap-2 p-2" style={{ background: COLORS.BG_DARK }}>
 			<PrefabCreatorComponents.Prefabs />
 			<PrefabCreatorComponents.PrefabCanvas />
-			{/* <PrefabCreatorComponents.ActivePrefab /> */}
 			<PrefabCreatorComponents.Modules />
 		</Layout.Center>
 	);
