@@ -12,6 +12,7 @@ export enum ModuleValueType {
 	Bool,
 	Number,
 	Text,
+	TextArea,
 }
 
 export type Module = {

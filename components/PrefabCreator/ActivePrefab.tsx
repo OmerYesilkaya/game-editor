@@ -6,9 +6,10 @@ import ModuleItem from "./ModuleItem";
 
 type ActivePrefabProps = {
 	prefab?: any;
+	themeColor: string;
 };
 
-const ActivePrefab: React.FC<ActivePrefabProps> = ({ prefab }) => {
+const ActivePrefab: React.FC<ActivePrefabProps> = ({ prefab, themeColor }) => {
 	const { moduleIds } = usePrefabStore((state) => ({
 		moduleIds: state.moduleIds,
 	}));
@@ -21,7 +22,7 @@ const ActivePrefab: React.FC<ActivePrefabProps> = ({ prefab }) => {
 			{moduleIds.length > 0 ? (
 				<div className="flex flex-col gap-y-1 mt-1">
 					{moduleIds.map((id) => (
-						<ModuleItem key={id} moduleId={id} />
+						<ModuleItem themeColor={themeColor} key={id} moduleId={id} />
 					))}
 				</div>
 			) : (

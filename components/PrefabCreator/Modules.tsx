@@ -34,7 +34,7 @@ const Modules: React.FC<ModulesProps> = ({ x }) => {
 	}
 
 	return (
-		<div className="w-2/3 h-full p-2 my-4 overflow-y-auto card-secondary">
+		<div className="w-full h-full p-2 overflow-y-auto card-secondary">
 			<Common.Header>Modules</Common.Header>
 			<Common.SearchInput placeholder="Module Name" query={query} setQuery={setQuery} isLoading={isLoading} />
 			<div className="flex flex-col gap-y-1 mt-1">

@@ -5,18 +5,51 @@ import cn from "classnames";
 import { usePrefabStore } from "@app/store";
 import { api } from "@app/hooks";
 import { ChevronRightIcon, TrashIcon } from "@heroicons/react/outline";
-import { Module } from "types/module";
+import { Module, ModuleValueType } from "types/module";
+import DynamicInput from "./DynamicInput";
 
-const ModuleInput: React.FC<{ child: Module }> = ({ child: module }) => {
+const ModuleInput: React.FC<{ themeColor: string; child: Module }> = ({ themeColor, child: module }) => {
+	const [isExpanded, setIsExpanded] = useState(false);
+
+	function toggleExpand() {
+		setIsExpanded((prev) => !prev);
+	}
+
 	return (
-		<div className="grid grid-cols-2 place-items-start">
-			<span className="">{module.name}</span>
-			<input className="w-full text-black rounded-sm px-1" />
+		<div className="flex flex-col w-full bg-zinc-900 rounded-sm px-1 py-1">
+			<div className="flex w-full">
+				<span className="w-full text-left">{module.name}</span>
+				{module.value_type === ModuleValueType.Object ? (
+					<div className="ml-1 flex items-center justify-between">
+						<ChevronRightIcon
+							onClick={(e) => {
+								e.stopPropagation();
+								toggleExpand();
+							}}
+							className={cn(`w-5 h-5 bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md cursor-pointer`, {
+								"rotate-90": isExpanded,
+							})}
+						/>
+					</div>
+				) : (
+					<DynamicInput module={module} />
+				)}
+			</div>
+			{isExpanded && (
+				<div className="flex h-full w-full">
+					<hr className="w-0.5 h-auto bg-zinc-200 rounded-full my-0.5 ml-2" />
+					<div className="ml-1 rounded-sm  my-0.5 pl-1  w-full">
+						<div className="flex flex-col w-full h-full items-start">
+							{module.children && module.children.map((child) => <ModuleInput themeColor={themeColor} key={child.id} child={child} />)}
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
 
-const ModuleItem: React.FC<{ moduleId: number }> = ({ moduleId }) => {
+const ModuleItem: React.FC<{ themeColor: string; moduleId: number }> = ({ themeColor, moduleId }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const { removeModule } = usePrefabStore((state) => ({
 		removeModule: state.removeModule,
@@ -33,7 +66,7 @@ const ModuleItem: React.FC<{ moduleId: number }> = ({ moduleId }) => {
 
 	return (
 		<button
-			className={cn("w-full h-full flex flex-col font-default bg-zinc-800 border-2 border-white rounded-md px-1 py-0.5 text-white", {
+			className={cn("w-full h-full flex flex-col font-default bg-zinc-800 border-2 rounded-sm px-1 py-0.5 text-white", {
 				"cursor-pointer": !isExpanded,
 				"cursor-default": isExpanded,
 			})}
@@ -52,7 +85,7 @@ const ModuleItem: React.FC<{ moduleId: number }> = ({ moduleId }) => {
 							e.stopPropagation();
 							toggleExpand();
 						}}
-						className={cn("w-5 h-5 bg-zinc-200 text-cyan-900 border-2 border-white rounded-sm shadow-md cursor-pointer", {
+						className={cn(`w-5 h-5 bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md cursor-pointer`, {
 							"rotate-90": isExpanded,
 						})}
 					/>
@@ -61,10 +94,10 @@ const ModuleItem: React.FC<{ moduleId: number }> = ({ moduleId }) => {
 
 			{isExpanded && (
 				<>
-					<hr className="bg-slate-200 h-px w-full mt-0.5" />
+					<hr className="text-zinc-600 h-px w-full mt-0.5" />
 					<div className="w-full flex flex-col px-0.5 pb-0.5">
-						<div className="flex flex-col w-full h-full items-start gap-y-1 mt-1">
-							{module.children && module.children.map((child) => <ModuleInput key={child.id} child={child} />)}
+						<div className="flex flex-col w-full h-full items-start gap-y-px mt-1">
+							{module.children && module.children.map((child) => <ModuleInput themeColor={themeColor} key={child.id} child={child} />)}
 						</div>
 					</div>
 				</>

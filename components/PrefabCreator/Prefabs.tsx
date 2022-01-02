@@ -6,7 +6,7 @@ type PrefabsProps = {
 
 const Prefabs: React.FC<PrefabsProps> = ({ x }) => {
 	return (
-		<div className="w-2/3 h-full p-2 my-4 overflow-y-auto card-secondary">
+		<div className="w-full h-full p-2 overflow-y-auto card-secondary">
 			<Common.Header>Prefabs</Common.Header>
 		</div>
 	);

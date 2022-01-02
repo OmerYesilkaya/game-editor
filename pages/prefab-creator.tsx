@@ -4,10 +4,14 @@ import { COLORS } from "@app/constants";
 
 const PrefabCreator: NextPage = () => {
 	return (
-		<Layout.Center className="w-full h-full flex gap-2 p-2" style={{ background: COLORS.BG_DARK }}>
-			<PrefabCreatorComponents.Prefabs />
+		<Layout.Center className="relative w-full h-full flex gap-1 p-2" style={{ background: COLORS.BG_DARK }}>
+			<PrefabCreatorComponents.PreviewWindow />
+			<div className="flex flex-col w-1/3 h-full gap-y-1">
+				<PrefabCreatorComponents.Prefabs />
+				<PrefabCreatorComponents.Modules />
+			</div>
+
 			<PrefabCreatorComponents.PrefabCanvas />
-			<PrefabCreatorComponents.Modules />
 		</Layout.Center>
 	);
 };

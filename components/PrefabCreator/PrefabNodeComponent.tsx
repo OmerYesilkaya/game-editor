@@ -8,6 +8,7 @@ type Props = {
 
 const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const themeColor = "rose";
 
 	const customHandleStyles = containerRef.current && {
 		background: "white",
@@ -19,9 +20,9 @@ const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 	};
 
 	return (
-		<div ref={containerRef} className="w-96 p-2 my-4 overflow-y-auto border-indigo-700 border-4 rounded-md bg-zinc-900">
+		<div ref={containerRef} className={`w-[400px] p-2 my-4 overflow-y-auto border-${themeColor}-700 border-4 rounded-md bg-zinc-900`}>
 			<Handle type="target" position={Position.Top} style={{ transform: "translateY(14.5px)", ...customHandleStyles }} />
-			<PrefabCreatorComponents.ActivePrefab prefab={data.prefab} />
+			<PrefabCreatorComponents.ActivePrefab prefab={data.prefab} themeColor={themeColor} />
 			<Handle type="source" position={Position.Bottom} style={{ transform: "translateY(-14.5px)", ...customHandleStyles }} />
 		</div>
 	);
