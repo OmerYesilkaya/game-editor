@@ -1,10 +1,12 @@
-import { Common } from "@app/components";
 import { animated, useSpring } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
+
+import { CameraIcon } from "@heroicons/react/solid";
+
 import { useWindowBounds, useResponsive } from "@app/hooks";
+import { Common } from "@app/components";
 import { usePreviewStore } from "@app/store";
 import { ANIMATION_SPEEDS } from "@app/constants";
-import { CameraIcon } from "@heroicons/react/solid";
 
 const PlayRateControl: React.FC = () => {
 	const { speedIndex, nextAnimationSpeed } = usePreviewStore((state) => ({

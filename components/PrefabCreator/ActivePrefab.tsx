@@ -10,7 +10,7 @@ import cn from "classnames";
 import ModuleItem from "./ModuleItem";
 
 type ActivePrefabProps = {
-	prefab?: any;
+	prefab: { name: string; moduleIds: number[]; id: number; internalId: string };
 	themeColor: string;
 };
 type ButtonProps = {
@@ -35,15 +35,16 @@ const Button: React.FC<ButtonProps> = ({ children, themeColor, variant = "defaul
 };
 
 const ActivePrefab: React.FC<ActivePrefabProps> = ({ prefab, themeColor }) => {
-	const { moduleIds } = usePrefabStore((state) => ({
+	const { moduleIds, setActivePrefabId } = usePrefabStore((state) => ({
 		moduleIds: state.moduleIds,
+		setActivePrefabId: state.setActivePrefabId,
 	}));
 
 	return (
 		<>
-			<Common.Header id="drag-handle" className="rounded-sm px-2 py-0 text-lg">
+			<Common.Header id="drag-handle" className="rounded-sm px-2 py-0 text-lg" onClick={() => setActivePrefabId(prefab.internalId)}>
 				<div className="flex items-center justify-between">
-					<span>Enemy Boar</span>
+					<span>{prefab.name}</span>
 					<div className="flex items-center gap-x-1">
 						<Button themeColor={themeColor} title="Collapse All">
 							<EyeIcon className="w-full h-full p-1" />
@@ -67,7 +68,7 @@ const ActivePrefab: React.FC<ActivePrefabProps> = ({ prefab, themeColor }) => {
 			) : (
 				<div className="text-white font-bold border-dashed border-2 mt-1 p-4 text-sm flex flex-col justify-center items-center">
 					<ExclamationCircleIcon className="w-10 h-10" />
-					<span className="w-2/3 text-center">Please add a module from the panel on the right</span>
+					<span className="w-2/3 text-center">Please add a module from the panel on the left</span>
 				</div>
 			)}
 		</>

@@ -1,19 +1,20 @@
 import ReactFlow, { Background, BackgroundVariant, Elements } from "react-flow-renderer";
 import PrefabNodeComponent from "./PrefabNodeComponent";
+import { usePrefabStore } from "@app/store";
 
 const PrefabCanvas: React.FC = () => {
-	const elements: Elements = [
-		{
-			id: "2",
-			type: "special",
-			position: { x: 100, y: 100 },
-			data: { text: "A custom node" },
-			dragHandle: "#drag-handle",
-		},
-	];
+	const prefabs = usePrefabStore((state) => state.prefabs);
+
+	const elements: Elements = prefabs.map((prefab) => ({
+		id: prefab.internalId,
+		type: "prefab",
+		position: prefab.position,
+		data: { name: prefab.name, moduleIds: prefab.moduleIds, id: prefab.id, internalId: prefab.internalId },
+		dragHandle: "#drag-handle",
+	}));
 
 	const nodeTypes = {
-		special: PrefabNodeComponent,
+		prefab: PrefabNodeComponent,
 	};
 
 	return (
