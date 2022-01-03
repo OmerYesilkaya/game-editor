@@ -16,24 +16,17 @@ type Rect = {
 	height: number;
 };
 
-type Sprite = {
+export type Sprite = {
+	id: string;
 	pivot: Position;
 	alignment: number;
 	rect: Rect;
-};
-
-type SpriteMap = {
-	[key: string]: Sprite;
-};
-
-export type AssetTexture = {
-	id: string;
-	sprites: SpriteMap;
-};
-
-export type AssetAnimation = {
-	name: string;
 	textureId: string;
+};
+
+export type Animation = {
+	id: string;
+	name: string;
 	priority: AnimationPriority;
 	transitionType: AnimationTransitionType;
 	sprites: string[];

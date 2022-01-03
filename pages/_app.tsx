@@ -1,7 +1,6 @@
+import AppWrapper from "App";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
-
-import { DefaultLayout } from "@app/layouts";
 
 import "../styles/globals.css";
 
@@ -10,9 +9,9 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<DefaultLayout>
+			<AppWrapper>
 				<Component {...pageProps} />
-			</DefaultLayout>
+			</AppWrapper>
 		</QueryClientProvider>
 	);
 }

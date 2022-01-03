@@ -1,8 +1,7 @@
 import { Common } from "@app/components";
 import { useAnimationStore } from "@app/store";
 
-import animationSpeeds from "constants/baseAnimationSpeed";
-import Player from "public/assets/images/Player.png";
+import animationSpeeds from "constants/animationSpeeds";
 
 const Animations = () => {
 	const { speedIndex, nextAnimationSpeed } = useAnimationStore((state) => ({
@@ -20,7 +19,7 @@ const Animations = () => {
 					<option>Attack</option>
 				</select>
 				<div className="relative my-2 card-secondary">
-					<Common.AnimationPlayer texture={Player} width={250} height={250} />
+					<Common.AnimationPlayer width={250} height={250} />
 					<button
 						className="absolute w-12 px-1 py-0 text-sm text-blue-500 transition-colors bg-gray-100 rounded-md shadow-md right-1 top-1 active:bg-gray-200"
 						onClick={() => nextAnimationSpeed()}

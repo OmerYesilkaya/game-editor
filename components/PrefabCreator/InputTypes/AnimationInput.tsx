@@ -1,53 +1,53 @@
-import Common from "components/Common";
 import { useState } from "react";
+
+import { Common } from "@app/components";
+import { usePreviewStore, useAnimationStore, useSpriteStore } from "@app/store";
+import { AnimationPriority, AnimationTransitionType } from "@app/types";
 
 type Animation = {
 	id: string;
 	name: string;
-	spriteIds: string[];
+	priority: AnimationPriority;
+	sprites: string[];
+	transitionType: AnimationTransitionType;
 };
 
 const AnimationInput: React.FC = () => {
 	const [selectedAnimation, setSelectedAnimation] = useState<Animation | null>(null);
+	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
+	const animations = useAnimationStore((state) => state.animations);
+	const sprites = useSpriteStore((state) => state.sprites);
 
 	function handleSelect(id: string) {
-		const target = animationData.find((animation) => animation.id === id);
+		const target = animations.find((animation) => animation.id === id);
 		if (target) {
 			setSelectedAnimation(target);
 		}
 	}
 
-	const animationData: Animation[] = [
-		{
-			id: "random-animation-id-1",
-			name: "Animation 1",
-			spriteIds: [
-				"ca89b01a71c54eef0800000000000000",
-				"f7f485b6470b5ce50800000000000000",
-				"8951c9bbadaf673c0800000000000000",
-				"2a34bcf0bd8d51250800000000000000",
-			],
-		},
-		{
-			id: "random-animation-id-2",
-			name: "Animation 2",
-			spriteIds: [
-				"ca89b01a71c54eef0800000000000000",
-				"f7f485b6470b5ce50800000000000000",
-				"8951c9bbadaf673c0800000000000000",
-				"2a34bcf0bd8d51250800000000000000",
-			],
-		},
-	];
+	function handlePointerEnter(id: string) {
+		const animation = animations.find((animation) => animation.id === id);
+		if (!animation) return;
+		const preview = sprites.filter((sprite) => animation.sprites.includes(sprite.id));
+		if (!preview) return;
+
+		setTemporaryPreview(preview);
+	}
+
+	function handlePointerOut() {
+		setTemporaryPreview(null);
+	}
 
 	return (
 		<Common.Select
 			title={selectedAnimation?.name}
 			className="w-full text-white rounded-sm pl-1 bg-zinc-700 shadow-md border border-zinc-200"
 			optionClassName="hover:bg-zinc-600 w-full text-left px-1"
-			options={animationData.map((animation) => ({ id: animation.id, value: animation.spriteIds, label: animation.name }))}
-			handleSelect={handleSelect}
+			options={animations.map((animation) => ({ id: animation.id, value: JSON.stringify(animation), label: animation.name }))}
 			selectedValue={selectedAnimation}
+			setSelectedValue={handleSelect}
+			handlePointerEnter={handlePointerEnter}
+			handlePointerOut={handlePointerOut}
 		/>
 	);
 };

@@ -1,14 +1,12 @@
 import create from "zustand";
-import animationSpeeds from "constants/baseAnimationSpeed";
+import { AssetAnimation } from "@app/types";
 
 type AnimationStoreTypes = {
-	speedIndex: number;
-	getCurrentSpeed: () => number;
-	nextAnimationSpeed: () => void;
+	animations: AssetAnimation[];
+	setAnimations: (value: AssetAnimation[]) => void;
 };
 
 export const useAnimationStore = create<AnimationStoreTypes>((set, get) => ({
-	speedIndex: 2,
-	getCurrentSpeed: () => animationSpeeds[get().speedIndex].value,
-	nextAnimationSpeed: () => set((prev) => ({ speedIndex: (prev.speedIndex + 1) % animationSpeeds.length })),
+	animations: [],
+	setAnimations: (value) => set({ animations: value }),
 }));

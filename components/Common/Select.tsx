@@ -3,6 +3,7 @@ import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 
 import cn from "classnames";
+import { usePrefabStore } from "store/usePrefabStore";
 
 type Option = {
 	id: string;
@@ -12,14 +13,18 @@ type Option = {
 type Props = {
 	options: Option[];
 	selectedValue: any | null;
-	handleSelect: (id: string) => void;
+	setSelectedValue: (id: string) => void;
+	handlePointerEnter: (id: string) => void;
+	handlePointerOut: () => void;
 	optionClassName?: string;
 };
 
 const Select: React.FC<Props & HTMLAttributes<HTMLDivElement>> = ({
 	options,
 	selectedValue,
-	handleSelect,
+	setSelectedValue,
+	handlePointerEnter,
+	handlePointerOut,
 	className,
 	optionClassName,
 	...restProps
@@ -52,10 +57,11 @@ const Select: React.FC<Props & HTMLAttributes<HTMLDivElement>> = ({
 							className={cn(optionClassName, { "bg-zinc-600": option.id === selectedValue?.id })}
 							key={option.id}
 							onClick={() => {
-								handleSelect(option.id);
+								setSelectedValue(option.id);
 								setIsDropdownOpen(false);
 							}}
-							onPointerEnter={() => console.log("value", option.value)}
+							onPointerEnter={() => handlePointerEnter(option.id)}
+							onPointerOut={() => handlePointerOut()}
 						>
 							{option.label}
 						</div>

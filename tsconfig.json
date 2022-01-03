@@ -5,12 +5,12 @@
 			"@app/api": ["api"],
 			"@app/components": ["components"],
 			"@app/pages": ["pages"],
-			"@app/layouts": ["layouts"],
 			"@app/constants": ["constants"],
 			"@app/hooks": ["hooks"],
 			"@app/styles": ["styles"],
 			"@app/types": ["types"],
-			"@app/store": ["store"]
+			"@app/store": ["store"],
+			"@feature/animation-player": ["features/animation-player"]
 		},
 		"allowJs": true,
 		"alwaysStrict": true,
