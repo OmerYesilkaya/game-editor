@@ -26,12 +26,12 @@ type AnimationPlayerProps = {
 
 const AnimationPlayer: React.FC<AnimationPlayerProps> = ({ width, height }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+
 	useEffect(() => {
 		if (!canvasRef.current) return;
 		const ctx = canvasRef.current.getContext("2d");
 		if (!ctx) return;
 		ctx.imageSmoothingEnabled = false;
-
 		draw(ctx, 0, width, height);
 
 		return () => window.cancelAnimationFrame(lastAnimationRequestID);
