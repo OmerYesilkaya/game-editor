@@ -32,9 +32,9 @@ const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 				[`border-${themeColor}-800`]: activePrefabId !== data.internalId,
 			})}
 		>
-			<Handle type="target" position={Position.Top} style={{ transform: "translateY(14.5px)", ...customHandleStyles }} />
+			<Handle type="target" position={Position.Top} style={{ transform: "translateY(14.5px) translateX(-7.5px)", ...customHandleStyles }} />
 			<PrefabCreatorComponents.ActivePrefab prefab={data} themeColor={themeColor} />
-			<Handle type="source" position={Position.Bottom} style={{ transform: "translateY(-14.5px)", ...customHandleStyles }} />
+			<Handle type="source" position={Position.Bottom} style={{ transform: "translateY(-14.5px) translateX(-7.5px)", ...customHandleStyles }} />
 		</div>
 	);
 };
