@@ -3,10 +3,10 @@ import { useState } from "react";
 import cn from "classnames";
 
 import { usePrefabStore } from "@app/store";
-import { api } from "@app/hooks";
 import { ChevronRightIcon, TrashIcon } from "@heroicons/react/outline";
 import { Module, ModuleValueType } from "types/module";
 import DynamicInput from "./DynamicInput";
+import api from "hooks/api";
 
 const ModuleInput: React.FC<{ themeColor: string; child: Module }> = ({ themeColor, child: module }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -51,12 +51,11 @@ const ModuleInput: React.FC<{ themeColor: string; child: Module }> = ({ themeCol
 
 const ModuleItem: React.FC<{ themeColor: string; moduleId: number }> = ({ themeColor, moduleId }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
-	const { removeModule } = usePrefabStore((state) => ({
-		removeModule: state.removeModule,
+	const { removeModuleFromPrefab } = usePrefabStore((state) => ({
+		removeModuleFromPrefab: state.removeModuleFromPrefab,
 	}));
-	const { data: module, isLoading } = api.useGetModuleById({
-		params: { id: moduleId },
-	});
+
+	const { data: module } = api.useGetModuleById({ params: { id: moduleId } });
 
 	function toggleExpand() {
 		setIsExpanded((prev) => !prev);
@@ -78,7 +77,11 @@ const ModuleItem: React.FC<{ themeColor: string; moduleId: number }> = ({ themeC
 				<div className="flex items-center">
 					<TrashIcon
 						className="bg-red-600 p-0.5 w-5 h-5 shadow-md rounded-sm text-sm font-bold font-default transition-colors hover:bg-red-700 mr-1 border-2 cursor-pointer"
-						onClick={() => removeModule(module.id)}
+						onClick={(e) => {
+							e.stopPropagation();
+							console.log("module", module);
+							removeModuleFromPrefab(module.id, module.prefabInternalId);
+						}}
 					/>
 					<ChevronRightIcon
 						onClick={(e) => {

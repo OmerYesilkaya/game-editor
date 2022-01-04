@@ -1,7 +1,9 @@
+import { Module } from ".";
+
 export type Prefab = {
 	id: number;
 	name: string;
-	moduleIds: number[];
+	modules: Module[];
 	internalId: string;
 	position: { x: number; y: number };
 };

@@ -42,7 +42,7 @@ const PreviewWindow: React.FC = () => {
 	const WINDOW_HEIGHT = isSmallDevice ? 175 : 200;
 
 	const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
-	const borderWidth = 2;
+	const borderWidth = 4;
 	const bind = useDrag(({ down, offset: [ox, oy] }) => api.start({ x: ox, y: oy, immediate: down }), {
 		bounds: {
 			left: bounds.left + (WINDOW_WIDTH / 2 + borderWidth),

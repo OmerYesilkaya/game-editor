@@ -4,13 +4,14 @@ import { EyeIcon, DuplicateIcon, ExclamationCircleIcon, TrashIcon } from "@heroi
 
 import { Common } from "@app/components";
 import { usePrefabStore } from "@app/store";
+import { Module } from "@app/types";
 
 import cn from "classnames";
 
 import ModuleItem from "./ModuleItem";
 
 type ActivePrefabProps = {
-	prefab: { name: string; moduleIds: number[]; id: number; internalId: string };
+	prefab: { name: string; modules: Module[]; id: number; internalId: string };
 	themeColor: string;
 };
 type ButtonProps = {
@@ -35,8 +36,7 @@ const Button: React.FC<ButtonProps> = ({ children, themeColor, variant = "defaul
 };
 
 const ActivePrefab: React.FC<ActivePrefabProps> = ({ prefab, themeColor }) => {
-	const { moduleIds, setActivePrefabId } = usePrefabStore((state) => ({
-		moduleIds: state.moduleIds,
+	const { setActivePrefabId } = usePrefabStore((state) => ({
 		setActivePrefabId: state.setActivePrefabId,
 	}));
 
@@ -49,20 +49,20 @@ const ActivePrefab: React.FC<ActivePrefabProps> = ({ prefab, themeColor }) => {
 						<Button themeColor={themeColor} title="Collapse All">
 							<EyeIcon className="w-full h-full p-1" />
 						</Button>
-						<Button themeColor={themeColor}>
+						<Button themeColor={themeColor} title="Duplicate">
 							<DuplicateIcon className="w-full h-full p-1" />
 						</Button>
 						<div className="h-6 bg-rose-600  w-0.5 rounded-full mx-1" />
-						<Button themeColor={themeColor} variant="outline" title="Remove All">
+						<Button themeColor={themeColor} variant="outline" title="Delete Prefab">
 							<TrashIcon className="w-full h-full p-1" />
 						</Button>
 					</div>
 				</div>
 			</Common.Header>
-			{moduleIds.length > 0 ? (
+			{prefab.modules.length > 0 ? (
 				<div className="flex flex-col gap-y-1 mt-1">
-					{moduleIds.map((id) => (
-						<ModuleItem themeColor={themeColor} key={id} moduleId={id} />
+					{prefab.modules.map((module) => (
+						<ModuleItem themeColor={themeColor} key={module.id} moduleId={module.id} />
 					))}
 				</div>
 			) : (

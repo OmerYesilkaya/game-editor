@@ -1,15 +1,16 @@
 import { NextPage } from "next";
-import MOCK_DATA from "constants/MOCK_ASSETS";
 import { createRef, MutableRefObject, useEffect, useRef, useState } from "react";
-import { Monsters } from "@app/components";
+import { BalanceMaster as BalanceMasterComponents } from "@app/components";
 
 const allTags = ["Health", "Shield", "Armor", "JumpSpeed", "JumpDistance", "DamageOverTime"];
 
-const EditMonsters: NextPage = () => {
+const monstersData: any = [];
+
+const BalanceMaster: NextPage = () => {
 	const tagRefs = useRef([]);
 	const [selectedTags, setSelectedTags] = useState(new Array<string>());
 	const [filteredTags, setFilteredTags] = useState(allTags);
-	const [filteredMonsters, setFilteredMonsters] = useState(MOCK_DATA.MONSTERS);
+	const [filteredMonsters, setFilteredMonsters] = useState([]);
 	const [tagQuery, setTagQuery] = useState<string>("");
 
 	function handleSelectTag(ref: MutableRefObject<HTMLInputElement>) {
@@ -31,7 +32,7 @@ const EditMonsters: NextPage = () => {
 			return;
 		}
 		setFilteredMonsters(
-			MOCK_DATA.MONSTERS.filter((monster) => {
+			monstersData.filter((monster: any) => {
 				const truthMap = selectedTags.map((tag) => {
 					return monster.stats.some((stat: any) => stat.name === tag);
 				});
@@ -48,18 +49,18 @@ const EditMonsters: NextPage = () => {
 	return (
 		<div className="flex w-full gap-2 p-2">
 			<div className="flex flex-col w-1/2">
-				<Monsters.Edit.Tags
+				<BalanceMasterComponents.Tags
 					filteredTags={filteredTags}
 					handleSelectTag={handleSelectTag}
 					selectedTags={selectedTags}
 					setTagQuery={setTagQuery}
 					tagRefs={tagRefs}
 				/>
-				<Monsters.Edit.StatGrid selectedTags={selectedTags} filteredMonsters={filteredMonsters} />
+				<BalanceMasterComponents.StatGrid selectedTags={selectedTags} filteredMonsters={filteredMonsters} />
 			</div>
 			<div className="w-1/2 text-white card-secondary">second screen</div>
 		</div>
 	);
 };
 
-export default EditMonsters;
+export default BalanceMaster;

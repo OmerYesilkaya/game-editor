@@ -29,7 +29,8 @@ const Prefab: React.FC<{ prefab: PrefabType }> = ({ prefab }) => {
 };
 
 const Prefabs: React.FC = () => {
-	const { prefabs, addPrefab } = usePrefabStore((state) => ({ prefabs: state.prefabs, addPrefab: state.addPrefab }));
+	const { prefabs, addPrefab } = usePrefabStore((state) => ({ prefabs: state.prefabs, addPrefab: state.createPrefab }));
+
 	return (
 		<div className="w-full h-full p-2 overflow-y-auto card-secondary flex flex-col justify-between">
 			<div className="flex flex-col">

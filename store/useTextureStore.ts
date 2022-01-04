@@ -1,14 +1,5 @@
 import create from "zustand";
-
-type RawTexture = {
-	id: string;
-	texture: StaticImageData;
-};
-
-type Texture = {
-	id: string;
-	image: HTMLImageElement;
-};
+import { Texture, RawTexture } from "@app/types";
 
 type TextureStoreTypes = {
 	textures: Texture[];
@@ -22,8 +13,7 @@ export const useTextureStore = create<TextureStoreTypes>((set) => ({
 	setRawTextures: (textures) => {
 		textures.forEach((raw) => {
 			const image = new Image();
-			image.src = raw.texture.src;
-
+			image.src = raw.texture as string;
 			image.onload = () => {
 				set((prev) => ({ textures: [...prev.textures, { id: raw.id, image }], rawTextures: textures }));
 			};

@@ -20,4 +20,7 @@ export type Module = {
 	id: number;
 	children: Module[] | null;
 	value_type: ModuleValueType;
+	isCollapsed: boolean;
+	value: any | null;
+	prefabInternalId: string;
 };

@@ -1,31 +1,69 @@
-import { useEffect } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 
 import { NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
 
 import { Footer, Navbar } from "@app/components";
 import { useTextureStore, useAnimationStore, useSpriteStore } from "@app/store";
+import { RawTexture } from "@app/types";
+import { api } from "@app/hooks";
+import { URL } from "./constants";
 
-import Player from "public/assets/images/Player.png";
-import { MOCK_DATA } from "./constants";
+async function loadTextures(textures: { id: number; name: string }[], setFiles: React.Dispatch<SetStateAction<RawTexture[]>>) {
+	const rawTextures = [] as RawTexture[];
+	textures.forEach((texture) =>
+		fetch(URL.GET_TEXTURES + `/${texture.id}`, {
+			method: "GET",
+		})
+			.then((result) => result.blob())
+			.then((data) => {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					setFiles((prev) => [...prev, { id: texture.id, texture: e?.target?.result ?? null }]);
+				};
+				reader.readAsDataURL(data);
+			})
+	);
+
+	return rawTextures;
+}
 
 const AppWrapper: NextPage = ({ children }) => {
 	const router = useRouter();
 	const isInPrefabCreator = router.pathname === "/prefab-creator";
+	const [files, setFiles] = useState<RawTexture[]>([]);
 
 	const setRawTextures = useTextureStore((state) => state.setRawTextures);
 	const setAnimations = useAnimationStore((state) => state.setAnimations);
 	const setSprites = useSpriteStore((state) => state.setSprites);
 
-	const ANIMATION_2 = { ...MOCK_DATA.IDLE_ANIMATION, id: "diffrenet-id", name: "idle-2" };
+	const { isLoading: areTexturesLoading } = api.useGetTextures({
+		onSuccess: (data) => {
+			loadTextures(data, setFiles);
+		},
+	});
+
+	const { isLoading: areSpritesLoading } = api.useGetSprites({
+		onSuccess: (data) => {
+			setSprites(data);
+		},
+	});
+
+	const { isLoading: areAnimationLoading } = api.useGetAnimations({
+		onSuccess: (data) => {
+			setAnimations(data);
+		},
+	});
+
 	useEffect(() => {
-		setRawTextures([{ id: "37d25c3149f6ce44aafbf5917079cf20", texture: Player }]);
-		setAnimations([MOCK_DATA.IDLE_ANIMATION, ANIMATION_2]);
-		setSprites(MOCK_DATA.SPRITES);
-	}, []);
+		setRawTextures(files);
+	}, [files]);
 
 	return (
-		<div className="flex flex-col h-screen background-pattern">
+		<div className="flex flex-col h-screen">
+			{(areAnimationLoading || areSpritesLoading || areTexturesLoading) && (
+				<div className="w-screen h-screen opacity-30 flex items-center justify-center fixed inset-0">loading...</div>
+			)}
 			{!isInPrefabCreator && <Navbar />}
 			<main className="flex flex-auto overflow-y-auto">{children}</main>
 			{!isInPrefabCreator && <Footer />}

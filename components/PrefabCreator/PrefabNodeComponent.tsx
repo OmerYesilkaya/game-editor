@@ -3,11 +3,12 @@ import { Handle, Position } from "react-flow-renderer";
 
 import { PrefabCreator as PrefabCreatorComponents } from "@app/components";
 import { usePrefabStore } from "@app/store";
+import { Module } from "@app/types";
 
 import cn from "classnames";
 
 type Props = {
-	data: { name: string; moduleIds: number[]; id: number; internalId: string };
+	data: { name: string; modules: Module[]; id: number; internalId: string };
 };
 
 const PrefabNodeComponent: React.FC<Props> = ({ data }) => {

@@ -1,15 +1,13 @@
 import { ExclamationIcon } from "@heroicons/react/outline";
-import { MonsterType } from "types/monster";
-import MOCK_DATA from "constants/MOCK_ASSETS";
 import { Fragment } from "react";
 
 type StatGridPropTypes = {
 	selectedTags: string[];
-	filteredMonsters: MonsterType[];
+	filteredMonsters: any[];
 };
 
 const StatGrid: React.FC<StatGridPropTypes> = ({ selectedTags, filteredMonsters }) => {
-	const monsters = selectedTags.length === 0 ? MOCK_DATA.MONSTERS : filteredMonsters;
+	const monsters = selectedTags.length === 0 ? [] : filteredMonsters;
 	return (
 		<div
 			className="grid gap-1 p-1 mt-2 bg-gray-200 rounded-sm"

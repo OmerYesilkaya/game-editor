@@ -9,7 +9,7 @@ const PrefabCanvas: React.FC = () => {
 		id: prefab.internalId,
 		type: "prefab",
 		position: prefab.position,
-		data: { name: prefab.name, moduleIds: prefab.moduleIds, id: prefab.id, internalId: prefab.internalId },
+		data: { name: prefab.name, modules: prefab.modules, id: prefab.id, internalId: prefab.internalId },
 		dragHandle: "#drag-handle",
 	}));
 

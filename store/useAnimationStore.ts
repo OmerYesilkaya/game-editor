@@ -1,12 +1,12 @@
 import create from "zustand";
-import { AssetAnimation } from "@app/types";
+import { Animation } from "@app/types";
 
 type AnimationStoreTypes = {
-	animations: AssetAnimation[];
-	setAnimations: (value: AssetAnimation[]) => void;
+	animations: Animation[];
+	setAnimations: (value: Animation[]) => void;
 };
 
-export const useAnimationStore = create<AnimationStoreTypes>((set, get) => ({
+export const useAnimationStore = create<AnimationStoreTypes>((set) => ({
 	animations: [],
 	setAnimations: (value) => set({ animations: value }),
 }));

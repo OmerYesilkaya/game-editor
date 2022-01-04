@@ -18,7 +18,6 @@ function update(context: EngineContext) {
 	if (!sprite) return;
 
 	const texture = textures.find((texture) => texture.id === sprite.textureId);
-
 	if (!texture) return;
 
 	drawSprite(context, sprite, texture.image);

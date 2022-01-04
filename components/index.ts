@@ -1,9 +1,8 @@
-import Character from "./Character";
 import Common from "./Common";
 import Footer from "./Footer";
 import Layout from "./Layout";
-import Monsters from "./Monsters";
+import BalanceMaster from "./BalanceMaster";
 import Navbar from "./Navbar";
 import PrefabCreator from "./PrefabCreator";
 
-export { Character, Common, Footer, Layout, Monsters, Navbar, PrefabCreator };
+export { BalanceMaster, Common, Footer, Layout, Navbar, PrefabCreator };

@@ -18,7 +18,7 @@ class MyDocument extends Document {
 					/>
 					<script src="https://cdn.tailwindcss.com"></script>
 				</Head>
-				<body>
+				<body className="background-pattern">
 					<Main />
 					<NextScript />
 				</body>

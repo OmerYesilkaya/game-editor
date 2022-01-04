@@ -17,17 +17,18 @@ type Rect = {
 };
 
 export type Sprite = {
-	id: string;
+	id: number;
 	pivot: Position;
 	alignment: number;
+	name: string;
 	rect: Rect;
-	textureId: string;
+	textureId: number;
 };
 
 export type Animation = {
-	id: string;
+	id: number;
 	name: string;
 	priority: AnimationPriority;
 	transitionType: AnimationTransitionType;
-	sprites: string[];
+	sprites: number[];
 };

@@ -5,23 +5,25 @@ import { api, useDebounce } from "@app/hooks";
 import { ChevronLeftIcon } from "@heroicons/react/outline";
 import { usePrefabStore } from "@app/store";
 
-type ModulesProps = {
-	x?: any;
-};
-
-const Modules: React.FC<ModulesProps> = ({ x }) => {
+const Modules: React.FC = () => {
 	const [query, setQuery] = useState("");
 
-	const { data: modules } = api.useGetModules();
 	const { debouncedValue, isLoading } = useDebounce(query.toLowerCase(), 200);
-	const { moduleIds, addModule } = usePrefabStore((state) => ({
-		moduleIds: state.moduleIds,
-		addModule: state.addModule,
+	const { getActivePrefab, addModuleToPrefab } = usePrefabStore((state) => ({
+		addModuleToPrefab: state.addModuleToPrefab,
+		getActivePrefab: state.getActivePrefab,
 	}));
 
-	const filteredModules = modules
-		? modules
-				.filter((module) => !moduleIds.includes(module.id))
+	const { data: rootModules } = api.useGetModules();
+
+	const filteredModules = rootModules
+		? rootModules
+				.filter(
+					(module) =>
+						!getActivePrefab()
+							?.modules.map((module) => module.id)
+							.includes(module.id)
+				)
 				.filter((module) => debouncedValue === "" || module.name.toLowerCase().includes(debouncedValue))
 		: [];
 
@@ -43,7 +45,7 @@ const Modules: React.FC<ModulesProps> = ({ x }) => {
 							<button
 								className="bg-sky-900 border-2 border-white rounded-md px-1.5 py-0.5 text-white flex items-center cursor-pointer transition hover:brightness-110"
 								key={module.id}
-								onClick={() => addModule(module.id)}
+								onClick={() => addModuleToPrefab(module)}
 							>
 								<ChevronLeftIcon className="w-5 h-5 bg-zinc-200 text-cyan-900 border-2 border-white rounded-sm shadow-md " />
 								<span className="ml-2">{module.name}</span>
