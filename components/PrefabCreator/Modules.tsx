@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 
 import { Common } from "@app/components";
 import { api, useDebounce } from "@app/hooks";
-import { ChevronLeftIcon } from "@heroicons/react/outline";
 import { usePrefabStore } from "@app/store";
 
 const Modules: React.FC = () => {
@@ -36,26 +36,25 @@ const Modules: React.FC = () => {
 	}
 
 	return (
-		<div className="w-full h-full p-2 overflow-y-auto card-secondary">
-			<Common.Header>Modules</Common.Header>
+		<>
 			<Common.SearchInput placeholder="Module Name" query={query} setQuery={setQuery} isLoading={isLoading} />
 			<div className="flex flex-col gap-y-1 mt-1">
 				{filteredModules.length > 0
 					? filteredModules.map((module) => (
 							<button
-								className="bg-sky-900 border-2 border-white rounded-md px-1.5 py-0.5 text-white flex items-center cursor-pointer transition hover:brightness-110"
+								className="menu-card-pattern border-2 border-white rounded-md p-1 px-1.5 text-white flex items-center cursor-pointer transition hover:brightness-110"
 								key={module.id}
 								onClick={() => addModuleToPrefab(module)}
 							>
-								<ChevronLeftIcon className="w-5 h-5 bg-zinc-200 text-cyan-900 border-2 border-white rounded-sm shadow-md " />
-								<span className="ml-2">{module.name}</span>
-								<div className="bg-orange-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
-								<div className="bg-red-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div>
+								<span className="font-default text-sm font-bold mr-2">{module.name.toUpperCase()}</span>
+								{/* <div className="bg-orange-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
+								<div className="bg-red-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div> */}
+								<ChevronRightIcon className="w-5 h-5 ml-auto bg-zinc-200 text-cyan-900 border-2 border-white rounded-sm shadow-md " />
 							</button>
 					  ))
 					: getMessage()}
 			</div>
-		</div>
+		</>
 	);
 };
 

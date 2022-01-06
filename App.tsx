@@ -62,7 +62,12 @@ const AppWrapper: NextPage = ({ children }) => {
 	return (
 		<div className="flex flex-col h-screen">
 			{(areAnimationLoading || areSpritesLoading || areTexturesLoading) && (
-				<div className="w-screen h-screen opacity-30 flex items-center justify-center fixed inset-0">loading...</div>
+				<>
+					<div className="w-screen h-screen bg-black opacity-80 flex items-center justify-center fixed inset-0 z-[1000] " />
+					<div className="z-[1001] fixed inset-0 flex items-center justify-center text-white h-screen w-screen font-default text-4xl font-black select-none">
+						LOADING...
+					</div>
+				</>
 			)}
 			{!isInPrefabCreator && <Navbar />}
 			<main className="flex flex-auto overflow-y-auto">{children}</main>
