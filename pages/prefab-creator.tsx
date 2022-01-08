@@ -5,9 +5,10 @@ import { useCanvasStore } from "@app/store";
 import { useEffect } from "react";
 
 const PrefabCreator: NextPage = () => {
-	const { activeWindowIds, toggleActivation } = useCanvasStore((state) => ({
+	const { activeAssetInput, activeWindowIds, toggleActivation } = useCanvasStore((state) => ({
 		activeWindowIds: state.activeWindowIds,
 		toggleActivation: state.toggleActivation,
+		activeAssetInput: state.activeAssetInput,
 	}));
 
 	useEffect(() => {
@@ -25,6 +26,9 @@ const PrefabCreator: NextPage = () => {
 					break;
 				case "4":
 					toggleActivation("toolbar-active-prefab");
+					break;
+				case "5":
+					toggleActivation("toolbar-file-select");
 					break;
 				default:
 					break;
@@ -56,7 +60,7 @@ const PrefabCreator: NextPage = () => {
 				);
 			})}
 			<PrefabCreatorComponents.PrefabCanvas />
-			{/* <PrefabCreatorComponents.Overlay /> */}
+			{activeAssetInput && <PrefabCreatorComponents.Overlay />}
 		</Layout.Center>
 	);
 };

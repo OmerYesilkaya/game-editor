@@ -1,4 +1,4 @@
-import { Module, ModuleValueType } from "@app/types";
+import { Module, ModuleValueType, AssetFileTypes } from "@app/types";
 import {
 	BoolInput,
 	ColorInput,
@@ -21,7 +21,7 @@ const DynamicInput: React.FC<DynamicInputPropTypes> = ({ module }) => {
 
 	switch (module.value_type) {
 		case ModuleValueType.Animation:
-			renderInput = () => <FileSelectInput type="animation" themeColor="rose" moduleId={module.id} />;
+			renderInput = () => <FileSelectInput type={AssetFileTypes.animation} themeColor="rose" moduleId={module.id} />;
 			break;
 		case ModuleValueType.Bool:
 			renderInput = () => <BoolInput moduleId={module.id} />;
@@ -39,7 +39,7 @@ const DynamicInput: React.FC<DynamicInputPropTypes> = ({ module }) => {
 			renderInput = () => <div>Range</div>;
 			break;
 		case ModuleValueType.Sprite:
-			renderInput = () => <FileSelectInput type="sprite" themeColor="rose" moduleId={module.id} />;
+			renderInput = () => <FileSelectInput type={AssetFileTypes.sprite} themeColor="rose" moduleId={module.id} />;
 			break;
 		case ModuleValueType.Text:
 			renderInput = () => <TextInput moduleId={module.id} />;

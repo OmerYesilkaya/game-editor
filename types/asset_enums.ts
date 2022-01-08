@@ -11,4 +11,9 @@ enum AnimationTransitionType {
 	DESTROY,
 }
 
-export { AnimationPriority, AnimationTransitionType };
+enum AssetFileTypes {
+	"animation",
+	"sprite",
+}
+
+export { AnimationPriority, AnimationTransitionType, AssetFileTypes };

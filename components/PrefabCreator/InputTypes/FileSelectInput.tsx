@@ -1,21 +1,28 @@
 import { DocumentTextIcon } from "@heroicons/react/solid";
 import { useFormContext } from "react-hook-form";
 
+import { useCanvasStore } from "@app/store";
+import { AssetFileTypes } from "@app/types";
+import { array } from "@app/utils";
+
 type Props = {
-	type: "animation" | "sprite";
+	type: AssetFileTypes;
 	themeColor: string;
 	moduleId: number;
 };
 
 const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId }) => {
-	const { setValue, register } = useFormContext();
+	const { register } = useFormContext();
+	const { setActiveAssetInput, setActiveWindowIds, activeWindowIds } = useCanvasStore((state) => ({
+		setActiveAssetInput: state.setActiveAssetInput,
+		setActiveWindowIds: state.setActiveWindowIds,
+		activeWindowIds: state.activeWindowIds,
+	}));
 
 	function handleFileClick() {
-		if (type === "animation") {
-			setValue(`${moduleId}`, "x");
-		} else {
-			setValue(`${moduleId}`, "y");
-		}
+		const windows = [...activeWindowIds, "toolbar-preview", "toolbar-file-select"];
+		setActiveAssetInput({ id: moduleId, type });
+		setActiveWindowIds(windows.filter(array.onlyUniques));
 	}
 
 	return (
