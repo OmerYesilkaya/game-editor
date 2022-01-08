@@ -34,6 +34,7 @@ const Prefabs: React.FC = () => {
 		<div className="flex flex-col h-full justify-between">
 			<div className="flex gap-x-2 sticky top-0">
 				<button
+					type="button"
 					className="bg-emerald-600 mt-1 rounded-sm text-white px-2 py-1 text-sm font-default font-bold shadow-md flex items-center transition hover:bg-emerald-700 grow"
 					onClick={() => addPrefab()}
 				>
@@ -41,6 +42,7 @@ const Prefabs: React.FC = () => {
 					<PlusIcon className="w-4 h-4 ml-2 text-emerald-600 bg-white rounded-sm" />
 				</button>
 				<button
+					type="button"
 					className="bg-sky-600 mt-1 rounded-sm text-white px-2 py-1 text-sm font-default font-bold shadow-md flex items-center transition hover:bg-sky-700 grow"
 					onClick={() => addPrefab()}
 				>

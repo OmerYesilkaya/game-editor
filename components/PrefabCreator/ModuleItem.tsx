@@ -21,15 +21,20 @@ const ModuleInput: React.FC<{ themeColor: string; child: Module }> = ({ themeCol
 				<span className="w-full text-left">{module.name}</span>
 				{module.value_type === ModuleValueType.Object ? (
 					<div className="ml-1 flex items-center justify-between">
-						<ChevronRightIcon
+						<button
+							type="button"
+							className={`w-5 h-5 bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md cursor-pointer`}
 							onClick={(e) => {
 								e.stopPropagation();
 								toggleExpand();
 							}}
-							className={cn(`w-5 h-5 bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md cursor-pointer`, {
-								"rotate-90": isExpanded,
-							})}
-						/>
+						>
+							<ChevronRightIcon
+								className={cn(`transition-transform`, {
+									"rotate-90": isExpanded,
+								})}
+							/>
+						</button>
 					</div>
 				) : (
 					<DynamicInput module={module} />
@@ -64,34 +69,31 @@ const ModuleItem: React.FC<{ themeColor: string; moduleId: number }> = ({ themeC
 	if (!module) return null;
 
 	return (
-		<button
-			className={cn("w-full h-full flex flex-col font-default bg-zinc-800 border-2 rounded-sm px-1 py-0.5 text-white", {
-				"cursor-pointer": !isExpanded,
-				"cursor-default": isExpanded,
-			})}
-			key={module.id}
-			onClick={() => (!isExpanded ? toggleExpand() : null)}
-		>
-			<div className="flex items-center justify-between w-full">
+		<div className="w-full h-full flex flex-col font-default bg-zinc-800 border-2 rounded-sm px-1 py-0.5 text-white ">
+			<div className="flex items-center justify-between w-full cursor-pointer" onClick={() => toggleExpand()}>
 				<div className="font-bold">{module.name}</div>
 				<div className="flex items-center">
 					<TrashIcon
 						className="bg-red-600 p-0.5 w-5 h-5 shadow-md rounded-sm text-sm font-bold font-default transition-colors hover:bg-red-700 mr-1 border-2 cursor-pointer"
 						onClick={(e) => {
 							e.stopPropagation();
-							console.log("module", module);
 							removeModuleFromPrefab(module.id, module.prefabInternalId);
 						}}
 					/>
-					<ChevronRightIcon
+					<button
+						type="button"
+						className={`w-5 h-5 bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md cursor-pointer`}
 						onClick={(e) => {
 							e.stopPropagation();
 							toggleExpand();
 						}}
-						className={cn(`w-5 h-5 bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md cursor-pointer`, {
-							"rotate-90": isExpanded,
-						})}
-					/>
+					>
+						<ChevronRightIcon
+							className={cn(`transition-transform`, {
+								"rotate-90": isExpanded,
+							})}
+						/>
+					</button>
 				</div>
 			</div>
 
@@ -105,7 +107,7 @@ const ModuleItem: React.FC<{ themeColor: string; moduleId: number }> = ({ themeC
 					</div>
 				</>
 			)}
-		</button>
+		</div>
 	);
 };
 

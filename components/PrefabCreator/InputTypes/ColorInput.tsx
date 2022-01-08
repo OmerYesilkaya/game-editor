@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-const ColorInput: React.FC = () => {
-	const [color, setColor] = useState<string>("#ffffff");
+type Props = {
+	moduleId: number;
+};
 
-	return <input className="px-0.5 rounded-sm bg-zinc-800 border w-full" type="color" value={color} onChange={(e) => setColor(e.target.value)} />;
+const ColorInput: React.FC<Props> = ({ moduleId }) => {
+	const { register } = useFormContext();
+
+	return <input className="px-0.5 rounded-sm bg-zinc-800 border w-full" type="color" {...register(moduleId.toString())} defaultValue="#ffffff" />;
 };
 
 export default ColorInput;

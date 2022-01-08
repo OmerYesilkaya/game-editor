@@ -1,7 +1,10 @@
-import { UseQueryOptions } from "react-query";
+import { UseMutationOptions, UseQueryOptions } from "react-query";
 
-type OptionTypes<T, S = {}> = UseQueryOptions<T, T, T, any> & {
+type QueryOptionTypes<T, S = {}> = UseQueryOptions<T, T, T, any> & {
+	params?: S;
+};
+type MutationOptionTypes<T, S = {}> = UseMutationOptions<T, T, any, T> & {
 	params?: S;
 };
 
-export type { OptionTypes };
+export type { QueryOptionTypes, MutationOptionTypes };

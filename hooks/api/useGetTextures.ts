@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from "react-query";
 import { URL } from "@app/constants";
-import { OptionTypes } from "@app/types";
+import { QueryOptionTypes } from "@app/types";
 
 type ApiTexture = { id: number; name: string };
 
@@ -9,9 +9,9 @@ async function getTextures(): Promise<ApiTexture[]> {
 		method: "GET",
 	};
 
-	return await fetch(URL.GET_TEXTURES, INIT).then((result) => result.json());
+	return await fetch(URL.TEXTURES, INIT).then((result) => result.json());
 }
 
-export default function useGetTextures(props?: OptionTypes<ApiTexture[]>): UseQueryResult<ApiTexture[]> {
+export default function useGetTextures(props?: QueryOptionTypes<ApiTexture[]>): UseQueryResult<ApiTexture[]> {
 	return useQuery("useGetTextures", () => getTextures(), props);
 }

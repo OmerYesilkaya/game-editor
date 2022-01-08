@@ -5,16 +5,21 @@ import { useDrag } from "@use-gesture/react";
 
 import { useWindowBounds } from "@app/hooks";
 import Common from "components/Common";
+import { XIcon } from "@heroicons/react/outline";
+import { useCanvasStore } from "store/useCanvasStore";
 
 type Props = {
-	title: string;
+	title: JSX.Element;
 	noContent: React.ReactElement;
 	width: number;
 	height: number;
 	isActive: boolean;
+	id: string;
+	order: number;
 };
 
-const Window: React.FC<Props> = ({ title, noContent, width, height, isActive, children }) => {
+const Window: React.FC<Props> = ({ id, title, noContent, width, height, isActive, order, children }) => {
+	const toggleActivation = useCanvasStore((state) => state.toggleActivation);
 	const bounds = useWindowBounds();
 
 	const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
@@ -31,7 +36,7 @@ const Window: React.FC<Props> = ({ title, noContent, width, height, isActive, ch
 	return (
 		<animated.div
 			className={cn(
-				`w-[${width}px] h-[${height}px] max-h-[${height}px] rounded-sm absolute z-50 touch-none border-zinc-200 select-none menu-card-pattern transition-opacity`,
+				`w-[${width}px] h-[${height}px] max-h-[${height}px] rounded-sm absolute border-zinc-200 select-none menu-card-pattern transition-opacity z-[1${order}]`,
 				{
 					"pointer-events-none opacity-0": !isActive,
 				}
@@ -40,15 +45,32 @@ const Window: React.FC<Props> = ({ title, noContent, width, height, isActive, ch
 		>
 			{children ? (
 				<div className="h-full w-full flex flex-col overflow-y-auto">
-					<Common.Header className="rounded-none border-4 border-zinc-900 px-2 py-0 text-lg" {...bind()}>
+					<Common.Header className="rounded-none border-4 border-zinc-900 px-2 py-0 text-xl sticky top-0 touch-none z-[2]" {...bind()}>
 						<div className="flex items-center justify-between">
-							<span>{title}</span>
+							{title}
+							<button
+								type="button"
+								className="w-4 h-4 bg-red-500 rounded-sm shadow-md transition hover:brightness-50"
+								onClick={() => toggleActivation(id)}
+							>
+								<XIcon />
+							</button>
 						</div>
 					</Common.Header>
-					<div className="w-full h-full flex flex-col overflow-y-auto pb-1 px-1">{children}</div>
+					<div
+						className={cn("w-full h-full flex flex-col overflow-y-auto", {
+							"p-0": id === "toolbar-preview",
+							"pb-1 px-1": id !== "toolbar-preview",
+						})}
+					>
+						{children}
+					</div>
 				</div>
 			) : (
-				<div {...bind()} className="border-dashed border-2 w-full h-full text-white font-default flex flex-col items-center justify-center">
+				<div
+					{...bind()}
+					className="border-dashed border-2 w-full h-full text-white font-default flex flex-col items-center justify-center  touch-none"
+				>
 					{noContent}
 				</div>
 			)}

@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-const BoolInput: React.FC = () => {
-	const [isChecked, setIsChecked] = useState(false);
+type Props = {
+	moduleId: number;
+};
 
-	function toggleIsChecked() {
-		setIsChecked((prev) => !prev);
-	}
+const BoolInput: React.FC<Props> = ({ moduleId }) => {
+	const { register } = useFormContext();
 
 	return (
 		<div className="w-full h-full flex items-center">
-			<input className="w-4 h-4" type="checkbox" checked={isChecked} onChange={toggleIsChecked} />
+			<input className="w-4 h-4" type="checkbox" {...register(moduleId.toString())} />
 		</div>
 	);
 };

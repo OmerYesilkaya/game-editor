@@ -24,7 +24,7 @@ type AnimationPlayerProps = {
 	height: number;
 };
 
-const AnimationPlayer: React.FC<AnimationPlayerProps> = ({ width, height }) => {
+const Player: React.FC<AnimationPlayerProps> = ({ width, height }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const AnimationPlayer: React.FC<AnimationPlayerProps> = ({ width, height }) => {
 		return () => window.cancelAnimationFrame(lastAnimationRequestID);
 	}, [width, height]);
 
-	return <canvas className="z-10" ref={canvasRef} width={width} height={height} />;
+	return <canvas className="z-[2]" ref={canvasRef} width={width} height={height} />;
 };
 
-export default AnimationPlayer;
+export default Player;

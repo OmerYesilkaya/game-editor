@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ChevronRightIcon } from "@heroicons/react/outline";
 
 import { Common } from "@app/components";
 import { api, useDebounce } from "@app/hooks";
@@ -42,14 +41,14 @@ const Modules: React.FC = () => {
 				{filteredModules.length > 0
 					? filteredModules.map((module) => (
 							<button
-								className="menu-card-pattern border-2 border-white rounded-md p-1 px-1.5 text-white flex items-center cursor-pointer transition hover:brightness-110"
+								type="button"
+								className="bg-zinc-900 border-2 border-white rounded-sm py-0.5 px-1.5 text-white flex items-center cursor-pointer transition hover:brightness-125"
 								key={module.id}
 								onClick={() => addModuleToPrefab(module)}
 							>
 								<span className="font-default text-sm font-bold mr-2">{module.name.toUpperCase()}</span>
 								{/* <div className="bg-orange-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
 								<div className="bg-red-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div> */}
-								<ChevronRightIcon className="w-5 h-5 ml-auto bg-zinc-200 text-cyan-900 border-2 border-white rounded-sm shadow-md " />
 							</button>
 					  ))
 					: getMessage()}

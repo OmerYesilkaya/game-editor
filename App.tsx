@@ -12,7 +12,7 @@ import { URL } from "./constants";
 async function loadTextures(textures: { id: number; name: string }[], setFiles: React.Dispatch<SetStateAction<RawTexture[]>>) {
 	const rawTextures = [] as RawTexture[];
 	textures.forEach((texture) =>
-		fetch(URL.GET_TEXTURES + `/${texture.id}`, {
+		fetch(URL.TEXTURES + `/${texture.id}`, {
 			method: "GET",
 		})
 			.then((result) => result.blob())
@@ -63,8 +63,8 @@ const AppWrapper: NextPage = ({ children }) => {
 		<div className="flex flex-col h-screen">
 			{(areAnimationLoading || areSpritesLoading || areTexturesLoading) && (
 				<>
-					<div className="w-screen h-screen bg-black opacity-80 flex items-center justify-center fixed inset-0 z-[1000] " />
-					<div className="z-[1001] fixed inset-0 flex items-center justify-center text-white h-screen w-screen font-default text-4xl font-black select-none">
+					<div className="w-screen h-screen bg-black opacity-80 flex items-center justify-center fixed inset-0 z-[21] " />
+					<div className="z-[22] fixed inset-0 flex items-center justify-center text-white h-screen w-screen font-default text-4xl font-black select-none">
 						LOADING...
 					</div>
 				</>

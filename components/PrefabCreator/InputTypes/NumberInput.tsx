@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-const Number: React.FC = () => {
-	const [value, setValue] = useState<number>(0);
+type Props = {
+	moduleId: number;
+};
+
+const Number: React.FC<Props> = ({ moduleId }) => {
+	const { register } = useFormContext();
 
 	return (
 		<input
 			type="number"
 			className="w-full text-white rounded-sm pl-1 bg-zinc-700 shadow-md border border-zinc-200"
-			value={value}
-			onChange={(e) => setValue(parseInt(e.target.value))}
+			{...register(moduleId.toString())}
 		/>
 	);
 };

@@ -12,7 +12,7 @@ const PrefabCreator: NextPage = () => {
 
 	useEffect(() => {
 		function handleShortcuts(e: KeyboardEvent) {
-			if (document.activeElement && document.activeElement?.tagName === "INPUT") return;
+			if ((document.activeElement && document.activeElement?.tagName === "INPUT") || document.activeElement?.tagName === "TEXTAREA") return;
 			switch (e.key) {
 				case "1":
 					toggleActivation("toolbar-prefabs");
@@ -49,12 +49,14 @@ const PrefabCreator: NextPage = () => {
 						title={window.name}
 						isActive={isActive}
 						id={window.id}
+						order={window.order}
 					>
 						{window.component}
 					</PrefabCreatorComponents.Window>
 				);
 			})}
 			<PrefabCreatorComponents.PrefabCanvas />
+			{/* <PrefabCreatorComponents.Overlay /> */}
 		</Layout.Center>
 	);
 };

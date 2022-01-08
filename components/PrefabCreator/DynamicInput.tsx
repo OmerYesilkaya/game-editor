@@ -1,11 +1,10 @@
 import { Module, ModuleValueType } from "@app/types";
 import {
-	AnimationInput,
 	BoolInput,
 	ColorInput,
+	FileSelectInput,
 	NumberInput,
 	PercentageInput,
-	SpriteInput,
 	TextAreaInput,
 	TextInput,
 	Vec2Input,
@@ -22,40 +21,40 @@ const DynamicInput: React.FC<DynamicInputPropTypes> = ({ module }) => {
 
 	switch (module.value_type) {
 		case ModuleValueType.Animation:
-			renderInput = () => <AnimationInput />;
+			renderInput = () => <FileSelectInput type="animation" themeColor="rose" moduleId={module.id} />;
 			break;
 		case ModuleValueType.Bool:
-			renderInput = () => <BoolInput />;
+			renderInput = () => <BoolInput moduleId={module.id} />;
 			break;
 		case ModuleValueType.Color:
-			renderInput = () => <ColorInput />;
+			renderInput = () => <ColorInput moduleId={module.id} />;
 			break;
 		case ModuleValueType.Number:
-			renderInput = () => <NumberInput />;
+			renderInput = () => <NumberInput moduleId={module.id} />;
 			break;
 		case ModuleValueType.Percentage:
-			renderInput = () => <PercentageInput />;
+			renderInput = () => <PercentageInput moduleId={module.id} />;
 			break;
 		case ModuleValueType.Range:
 			renderInput = () => <div>Range</div>;
 			break;
 		case ModuleValueType.Sprite:
-			renderInput = () => <SpriteInput />;
+			renderInput = () => <FileSelectInput type="sprite" themeColor="rose" moduleId={module.id} />;
 			break;
 		case ModuleValueType.Text:
-			renderInput = () => <TextInput />;
+			renderInput = () => <TextInput moduleId={module.id} />;
 			break;
 		case ModuleValueType.TextArea:
-			renderInput = () => <TextAreaInput />;
+			renderInput = () => <TextAreaInput moduleId={module.id} />;
 			break;
 		case ModuleValueType.Vec2:
-			renderInput = () => <Vec2Input />;
+			renderInput = () => <Vec2Input moduleId={module.id} />;
 			break;
 		case ModuleValueType.Vec3:
-			renderInput = () => <Vec3Input />;
+			renderInput = () => <Vec3Input moduleId={module.id} />;
 			break;
 		case ModuleValueType.Vec4:
-			renderInput = () => <Vec4Input />;
+			renderInput = () => <Vec4Input moduleId={module.id} />;
 			break;
 		default:
 			renderInput = () => (

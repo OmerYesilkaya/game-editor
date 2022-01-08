@@ -20,6 +20,7 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({ children, themeColor, variant = "default", ...restProps }) => {
 	return (
 		<button
+			type="button"
 			onClick={() => console.log("click")}
 			className={cn(`w-7 h-7 rounded-sm bg-${themeColor}-500 transition  shadow-md `, {
 				[`bg-${themeColor}-500 hover:bg-${themeColor}-600 text-white`]: variant === "default",

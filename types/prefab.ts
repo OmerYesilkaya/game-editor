@@ -7,3 +7,12 @@ export type Prefab = {
 	internalId: string;
 	position: { x: number; y: number };
 };
+
+export type PostPrefabRequest = {
+	name: string;
+	modules: {
+		arrayIndex: number;
+		modulePartId: number;
+		value: any;
+	}[];
+};

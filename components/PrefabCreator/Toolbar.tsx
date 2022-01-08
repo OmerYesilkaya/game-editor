@@ -9,11 +9,12 @@ const Toolbar: React.FC = () => {
 	}));
 
 	return (
-		<div className="absolute bottom-5 left-5 flex items-center gap-x-2 z-[1002]">
+		<div className="absolute bottom-5 left-5 flex items-center gap-x-2 z-[20]">
 			{WINDOWS.map((window) => {
 				const isActive = activeWindowIds.includes(window.id);
 				return (
 					<button
+						type="button"
 						onClick={() => toggleActivation(window.id)}
 						key={window.id}
 						className={cn(
@@ -23,7 +24,7 @@ const Toolbar: React.FC = () => {
 								"hover:brightness-150 opacity-90 border-4 border-white": isActive,
 							}
 						)}
-						title={window.name}
+						title={window.id}
 					>
 						{window.icon}
 					</button>

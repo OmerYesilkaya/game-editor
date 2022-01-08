@@ -10,15 +10,15 @@ type SearchInputPropTypes = {
 
 const SearchInput: React.FC<SearchInputPropTypes> = ({ query, setQuery, placeholder, isLoading }) => {
 	return (
-		<div className="relative flex items-center my-1">
+		<div className="relative flex items-center my-1 font-default">
 			<input
-				className=" px-1.5 w-full pr-5 border-2 rounded-md"
+				className=" px-1 w-full pr-5 rounded-sm"
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
 				placeholder={placeholder}
 				maxLength={50}
 			/>
-			<div className="absolute right-2">{isLoading ? <div>...</div> : <SearchCircleIcon className="w-5 h-5" />}</div>
+			<div className="absolute right-1">{isLoading ? <div>...</div> : <SearchCircleIcon className="w-5 h-5" />}</div>
 		</div>
 	);
 };
