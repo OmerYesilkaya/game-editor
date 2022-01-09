@@ -43,16 +43,14 @@ const Modules: React.FC = () => {
 					? filteredModules.map((module) => (
 							<button
 								type="button"
-								className="bg-zinc-800 rounded-sm py-0.5 px-1.5 text-white flex items-center cursor-pointer transition hover:brightness-125"
+								className="bg-zinc-800 rounded-sm py-0.5 px-1.5 text-white flex justify-between items-center cursor-pointer transition hover:brightness-125"
 								key={module.id}
 								onClick={() => addModuleToPrefab(module)}
 							>
 								<span className="font-default text-sm font-bold mr-2">{module.name.toUpperCase()}</span>
 								{/* <div className="bg-orange-600 text-white font-default font-bold text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
 								<div className="bg-red-600 text-white font-default font-bold text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div> */}
-								<button>
-									<ChevronRightIcon className="w-4 h-4" />
-								</button>
+								<ChevronRightIcon className="w-4 h-4" />
 							</button>
 					  ))
 					: getMessage()}
