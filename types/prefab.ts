@@ -1,9 +1,9 @@
-import { Module } from ".";
+import { ApiModule } from ".";
 
 export type Prefab = {
 	id: number;
 	name: string;
-	modules: Module[];
+	modules: ApiModule[];
 	internalId: string;
 	position: { x: number; y: number };
 };
@@ -15,4 +15,10 @@ export type PostPrefabRequest = {
 		modulePartId: number;
 		value: any;
 	}[];
+};
+
+export type GetPrefabResponse = {
+	id: number;
+	modules: ApiModule[];
+	name: string;
 };

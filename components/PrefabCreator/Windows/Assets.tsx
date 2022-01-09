@@ -1,15 +1,10 @@
-// import { useFormContext } from "react-hook-form";
-
 import cn from "classnames";
 
 import { useSpriteStore, useAnimationStore, usePreviewStore, useCanvasStore } from "@app/store";
 import { AssetFileTypes } from "@app/types";
 import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
 
 const Sprites: React.FC = () => {
-	const { setValue } = useFormContext();
-
 	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
 	const sprites = useSpriteStore((state) => state.sprites);
 	const { activeAssetInput, setActiveAssetInput } = useCanvasStore((state) => ({
@@ -19,7 +14,7 @@ const Sprites: React.FC = () => {
 
 	function handleSelect(id: number) {
 		if (!activeAssetInput) return;
-		setValue(activeAssetInput.id.toString(), id);
+		// setValue(activeAssetInput.id.toString(), id);
 		setActiveAssetInput(null);
 	}
 
@@ -53,8 +48,6 @@ const Sprites: React.FC = () => {
 };
 
 const Animations: React.FC = () => {
-	const { setValue } = useFormContext();
-
 	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
 	const animations = useAnimationStore((state) => state.animations);
 	const sprites = useSpriteStore((state) => state.sprites);
@@ -65,7 +58,7 @@ const Animations: React.FC = () => {
 
 	function handleSelect(id: number) {
 		if (!activeAssetInput) return;
-		setValue(activeAssetInput.id.toString(), id);
+		// setValue(activeAssetInput.id.toString(), id);
 		setActiveAssetInput(null);
 	}
 

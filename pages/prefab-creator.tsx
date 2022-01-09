@@ -1,10 +1,9 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
-import { useForm, FormProvider } from "react-hook-form";
 
 import { Layout, PrefabCreator as PrefabCreatorComponents } from "@app/components";
 import { COLORS, WINDOWS } from "@app/constants";
-import { useCanvasStore } from "@app/store";
+import { useCanvasStore, usePrefabStore } from "@app/store";
 
 const PrefabCreator: NextPage = () => {
 	const { activeAssetInput, activeWindowIds, toggleActivation } = useCanvasStore((state) => ({
@@ -13,7 +12,7 @@ const PrefabCreator: NextPage = () => {
 		activeAssetInput: state.activeAssetInput,
 	}));
 
-	const methods = useForm();
+	const prefab = usePrefabStore((state) => state.prefab);
 
 	useEffect(() => {
 		function handleShortcuts(e: KeyboardEvent) {
@@ -43,28 +42,30 @@ const PrefabCreator: NextPage = () => {
 		return () => window.removeEventListener("keydown", handleShortcuts);
 	}, []);
 
+	useEffect(() => {
+		console.log("pog");
+	}, [prefab]);
+
 	return (
 		<Layout.Center className="relative w-full h-full flex gap-1 p-2" style={{ background: COLORS.BG_DARK }}>
 			<PrefabCreatorComponents.Toolbar />
-			<FormProvider {...methods}>
-				{WINDOWS.map((window) => {
-					const isActive = activeWindowIds.includes(window.id);
-					return (
-						<PrefabCreatorComponents.Window
-							key={window.id}
-							width={window.width}
-							height={window.height}
-							noContent={<div>no content</div>}
-							title={window.name}
-							isActive={isActive}
-							id={window.id}
-							order={window.order}
-						>
-							{window.component}
-						</PrefabCreatorComponents.Window>
-					);
-				})}
-			</FormProvider>
+			{WINDOWS.map((window) => {
+				const isActive = activeWindowIds.includes(window.id);
+				return (
+					<PrefabCreatorComponents.Window
+						key={window.id}
+						width={window.width}
+						height={window.height}
+						noContent={<div>no content</div>}
+						title={window.name}
+						isActive={isActive}
+						id={window.id}
+						order={window.order}
+					>
+						{window.component}
+					</PrefabCreatorComponents.Window>
+				);
+			})}
 			<PrefabCreatorComponents.PrefabCanvas />
 			{activeAssetInput && <PrefabCreatorComponents.Overlay />}
 		</Layout.Center>

@@ -53,11 +53,11 @@ const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 
 	return (
 		<div
-			onClick={() => setActivePrefabId(data.internalId)}
+			onClick={() => setActivePrefabId(data.id)}
 			ref={containerRef}
 			className={cn(`w-[400px] p-2 my-4 overflow-y-auto  border-4 rounded-md bg-zinc-900`, {
-				[`border-${themeColor}-600`]: activePrefabId === data.internalId,
-				[`border-${themeColor}-800`]: activePrefabId !== data.internalId,
+				[`border-${themeColor}-600`]: activePrefabId === data.id,
+				[`border-${themeColor}-800`]: activePrefabId !== data.id,
 			})}
 		>
 			<Handle type="target" position={Position.Top} style={{ transform: "translateY(14.5px) translateX(-7.5px)", ...customHandleStyles }} />

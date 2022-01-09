@@ -20,7 +20,15 @@ export type Module = {
 	id: number;
 	children: Module[] | null;
 	value_type: ModuleValueType;
-	isCollapsed: boolean;
 	value: any | null;
+	isCollapsed: boolean;
 	prefabInternalId: string;
+};
+
+export type ApiModule = {
+	name: string;
+	id: number;
+	children: ApiModule[] | null;
+	value_type: ModuleValueType;
+	value: any | null;
 };

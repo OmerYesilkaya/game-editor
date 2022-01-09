@@ -1,10 +1,9 @@
 import dynamic from "next/dynamic";
 
-import { CashIcon, CubeTransparentIcon, DocumentTextIcon, EyeIcon, ViewGridIcon } from "@heroicons/react/outline";
+import { CashIcon, CubeTransparentIcon, DocumentTextIcon, EyeIcon } from "@heroicons/react/outline";
 import { CameraIcon } from "@heroicons/react/solid";
 
 const Prefabs = dynamic(() => import("../components/PrefabCreator/Windows/Prefabs"), { ssr: false });
-const Modules = dynamic(() => import("../components/PrefabCreator/Windows/Modules"), { ssr: false });
 const PreviewWindow = dynamic(() => import("../components/PrefabCreator/Windows/Preview"), { ssr: false });
 const PrefabWindow = dynamic(() => import("../components/PrefabCreator/Windows/ActivePrefab"), { ssr: false });
 const Assets = dynamic(() => import("../components/PrefabCreator/Windows/Assets"), { ssr: false });

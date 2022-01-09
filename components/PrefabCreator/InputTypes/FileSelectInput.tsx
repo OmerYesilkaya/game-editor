@@ -1,5 +1,4 @@
 import { DocumentTextIcon } from "@heroicons/react/solid";
-import { useFormContext, useWatch } from "react-hook-form";
 
 import { useCanvasStore, useAnimationStore, useSpriteStore } from "@app/store";
 import { AssetFileTypes } from "@app/types";
@@ -9,11 +8,11 @@ type Props = {
 	type: AssetFileTypes;
 	themeColor: string;
 	moduleId: number;
+	prefabId: string;
 };
 
-const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId }) => {
-	const { register, control } = useFormContext();
-	const value = useWatch({ name: moduleId.toString(), control });
+const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, prefabId }) => {
+	const value = 2;
 	const { setActiveAssetInput, setActiveWindowIds, activeWindowIds } = useCanvasStore((state) => ({
 		setActiveAssetInput: state.setActiveAssetInput,
 		setActiveWindowIds: state.setActiveWindowIds,
@@ -52,11 +51,11 @@ const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId }) => {
 			className={`w-full text-sm flex justify-center items-center rounded-sm my-px bg-${themeColor}-500 px-2 transition hover:bg-${themeColor}-600`}
 			onClick={() => handleFileClick()}
 		>
-			<span title={selectedValue} className="max-w-28 truncate">
+			<span title={selectedValue} className="max-w-[112px] truncate">
 				{selectedValue ? selectedValue : "CHOOSE A FILE"}
 			</span>
 			{!selectedValue && <DocumentTextIcon className="ml-1 w-4 h-4 mb-px" />}
-			<input className="invisible w-0 h-0" {...register(moduleId.toString())} />
+			<input className="invisible w-0 h-0" />
 		</button>
 	);
 };

@@ -1,29 +1,25 @@
 import { useState } from "react";
 
+import { ChevronRightIcon } from "@heroicons/react/outline";
+
 import { Common } from "@app/components";
 import { api, useDebounce } from "@app/hooks";
 import { usePrefabStore } from "@app/store";
-import { ChevronRightIcon } from "@heroicons/react/outline";
 
-const Modules: React.FC = () => {
+const AvailableModules: React.FC = () => {
 	const [query, setQuery] = useState("");
 
 	const { debouncedValue, isLoading } = useDebounce(query.toLowerCase(), 200);
-	const { getActivePrefab, addModuleToPrefab } = usePrefabStore((state) => ({
+	const { prefab, addModuleToPrefab } = usePrefabStore((state) => ({
+		prefab: state.prefab,
 		addModuleToPrefab: state.addModuleToPrefab,
-		getActivePrefab: state.getActivePrefab,
 	}));
 
 	const { data: rootModules } = api.useGetModules();
 
 	const filteredModules = rootModules
 		? rootModules
-				.filter(
-					(module) =>
-						!getActivePrefab()
-							?.modules.map((module) => module.id)
-							.includes(module.id)
-				)
+				.filter((module) => !prefab?.modules.map((module) => module.id).includes(module.id))
 				.filter((module) => debouncedValue === "" || module.name.toLowerCase().includes(debouncedValue))
 		: [];
 
@@ -59,4 +55,4 @@ const Modules: React.FC = () => {
 	);
 };
 
-export default Modules;
+export default AvailableModules;
