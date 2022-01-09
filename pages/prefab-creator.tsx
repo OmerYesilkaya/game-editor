@@ -1,8 +1,10 @@
 import { NextPage } from "next";
+import { useEffect } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+
 import { Layout, PrefabCreator as PrefabCreatorComponents } from "@app/components";
 import { COLORS, WINDOWS } from "@app/constants";
 import { useCanvasStore } from "@app/store";
-import { useEffect } from "react";
 
 const PrefabCreator: NextPage = () => {
 	const { activeAssetInput, activeWindowIds, toggleActivation } = useCanvasStore((state) => ({
@@ -10,6 +12,8 @@ const PrefabCreator: NextPage = () => {
 		toggleActivation: state.toggleActivation,
 		activeAssetInput: state.activeAssetInput,
 	}));
+
+	const methods = useForm();
 
 	useEffect(() => {
 		function handleShortcuts(e: KeyboardEvent) {
@@ -42,23 +46,25 @@ const PrefabCreator: NextPage = () => {
 	return (
 		<Layout.Center className="relative w-full h-full flex gap-1 p-2" style={{ background: COLORS.BG_DARK }}>
 			<PrefabCreatorComponents.Toolbar />
-			{WINDOWS.map((window) => {
-				const isActive = activeWindowIds.includes(window.id);
-				return (
-					<PrefabCreatorComponents.Window
-						key={window.id}
-						width={window.width}
-						height={window.height}
-						noContent={<div>no content</div>}
-						title={window.name}
-						isActive={isActive}
-						id={window.id}
-						order={window.order}
-					>
-						{window.component}
-					</PrefabCreatorComponents.Window>
-				);
-			})}
+			<FormProvider {...methods}>
+				{WINDOWS.map((window) => {
+					const isActive = activeWindowIds.includes(window.id);
+					return (
+						<PrefabCreatorComponents.Window
+							key={window.id}
+							width={window.width}
+							height={window.height}
+							noContent={<div>no content</div>}
+							title={window.name}
+							isActive={isActive}
+							id={window.id}
+							order={window.order}
+						>
+							{window.component}
+						</PrefabCreatorComponents.Window>
+					);
+				})}
+			</FormProvider>
 			<PrefabCreatorComponents.PrefabCanvas />
 			{activeAssetInput && <PrefabCreatorComponents.Overlay />}
 		</Layout.Center>

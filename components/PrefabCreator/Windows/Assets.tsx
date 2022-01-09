@@ -1,43 +1,57 @@
-import { useFormContext } from "react-hook-form";
+// import { useFormContext } from "react-hook-form";
 
 import cn from "classnames";
 
 import { useSpriteStore, useAnimationStore, usePreviewStore, useCanvasStore } from "@app/store";
 import { AssetFileTypes } from "@app/types";
 import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 const Sprites: React.FC = () => {
+	const { activeAssetInput, setActiveAssetInput } = useCanvasStore((state) => ({
+		activeAssetInput: state.activeAssetInput,
+		setActiveAssetInput: state.setActiveAssetInput,
+	}));
 	const sprites = useSpriteStore((state) => state.sprites);
+	const { setValue } = useFormContext();
+
+	function handleSelect(id: number) {
+		if (!activeAssetInput) return;
+		setValue(activeAssetInput.id.toString(), id);
+		setActiveAssetInput(null);
+	}
 
 	return (
 		<div className="flex flex-col gap-y-px">
 			{sprites.map((sprite) => (
-				<div
+				<button
 					key={sprite.id}
-					className="cursor-pointer px-1 rounded-sm transition bg-zinc-800 hover:brightness-125 whitespace-nowrap truncate"
+					className="flex px-1 rounded-sm transition bg-zinc-800 hover:brightness-125 whitespace-nowrap truncate"
 					title={sprite.name}
+					onClick={() => handleSelect(sprite.id)}
 				>
 					{sprite.name}
-				</div>
+				</button>
 			))}
 		</div>
 	);
 };
 
 const Animations: React.FC = () => {
+	const { setValue } = useFormContext();
+
 	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
 	const animations = useAnimationStore((state) => state.animations);
 	const sprites = useSpriteStore((state) => state.sprites);
-	const activeAssetInput = useCanvasStore((state) => state.activeAssetInput);
-	const methods = useFormContext();
-	console.log("m", methods);
+	const { activeAssetInput, setActiveAssetInput } = useCanvasStore((state) => ({
+		activeAssetInput: state.activeAssetInput,
+		setActiveAssetInput: state.setActiveAssetInput,
+	}));
 
 	function handleSelect(id: number) {
 		if (!activeAssetInput) return;
-		const target = animations.find((animation) => animation.id === id);
-		if (target) {
-			// setValue(activeAssetInput.id.toString(), id);
-		}
+		setValue(activeAssetInput.id.toString(), id);
+		setActiveAssetInput(null);
 	}
 
 	function handlePointerEnter(id: number) {
@@ -55,16 +69,16 @@ const Animations: React.FC = () => {
 	return (
 		<div className="flex flex-col gap-y-px">
 			{animations.map((animation) => (
-				<div
+				<button
 					key={animation.id}
-					className="cursor-pointer px-1 rounded-sm transition bg-zinc-800 hover:brightness-125 whitespace-nowrap truncate"
+					className="flex px-1 rounded-sm transition bg-zinc-800 hover:brightness-125 whitespace-nowrap truncate"
 					title={animation.name}
 					onClick={() => handleSelect(animation.id)}
 					onPointerEnter={() => handlePointerEnter(animation.id)}
 					onPointerOut={() => handlePointerOut()}
 				>
 					{animation.name}
-				</div>
+				</button>
 			))}
 		</div>
 	);
@@ -126,7 +140,6 @@ const Assets: React.FC = () => {
 		setActiveTab(activeAssetInput?.type);
 	}, [activeAssetInput]);
 
-	console.log("activeAssetInput?.type", activeAssetInput?.type);
 	return (
 		<div className="flex flex-col h-full">
 			<div className="flex gap-x-1">

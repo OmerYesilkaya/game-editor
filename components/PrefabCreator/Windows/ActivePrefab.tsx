@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { CubeTransparentIcon, ViewGridAddIcon } from "@heroicons/react/outline";
-import { useForm, FormProvider } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import { usePrefabStore } from "@app/store";
 import { Prefab } from "@app/types";
@@ -21,7 +21,7 @@ const PrefabWindow: React.FC = () => {
 		setPrefab(activePrefab);
 	}, [activePrefabId]);
 
-	const methods = useForm();
+	const methods = useFormContext();
 	const { handleSubmit } = methods;
 
 	function onSubmit(data: any) {
@@ -32,7 +32,9 @@ const PrefabWindow: React.FC = () => {
 			modules: Object.keys(data).map((id) => ({ arrayIndex: 0, modulePartId: Number(id), value: data[id] })),
 		};
 
-		mutate(formattedData);
+		console.log("f", formattedData);
+
+		// mutate(formattedData);
 	}
 
 	return (
@@ -40,26 +42,27 @@ const PrefabWindow: React.FC = () => {
 			{prefab ? (
 				<div className="h-full w-full flex flex-col overflow-y-auto">
 					<div className="flex flex-col h-full">
-						<FormProvider {...methods}>
-							<form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col">
-								{prefab.modules.length > 0 ? (
-									<div className="flex flex-col gap-y-1 mt-1">
-										{prefab.modules.map((module) => (
-											<ModuleItem themeColor={themeColor} key={module.id} moduleId={module.id} />
-										))}
-										<button type="submit" className="bg-green-400 font-default text-white rounded-sm">
-											save
-										</button>
-									</div>
-								) : (
-									<div className="text-white border-dashed border-2 mt-1 p-4 flex flex-col justify-center items-center font-default grow">
-										<ViewGridAddIcon className="w-24 h-24" />
-										<span className="text-2xl font-bold mb-2">{prefab.name} has no modules</span>
-										<span className="w-2/3 text-center">Please add a module from the panel on the left</span>
-									</div>
-								)}
-							</form>
-						</FormProvider>
+						<form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col">
+							{prefab.modules.length > 0 ? (
+								<div className="flex flex-col gap-y-1 mt-1">
+									{prefab.modules.map((module) => (
+										<ModuleItem themeColor={themeColor} key={module.id} moduleId={module.id} />
+									))}
+									<button
+										type="submit"
+										className="bg-rose-500 font-default text-white rounded-sm text-sm font-bold transition-all hover:bg-rose-600"
+									>
+										SAVE
+									</button>
+								</div>
+							) : (
+								<div className="text-white border-dashed border-2 mt-1 p-4 flex flex-col justify-center items-center font-default grow">
+									<ViewGridAddIcon className="w-24 h-24" />
+									<span className="text-2xl font-bold mb-2">{prefab.name} has no modules</span>
+									<span className="w-2/3 text-center">Please add a module from the panel on the left</span>
+								</div>
+							)}
+						</form>
 					</div>
 				</div>
 			) : (
