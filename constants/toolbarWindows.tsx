@@ -30,15 +30,6 @@ const windows: Window[] = [
 		order: 1,
 	},
 	{
-		id: "toolbar-modules",
-		name: <>Modules</>,
-		component: <Modules />,
-		width: 400,
-		height: 300,
-		icon: <ViewGridIcon />,
-		order: 2,
-	},
-	{
 		id: "toolbar-preview",
 		name: (
 			<div className="flex items-center">
@@ -56,8 +47,8 @@ const windows: Window[] = [
 		id: "toolbar-active-prefab",
 		name: <>ActivePrefab</>,
 		component: <PrefabWindow />,
-		width: 400,
-		height: 500,
+		width: 720,
+		height: 450,
 		icon: <CubeTransparentIcon />,
 		order: 3,
 	},

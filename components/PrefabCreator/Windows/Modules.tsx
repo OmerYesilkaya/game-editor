@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Common } from "@app/components";
 import { api, useDebounce } from "@app/hooks";
 import { usePrefabStore } from "@app/store";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 
 const Modules: React.FC = () => {
 	const [query, setQuery] = useState("");
@@ -37,18 +38,21 @@ const Modules: React.FC = () => {
 	return (
 		<>
 			<Common.SearchInput placeholder="Module Name" query={query} setQuery={setQuery} isLoading={isLoading} />
-			<div className="flex flex-col gap-y-1 mt-1">
+			<div className="flex flex-col gap-y-0.5 mt-1">
 				{filteredModules.length > 0
 					? filteredModules.map((module) => (
 							<button
 								type="button"
-								className="bg-zinc-900 border-2 border-white rounded-sm py-0.5 px-1.5 text-white flex items-center cursor-pointer transition hover:brightness-125"
+								className="bg-zinc-800 rounded-sm py-0.5 px-1.5 text-white flex items-center cursor-pointer transition hover:brightness-125"
 								key={module.id}
 								onClick={() => addModuleToPrefab(module)}
 							>
 								<span className="font-default text-sm font-bold mr-2">{module.name.toUpperCase()}</span>
-								{/* <div className="bg-orange-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
-								<div className="bg-red-600 text-white font-bold font-default text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div> */}
+								{/* <div className="bg-orange-600 text-white font-default font-bold text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
+								<div className="bg-red-600 text-white font-default font-bold text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div> */}
+								<button>
+									<ChevronRightIcon className="w-4 h-4" />
+								</button>
 							</button>
 					  ))
 					: getMessage()}

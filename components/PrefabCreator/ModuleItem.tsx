@@ -16,9 +16,9 @@ const ModuleInput: React.FC<{ themeColor: string; child: Module }> = ({ themeCol
 	}
 
 	return (
-		<div className="flex flex-col w-full bg-zinc-900 rounded-sm px-1 py-1">
+		<div className="flex flex-col w-full bg-zinc-900 rounded-sm px-1 py-0.5">
 			<div className="flex w-full">
-				<span className="w-full text-left">{module.name}</span>
+				<span className="w-full text-left uppercase text-sm font-bold">{module.name}</span>
 				{module.value_type === ModuleValueType.Object ? (
 					<div className="ml-1 flex items-center justify-between">
 						<button
@@ -69,12 +69,12 @@ const ModuleItem: React.FC<{ themeColor: string; moduleId: number }> = ({ themeC
 	if (!module) return null;
 
 	return (
-		<div className="w-full h-full flex flex-col font-default bg-zinc-800 border-2 rounded-sm px-1 py-0.5 text-white ">
+		<div className="bg-zinc-800  font-default  rounded-sm py-0.5 px-1.5 text-white flex items-center flex-col">
 			<div className="flex items-center justify-between w-full cursor-pointer" onClick={() => toggleExpand()}>
-				<div className="font-bold">{module.name}</div>
+				<div className="text-sm font-bold mr-2">{module.name.toUpperCase()}</div>
 				<div className="flex items-center">
 					<TrashIcon
-						className="bg-red-600 p-0.5 w-5 h-5 shadow-md rounded-sm text-sm font-bold font-default transition-colors hover:bg-red-700 mr-1 border-2 cursor-pointer"
+						className="bg-red-600 p-0.5 w-5 h-5 shadow-md rounded-sm text-sm font-bold font-defaulttransition-colors hover:bg-red-700 mr-1 border-2 cursor-pointer"
 						onClick={(e) => {
 							e.stopPropagation();
 							removeModuleFromPrefab(module.id, module.prefabInternalId);
