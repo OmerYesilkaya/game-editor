@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const Sprites: React.FC = () => {
+	const { setValue } = useFormContext();
+
+	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
+	const sprites = useSpriteStore((state) => state.sprites);
 	const { activeAssetInput, setActiveAssetInput } = useCanvasStore((state) => ({
 		activeAssetInput: state.activeAssetInput,
 		setActiveAssetInput: state.setActiveAssetInput,
 	}));
-	const sprites = useSpriteStore((state) => state.sprites);
-	const { setValue } = useFormContext();
 
 	function handleSelect(id: number) {
 		if (!activeAssetInput) return;
@@ -21,14 +23,27 @@ const Sprites: React.FC = () => {
 		setActiveAssetInput(null);
 	}
 
+	function handlePointerEnter(id: number) {
+		const preview = sprites.find((sprite) => sprite.id === id);
+		if (!preview) return;
+		setTemporaryPreview(preview);
+	}
+
+	function handlePointerOut() {
+		setTemporaryPreview(null);
+	}
+
 	return (
 		<div className="flex flex-col gap-y-px">
 			{sprites.map((sprite) => (
 				<button
+					type="button"
 					key={sprite.id}
 					className="flex px-1 rounded-sm transition bg-zinc-800 hover:brightness-125 whitespace-nowrap truncate"
 					title={sprite.name}
 					onClick={() => handleSelect(sprite.id)}
+					onPointerEnter={() => handlePointerEnter(sprite.id)}
+					onPointerOut={() => handlePointerOut()}
 				>
 					{sprite.name}
 				</button>
@@ -70,6 +85,7 @@ const Animations: React.FC = () => {
 		<div className="flex flex-col gap-y-px">
 			{animations.map((animation) => (
 				<button
+					type="button"
 					key={animation.id}
 					className="flex px-1 rounded-sm transition bg-zinc-800 hover:brightness-125 whitespace-nowrap truncate"
 					title={animation.name}
