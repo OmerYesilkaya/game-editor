@@ -4,12 +4,11 @@ import cn from "classnames";
 import { ChevronRightIcon, TrashIcon } from "@heroicons/react/outline";
 
 import { usePrefabStore } from "@app/store";
-import { Module, ModuleValueType } from "@app/types";
-import { api } from "@app/hooks";
+import { ModuleValueType, ApiModule } from "@app/types";
 
 import DynamicInput from "./DynamicInput";
 
-const ModuleInput: React.FC<{ themeColor: string; child: Module; prefabId: string }> = ({ themeColor, child: module, prefabId }) => {
+const ModuleInput: React.FC<{ themeColor: string; child: ApiModule }> = ({ themeColor, child: module }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	function toggleExpand() {
@@ -20,7 +19,7 @@ const ModuleInput: React.FC<{ themeColor: string; child: Module; prefabId: strin
 		<div className="flex flex-col w-full bg-zinc-900 rounded-sm px-1 py-0.5">
 			<div className="flex w-full">
 				<span className="w-full text-left uppercase text-sm font-bold">{module.name}</span>
-				{module.value_type === ModuleValueType.Object ? (
+				{module.valueType === ModuleValueType.Object ? (
 					<div className="ml-1 flex items-center justify-between">
 						<button
 							type="button"
@@ -38,7 +37,7 @@ const ModuleInput: React.FC<{ themeColor: string; child: Module; prefabId: strin
 						</button>
 					</div>
 				) : (
-					<DynamicInput module={module} prefabId={prefabId} />
+					<DynamicInput module={module} />
 				)}
 			</div>
 			{isExpanded && (
@@ -46,10 +45,7 @@ const ModuleInput: React.FC<{ themeColor: string; child: Module; prefabId: strin
 					<hr className="w-0.5 h-auto bg-zinc-200 rounded-full my-0.5 ml-2" />
 					<div className="ml-1 rounded-sm  my-0.5 pl-1  w-full">
 						<div className="flex flex-col w-full h-full items-start">
-							{module.children &&
-								module.children.map((child) => (
-									<ModuleInput themeColor={themeColor} key={child.id} child={child} prefabId={prefabId} />
-								))}
+							{module.children && module.children.map((child) => <ModuleInput themeColor={themeColor} key={child.id} child={child} />)}
 						</div>
 					</div>
 				</div>
@@ -58,13 +54,11 @@ const ModuleInput: React.FC<{ themeColor: string; child: Module; prefabId: strin
 	);
 };
 
-const ModuleItem: React.FC<{ themeColor: string; moduleId: number; prefabId: string }> = ({ themeColor, moduleId, prefabId }) => {
+const ModuleItem: React.FC<{ themeColor: string; module: ApiModule }> = ({ themeColor, module }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const { removeModuleFromPrefab } = usePrefabStore((state) => ({
 		removeModuleFromPrefab: state.removeModuleFromPrefab,
 	}));
-
-	const { data: module } = api.useGetModuleById({ params: { id: moduleId } });
 
 	function toggleExpand() {
 		setIsExpanded((prev) => !prev);
@@ -106,10 +100,7 @@ const ModuleItem: React.FC<{ themeColor: string; moduleId: number; prefabId: str
 					<hr className="text-zinc-600 h-px w-full mt-0.5" />
 					<div className="w-full flex flex-col px-0.5 pb-0.5">
 						<div className="flex flex-col w-full h-full items-start gap-y-px mt-1">
-							{module.children &&
-								module.children.map((child) => (
-									<ModuleInput themeColor={themeColor} key={child.id} child={child} prefabId={prefabId} />
-								))}
+							{module.children && module.children.map((child) => <ModuleInput themeColor={themeColor} key={child.id} child={child} />)}
 						</div>
 					</div>
 				</>

@@ -4,7 +4,7 @@ import { PencilIcon } from "@heroicons/react/outline";
 import uniqId from "uniqId";
 
 import { api } from "@app/hooks";
-import { usePrefabStore } from "@app/store";
+import { usePrefabStore, useInputStore } from "@app/store";
 import { GetPrefabResponse } from "@app/types";
 
 import AvailableModules from "./AvailableModules";
@@ -16,18 +16,22 @@ const PrefabWindow: React.FC = () => {
 		setName: setPrefabName,
 		setPrefab,
 		activePrefabId,
+		getModules,
 	} = usePrefabStore((state) => ({
 		prefab: state.prefab,
 		setPrefab: state.setPrefab,
 		setName: state.setName,
 		activePrefabId: state.activePrefabId,
+		getModules: state.getModules,
 	}));
+	const { inputs, setInputs } = useInputStore((state) => ({ inputs: state.inputs, setInputs: state.setInputs }));
 
 	api.useGetPrefabById({
 		params: { id: activePrefabId! },
 		enabled: !!activePrefabId,
 		onSuccess: (data: GetPrefabResponse) => {
 			setPrefab({ ...data, internalId: uniqId(), position: { x: 0, y: 0 } });
+			setInputs(getModules());
 		},
 	});
 
@@ -45,12 +49,10 @@ const PrefabWindow: React.FC = () => {
 
 	function onSubmit() {
 		if (!prefab) return;
-
 		const formattedData = {
 			name: prefab.name,
-			modules: prefab.modules.map((module) => ({ arrayIndex: 0, modulePartId: module.id, value: module.value })),
+			modules: inputs.map((module) => ({ arrayIndex: 0, modulePartId: module.id, value: module.value })),
 		};
-
 		console.log("f", formattedData);
 
 		// mutate(formattedData);
@@ -66,8 +68,6 @@ const PrefabWindow: React.FC = () => {
 		window.addEventListener("keydown", handleEnter);
 		return () => window.removeEventListener("keydown", handleEnter);
 	}, []);
-
-	useEffect(() => {}, [activePrefabId]);
 
 	return (
 		<div className="w-full flex h-[400px]">

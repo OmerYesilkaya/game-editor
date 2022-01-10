@@ -1,4 +1,4 @@
-import { Module, ModuleValueType, AssetFileTypes } from "@app/types";
+import { ApiModule, ModuleValueType } from "@app/types";
 import {
 	BoolInput,
 	ColorInput,
@@ -13,49 +13,48 @@ import {
 } from "./InputTypes";
 
 type DynamicInputPropTypes = {
-	module: Module;
-	prefabId: string;
+	module: ApiModule;
 };
 
-const DynamicInput: React.FC<DynamicInputPropTypes> = ({ module, prefabId }) => {
+const DynamicInput: React.FC<DynamicInputPropTypes> = ({ module }) => {
 	let renderInput: () => JSX.Element | null;
 
-	switch (module.value_type) {
+	switch (module.valueType) {
 		case ModuleValueType.Animation:
-			renderInput = () => <FileSelectInput type={AssetFileTypes.animation} themeColor="rose" moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Bool:
-			renderInput = () => <BoolInput moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <BoolInput moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Color:
-			renderInput = () => <ColorInput moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <ColorInput moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Number:
-			renderInput = () => <NumberInput moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <NumberInput moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Percentage:
-			renderInput = () => <PercentageInput moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <PercentageInput moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Range:
 			renderInput = () => <div>Range</div>;
 			break;
 		case ModuleValueType.Sprite:
-			renderInput = () => <FileSelectInput type={AssetFileTypes.sprite} themeColor="rose" moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Text:
-			renderInput = () => <TextInput moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <TextInput moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.TextArea:
-			renderInput = () => <TextAreaInput moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <TextAreaInput moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Vec2:
-			renderInput = () => <Vec2Input moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <Vec2Input moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Vec3:
-			renderInput = () => <Vec3Input moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <Vec3Input moduleId={module.id} defaultValue={module.value} />;
 			break;
 		case ModuleValueType.Vec4:
-			renderInput = () => <Vec4Input moduleId={module.id} prefabId={prefabId} />;
+			renderInput = () => <Vec4Input moduleId={module.id} defaultValue={module.value} />;
 			break;
 		default:
 			renderInput = () => (

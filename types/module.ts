@@ -19,7 +19,7 @@ export type Module = {
 	name: string;
 	id: number;
 	children: Module[] | null;
-	value_type: ModuleValueType;
+	valueType: ModuleValueType;
 	value: any | null;
 	isCollapsed: boolean;
 	prefabInternalId: string;
@@ -29,6 +29,6 @@ export type ApiModule = {
 	name: string;
 	id: number;
 	children: ApiModule[] | null;
-	value_type: ModuleValueType;
+	valueType: ModuleValueType;
 	value: any | null;
 };

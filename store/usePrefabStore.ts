@@ -1,5 +1,5 @@
 import create from "zustand";
-import { Prefab, Module } from "@app/types";
+import { Prefab, Module, ApiModule, Input } from "@app/types";
 import uniqId from "uniqid";
 
 type PrefabStoreProps = {
@@ -12,6 +12,7 @@ type PrefabStoreProps = {
 	setPrefab: (value: Prefab | null) => void;
 	updatePrefabValue: (moduleId: number, value: any) => void;
 	setName: (name: string) => void;
+	getModules: () => Input[];
 };
 
 export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
@@ -68,5 +69,29 @@ export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
 		prefab.name = name;
 
 		set(() => ({ prefab }));
+	},
+	// gets furthest branching modules of prefab
+	getModules: () => {
+		const prefab = get().prefab;
+		if (!prefab) return [];
+		const processingQueue: ApiModule[] = [];
+		const valueModules: Input[] = [];
+
+		prefab.modules.forEach((module) => {
+			processingQueue.push(module);
+		});
+
+		while (processingQueue.length > 0) {
+			const module = processingQueue.pop();
+			module?.children?.forEach((child) => {
+				if (child.children) {
+					processingQueue.push(child);
+				} else {
+					valueModules.push({ id: child.id, value: child.value, valueType: child.valueType });
+				}
+			});
+		}
+
+		return valueModules;
 	},
 }));

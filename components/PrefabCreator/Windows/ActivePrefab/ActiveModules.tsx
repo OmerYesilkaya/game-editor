@@ -18,7 +18,7 @@ const ActiveModules: React.FC<Props> = ({ prefab }) => {
 					{prefab.modules.length > 0 ? (
 						<div className="flex flex-col gap-y-0.5 ">
 							{prefab.modules.map((module) => (
-								<ModuleItem themeColor={themeColor} key={module.id} moduleId={module.id} prefabId={prefab.internalId} />
+								<ModuleItem themeColor={themeColor} key={module.id} module={module} />
 							))}
 						</div>
 					) : (

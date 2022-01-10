@@ -1,11 +1,11 @@
-import { AssetFileTypes } from "@app/types";
+import { ModuleValueType } from "@app/types";
 
 import create from "zustand";
 
 type CanvasStoreTypes = {
-	activeAssetInput: { id: number; type: AssetFileTypes } | null;
+	activeAssetInput: { id: number; type: ModuleValueType } | null;
 	activeWindowIds: string[];
-	setActiveAssetInput: (value: { id: number; type: AssetFileTypes } | null) => void;
+	setActiveAssetInput: (value: { id: number; type: ModuleValueType } | null) => void;
 	setActiveWindowIds: (ids: string[]) => void;
 	toggleActivation: (id: string) => void;
 };

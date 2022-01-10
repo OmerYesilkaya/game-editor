@@ -32,7 +32,6 @@ const Prefabs: React.FC = () => {
 
 	const { data: prefabs } = api.useGetPrefabs();
 
-	console.log("p", prefabs);
 	return (
 		<div className="flex flex-col h-full justify-between">
 			<div className="flex gap-x-2 sticky top-0">

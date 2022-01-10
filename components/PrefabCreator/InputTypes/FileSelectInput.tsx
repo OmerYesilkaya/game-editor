@@ -1,18 +1,18 @@
 import { DocumentTextIcon } from "@heroicons/react/solid";
 
-import { useCanvasStore, useAnimationStore, useSpriteStore } from "@app/store";
-import { AssetFileTypes } from "@app/types";
+import { useCanvasStore, useAnimationStore, useSpriteStore, useInputStore } from "@app/store";
 import { array } from "@app/utils";
+import { ModuleValueType } from "@app/types";
 
 type Props = {
-	type: AssetFileTypes;
+	type: ModuleValueType;
 	themeColor: string;
 	moduleId: number;
-	prefabId: string;
+	defaultValue: number;
 };
 
-const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, prefabId }) => {
-	const value = 2;
+const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, defaultValue }) => {
+	const inputs = useInputStore((state) => state.inputs);
 	const { setActiveAssetInput, setActiveWindowIds, activeWindowIds } = useCanvasStore((state) => ({
 		setActiveAssetInput: state.setActiveAssetInput,
 		setActiveWindowIds: state.setActiveWindowIds,
@@ -28,14 +28,16 @@ const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, prefabId
 	}
 
 	function getSelectedValue() {
-		let selectedValue;
+		const module = inputs.find((input) => input.id === moduleId);
+		const id = module ? module.value : defaultValue;
 
+		let selectedValue;
 		switch (type) {
-			case AssetFileTypes.animation:
-				selectedValue = animations.find((animation) => animation.id === value)?.name;
+			case ModuleValueType.Animation:
+				selectedValue = animations.find((animation) => animation.id === id)?.name;
 				break;
-			case AssetFileTypes.sprite:
-				selectedValue = sprites.find((sprite) => sprite.id === value)?.name;
+			case ModuleValueType.Sprite:
+				selectedValue = sprites.find((sprite) => sprite.id === id)?.name;
 				break;
 			default:
 				break;
@@ -55,7 +57,6 @@ const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, prefabId
 				{selectedValue ? selectedValue : "CHOOSE A FILE"}
 			</span>
 			{!selectedValue && <DocumentTextIcon className="ml-1 w-4 h-4 mb-px" />}
-			<input className="invisible w-0 h-0" />
 		</button>
 	);
 };

@@ -1,12 +1,13 @@
 import cn from "classnames";
 
-import { useSpriteStore, useAnimationStore, usePreviewStore, useCanvasStore } from "@app/store";
-import { AssetFileTypes } from "@app/types";
+import { useSpriteStore, useAnimationStore, usePreviewStore, useCanvasStore, useInputStore } from "@app/store";
 import { useEffect, useState } from "react";
+import { ModuleValueType } from "types/module";
 
 const Sprites: React.FC = () => {
 	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
 	const sprites = useSpriteStore((state) => state.sprites);
+	const updateInput = useInputStore((state) => state.updateInput);
 	const { activeAssetInput, setActiveAssetInput } = useCanvasStore((state) => ({
 		activeAssetInput: state.activeAssetInput,
 		setActiveAssetInput: state.setActiveAssetInput,
@@ -14,7 +15,7 @@ const Sprites: React.FC = () => {
 
 	function handleSelect(id: number) {
 		if (!activeAssetInput) return;
-		// setValue(activeAssetInput.id.toString(), id);
+		updateInput(activeAssetInput.id, id);
 		setActiveAssetInput(null);
 	}
 
@@ -51,6 +52,7 @@ const Animations: React.FC = () => {
 	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
 	const animations = useAnimationStore((state) => state.animations);
 	const sprites = useSpriteStore((state) => state.sprites);
+	const updateInput = useInputStore((state) => state.updateInput);
 	const { activeAssetInput, setActiveAssetInput } = useCanvasStore((state) => ({
 		activeAssetInput: state.activeAssetInput,
 		setActiveAssetInput: state.setActiveAssetInput,
@@ -58,7 +60,7 @@ const Animations: React.FC = () => {
 
 	function handleSelect(id: number) {
 		if (!activeAssetInput) return;
-		// setValue(activeAssetInput.id.toString(), id);
+		updateInput(activeAssetInput.id, id);
 		setActiveAssetInput(null);
 	}
 
@@ -94,9 +96,9 @@ const Animations: React.FC = () => {
 };
 
 type Props = {
-	activeTabId: AssetFileTypes;
-	tabId: AssetFileTypes;
-	handleSelect: (id: AssetFileTypes) => void;
+	activeTabId: ModuleValueType;
+	tabId: ModuleValueType;
+	handleSelect: (id: ModuleValueType) => void;
 };
 
 const Tab: React.FC<Props> = ({ tabId, activeTabId, handleSelect, children }) => {
@@ -122,19 +124,19 @@ const Tab: React.FC<Props> = ({ tabId, activeTabId, handleSelect, children }) =>
 
 const Assets: React.FC = () => {
 	const activeAssetInput = useCanvasStore((state) => state.activeAssetInput);
-	const [activeTab, setActiveTab] = useState<AssetFileTypes>(AssetFileTypes.animation);
+	const [activeTab, setActiveTab] = useState<ModuleValueType>(ModuleValueType.Animation);
 
-	function handleSelect(id: AssetFileTypes) {
+	function handleSelect(id: ModuleValueType) {
 		setActiveTab(id);
 	}
 
 	function getPanel() {
 		let panel;
 		switch (activeTab) {
-			case AssetFileTypes.animation:
+			case ModuleValueType.Animation:
 				panel = <Animations />;
 				break;
-			case AssetFileTypes.sprite:
+			case ModuleValueType.Sprite:
 				panel = <Sprites />;
 				break;
 			default:
@@ -152,10 +154,10 @@ const Assets: React.FC = () => {
 	return (
 		<div className="flex flex-col h-full">
 			<div className="flex gap-x-1">
-				<Tab handleSelect={handleSelect} tabId={AssetFileTypes.animation} activeTabId={activeTab}>
+				<Tab handleSelect={handleSelect} tabId={ModuleValueType.Animation} activeTabId={activeTab}>
 					ANIMATIONS
 				</Tab>
-				<Tab handleSelect={handleSelect} tabId={AssetFileTypes.sprite} activeTabId={activeTab}>
+				<Tab handleSelect={handleSelect} tabId={ModuleValueType.Sprite} activeTabId={activeTab}>
 					SPRITES
 				</Tab>
 			</div>
