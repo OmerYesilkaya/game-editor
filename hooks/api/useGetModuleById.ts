@@ -1,13 +1,13 @@
 import { useQuery, UseQueryResult } from "react-query";
 import { URL } from "@app/constants";
-import { QueryOptionTypes, Module } from "@app/types";
+import { QueryOptionTypes, ApiModule } from "@app/types";
 
-async function getModuleById(id?: number): Promise<Module> {
+export async function getModuleById(id?: number): Promise<ApiModule> {
 	return await fetch(URL.MODULES + `/${id}`, {
 		method: "GET",
 	}).then((result) => result.json());
 }
 
-export default function useGetModuleById({ params, ...props }: QueryOptionTypes<Module, { id: number }>): UseQueryResult<Module> {
-	return useQuery(["useGetModulesById", params?.id], () => getModuleById(params?.id), props) as UseQueryResult<Module>;
+export default function useGetModuleById({ params, ...props }: QueryOptionTypes<ApiModule, { id: number }>): UseQueryResult<ApiModule> {
+	return useQuery(["useGetModulesById", params?.id], () => getModuleById(params?.id), props) as UseQueryResult<ApiModule>;
 }

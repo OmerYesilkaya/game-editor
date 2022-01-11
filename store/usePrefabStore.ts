@@ -1,18 +1,17 @@
 import create from "zustand";
-import { Prefab, Module, ApiModule, Input } from "@app/types";
-import uniqId from "uniqid";
+import { Prefab, ApiModule } from "@app/types";
+import { v4 as uuid } from "uuid";
 
 type PrefabStoreProps = {
 	prefab: Prefab | null;
 	activePrefabId: number | null;
 	setActivePrefabId: (id: number | null) => void;
-	addModuleToPrefab: (module: Module) => void;
+	addModuleToPrefab: (module: ApiModule) => void;
 	removeModuleFromPrefab: (moduleId: number) => void;
 	createNewPrefab: () => void;
 	setPrefab: (value: Prefab | null) => void;
 	updatePrefabValue: (moduleId: number, value: any) => void;
 	setName: (name: string) => void;
-	getModules: () => Input[];
 };
 
 export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
@@ -41,7 +40,7 @@ export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
 				id: 0,
 				name: "New Prefab",
 				modules: [],
-				internalId: uniqId(),
+				internalId: uuid(),
 				position: {
 					x: 0,
 					y: 0,
@@ -69,29 +68,5 @@ export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
 		prefab.name = name;
 
 		set(() => ({ prefab }));
-	},
-	// gets furthest branching modules of prefab
-	getModules: () => {
-		const prefab = get().prefab;
-		if (!prefab) return [];
-		const processingQueue: ApiModule[] = [];
-		const valueModules: Input[] = [];
-
-		prefab.modules.forEach((module) => {
-			processingQueue.push(module);
-		});
-
-		while (processingQueue.length > 0) {
-			const module = processingQueue.pop();
-			module?.children?.forEach((child) => {
-				if (child.children) {
-					processingQueue.push(child);
-				} else {
-					valueModules.push({ id: child.id, value: child.value, valueType: child.valueType });
-				}
-			});
-		}
-
-		return valueModules;
 	},
 }));

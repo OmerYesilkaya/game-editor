@@ -1,3 +1,4 @@
+// hooks
 import useGetAnimations from "./useGetAnimations";
 import useGetModuleById from "./useGetModuleById";
 import useGetModules from "./useGetModules";
@@ -8,7 +9,11 @@ import useGetTextureById from "./useGetTextureById";
 import useGetTextures from "./useGetTextures";
 import usePostPrefab from "./usePostPrefab";
 
+//functions
+import { getModuleById } from "./useGetModuleById";
+
 export default {
+	// hooks
 	useGetAnimations,
 	useGetModuleById,
 	useGetModules,
@@ -18,4 +23,7 @@ export default {
 	useGetTextureById,
 	useGetTextures,
 	usePostPrefab,
+
+	// functions
+	getModuleById,
 };

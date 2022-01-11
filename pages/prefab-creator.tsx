@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { Layout, PrefabCreator as PrefabCreatorComponents } from "@app/components";
 import { COLORS, WINDOWS } from "@app/constants";
-import { useCanvasStore, usePrefabStore } from "@app/store";
+import { useCanvasStore } from "@app/store";
 
 const PrefabCreator: NextPage = () => {
 	const { activeAssetInput, activeWindowIds, toggleActivation } = useCanvasStore((state) => ({
@@ -11,8 +11,6 @@ const PrefabCreator: NextPage = () => {
 		toggleActivation: state.toggleActivation,
 		activeAssetInput: state.activeAssetInput,
 	}));
-
-	const prefab = usePrefabStore((state) => state.prefab);
 
 	useEffect(() => {
 		function handleShortcuts(e: KeyboardEvent) {
@@ -41,10 +39,6 @@ const PrefabCreator: NextPage = () => {
 		window.addEventListener("keydown", handleShortcuts);
 		return () => window.removeEventListener("keydown", handleShortcuts);
 	}, []);
-
-	useEffect(() => {
-		console.log("pog");
-	}, [prefab]);
 
 	return (
 		<Layout.Center className="relative w-full h-full flex gap-1 p-2" style={{ background: COLORS.BG_DARK }}>

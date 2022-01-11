@@ -13,6 +13,8 @@ type Props = {
 
 const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, defaultValue }) => {
 	const inputs = useInputStore((state) => state.inputs);
+	// A hacky/bad way to solve the issue of showing currently selected files data on inputs
+
 	const { setActiveAssetInput, setActiveWindowIds, activeWindowIds } = useCanvasStore((state) => ({
 		setActiveAssetInput: state.setActiveAssetInput,
 		setActiveWindowIds: state.setActiveWindowIds,

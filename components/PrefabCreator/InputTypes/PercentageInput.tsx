@@ -18,9 +18,9 @@ const PercentageInput: React.FC<Props> = ({ moduleId, defaultValue }) => {
 	}, [debouncedValue]);
 
 	return (
-		<div className="flex items-center">
-			<input value={value} type="range" min={0} max={1} step={0.01} defaultValue={0} onChange={(e) => setValue(parseInt(e.target.value))} />
-			<span className="ml-1">{`${Math.floor((0 ?? 0) * 100)}%`}</span>
+		<div className="flex items-center justify-between w-full">
+			<input value={value} type="range" min={0} max={1} step={0.01} onChange={(e) => setValue(parseFloat(e.target.value))} />
+			<span className="text-sm">{`${Math.floor((value ?? 0) * 100)}%`}</span>
 		</div>
 	);
 };

@@ -9,7 +9,7 @@ type Props = {
 };
 
 const BoolInput: React.FC<Props> = ({ moduleId, defaultValue }) => {
-	const { updateInput } = useInputStore((state) => ({ updateInput: state.updateInput }));
+	const updateInput = useInputStore((state) => state.updateInput);
 	const [value, setValue] = useState(defaultValue);
 	const { debouncedValue } = useDebounce(value, 300);
 

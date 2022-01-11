@@ -2,14 +2,14 @@ import { HTMLAttributes, useRef } from "react";
 import { Handle, Position } from "react-flow-renderer";
 
 import { usePrefabStore } from "@app/store";
-import { Module } from "@app/types";
+import { ApiModule } from "@app/types";
 
 import cn from "classnames";
 import { DuplicateIcon, TrashIcon } from "@heroicons/react/outline";
 import { Common } from "..";
 
 type Props = {
-	data: { name: string; modules: Module[]; id: number; internalId: string };
+	data: { name: string; modules: ApiModule[]; id: number; internalId: string };
 };
 
 type ButtonProps = {

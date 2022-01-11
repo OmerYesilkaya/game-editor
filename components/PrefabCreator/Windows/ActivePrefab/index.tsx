@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
 import { PencilIcon } from "@heroicons/react/outline";
-import uniqId from "uniqId";
+import { v4 as uuid } from "uuid";
 
 import { api } from "@app/hooks";
 import { usePrefabStore, useInputStore } from "@app/store";
 import { GetPrefabResponse } from "@app/types";
+import { moduleUtils } from "@app/utils";
 
 import AvailableModules from "./AvailableModules";
 import ActiveModules from "./ActiveModules";
@@ -16,13 +17,11 @@ const PrefabWindow: React.FC = () => {
 		setName: setPrefabName,
 		setPrefab,
 		activePrefabId,
-		getModules,
 	} = usePrefabStore((state) => ({
 		prefab: state.prefab,
 		setPrefab: state.setPrefab,
 		setName: state.setName,
 		activePrefabId: state.activePrefabId,
-		getModules: state.getModules,
 	}));
 	const { inputs, setInputs } = useInputStore((state) => ({ inputs: state.inputs, setInputs: state.setInputs }));
 
@@ -30,8 +29,8 @@ const PrefabWindow: React.FC = () => {
 		params: { id: activePrefabId! },
 		enabled: !!activePrefabId,
 		onSuccess: (data: GetPrefabResponse) => {
-			setPrefab({ ...data, internalId: uniqId(), position: { x: 0, y: 0 } });
-			setInputs(getModules());
+			setPrefab({ ...data, internalId: uuid(), position: { x: 0, y: 0 } });
+			setInputs(moduleUtils.getModuleInputs(data.modules));
 		},
 	});
 

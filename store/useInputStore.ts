@@ -5,6 +5,7 @@ type InputStoreTypes = {
 	inputs: Input[];
 	setInputs: (value: Input[]) => void;
 	updateInput: (inputId: number, value: any) => void;
+	addInputs: (inputs: Input[]) => void;
 };
 
 export const useInputStore = create<InputStoreTypes>((set, get) => ({
@@ -24,5 +25,15 @@ export const useInputStore = create<InputStoreTypes>((set, get) => ({
 		});
 
 		set(() => ({ inputs: newInputs }));
+	},
+	addInputs: (inputs: Input[]) => {
+		const existingInputs = get().inputs;
+		const inputsToAdd: Input[] = [];
+		inputs.forEach((input) => {
+			if (!existingInputs.includes(input)) {
+				inputsToAdd.push(input);
+			}
+		});
+		set(() => ({ inputs: [...existingInputs, ...inputsToAdd] }));
 	},
 }));
