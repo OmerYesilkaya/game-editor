@@ -41,7 +41,7 @@ const PrefabCreator: NextPage = () => {
 	}, []);
 
 	return (
-		<Layout.Center className="relative w-full h-full flex gap-1 p-2" style={{ background: COLORS.BG_DARK }}>
+		<Layout.Center className="relative w-full h-full flex gap-1" style={{ background: COLORS.BG_DARK }}>
 			<PrefabCreatorComponents.Toolbar />
 			{WINDOWS.map((window) => {
 				const isActive = activeWindowIds.includes(window.id);

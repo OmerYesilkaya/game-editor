@@ -34,21 +34,19 @@ const Prefabs: React.FC = () => {
 
 	return (
 		<div className="flex flex-col h-full justify-between">
-			<div className="flex gap-x-2 sticky top-0">
-				<button
-					type="button"
-					className="bg-emerald-600 mt-1 rounded-sm text-white px-2 py-1 text-sm font-default font-bold shadow-md flex items-center transition hover:bg-emerald-700 grow"
-					onClick={() => createNewPrefab()}
-				>
-					CREATE PREFAB
-					<PlusIcon className="w-4 h-4 ml-2 text-emerald-600 bg-white rounded-sm" />
-				</button>
-			</div>
 			<div className="flex flex-col">
 				<div className="mt-1 flex flex-col gap-y-1">
 					{prefabs && prefabs.map((prefab) => <Prefab key={prefab.id} prefabId={prefab.id} prefabName={prefab.name} />)}
 				</div>
 			</div>
+			<button
+				type="button"
+				className="bg-emerald-600 mt-1 rounded-sm text-white px-2 py-1 text-sm font-default font-bold shadow-md flex items-center justify-between transition hover:bg-emerald-700"
+				onClick={() => createNewPrefab()}
+			>
+				CREATE PREFAB
+				<PlusIcon className="w-4 h-4 ml-2 text-emerald-600 bg-white rounded-sm" />
+			</button>
 		</div>
 	);
 };
