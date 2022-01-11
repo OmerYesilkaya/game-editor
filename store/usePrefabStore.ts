@@ -46,6 +46,7 @@ export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
 					y: 0,
 				},
 			},
+			activePrefabId: null,
 		}));
 	},
 	setPrefab: (value) => set(() => ({ prefab: value })),

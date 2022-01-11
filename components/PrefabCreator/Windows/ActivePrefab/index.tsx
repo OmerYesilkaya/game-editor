@@ -25,7 +25,7 @@ const PrefabWindow: React.FC = () => {
 	}));
 	const { inputs, setInputs } = useInputStore((state) => ({ inputs: state.inputs, setInputs: state.setInputs }));
 
-	api.useGetPrefabById({
+	const { refetch } = api.useGetPrefabById({
 		params: { id: activePrefabId! },
 		enabled: !!activePrefabId,
 		onSuccess: (data: GetPrefabResponse) => {
@@ -67,6 +67,11 @@ const PrefabWindow: React.FC = () => {
 		window.addEventListener("keydown", handleEnter);
 		return () => window.removeEventListener("keydown", handleEnter);
 	}, []);
+
+	useEffect(() => {
+		if (!activePrefabId) return;
+		refetch();
+	}, [activePrefabId]);
 
 	return (
 		<div className="w-full flex h-[400px]">
