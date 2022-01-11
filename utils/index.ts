@@ -1,4 +1,5 @@
 import array from "./array";
 import moduleUtils from "./moduleUtils";
+import stringUtils from "./stringUtils";
 
-export { array, moduleUtils };
+export { array, moduleUtils, stringUtils };

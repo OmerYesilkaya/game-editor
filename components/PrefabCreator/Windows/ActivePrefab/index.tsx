@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { PencilIcon } from "@heroicons/react/outline";
 import { v4 as uuid } from "uuid";
 
 import { api } from "@app/hooks";
 import { usePrefabStore, useInputStore } from "@app/store";
 import { GetPrefabResponse } from "@app/types";
-import { moduleUtils } from "@app/utils";
+import { moduleUtils, stringUtils } from "@app/utils";
+import { Common } from "@app/components";
 
 import AvailableModules from "./AvailableModules";
 import ActiveModules from "./ActiveModules";
@@ -36,14 +36,11 @@ const PrefabWindow: React.FC = () => {
 
 	const { mutate } = api.usePostPrefab();
 
-	const [isEditable, setIsEditable] = useState(false);
 	const [name, setName] = useState<string>();
-	const nameRef = useRef<HTMLInputElement>(null);
 
 	function handleNameBlur() {
-		setIsEditable(false);
 		if (!name) return;
-		setPrefabName(name);
+		setPrefabName(stringUtils.capitalize(name));
 	}
 
 	function onSubmit() {
@@ -58,17 +55,6 @@ const PrefabWindow: React.FC = () => {
 	}
 
 	useEffect(() => {
-		function handleEnter(e: KeyboardEvent) {
-			if (!nameRef.current) return;
-			if (nameRef.current === document.activeElement && e.key === "Enter") {
-				nameRef.current.blur();
-			}
-		}
-		window.addEventListener("keydown", handleEnter);
-		return () => window.removeEventListener("keydown", handleEnter);
-	}, []);
-
-	useEffect(() => {
 		if (!activePrefabId) return;
 		refetch();
 	}, [activePrefabId]);
@@ -78,27 +64,12 @@ const PrefabWindow: React.FC = () => {
 			<div className="flex flex-col h-full w-full">
 				<div className="flex items-center justify-between w-full font-default h-7 py-0.5 mt-0.5 mb-0.5 p-0.5 bg-zinc-800 rounded-sm">
 					{prefab ? (
-						<div className=" bg-zinc-900 w-1/3 h-6 flex items-center justify-between pl-1 pr-0.5 rounded-sm">
-							{isEditable ? (
-								<input
-									ref={nameRef}
-									value={name}
-									onChange={(e) => setName(e.target.value)}
-									autoFocus
-									onBlur={() => handleNameBlur()}
-									className="font-bold text-white bg-zinc-900 h-5 w-full mr-1 capitalize"
-									placeholder={prefab.name}
-								/>
-							) : (
-								<span className="font-bold text-white">{prefab.name}</span>
-							)}
-							<button
-								className="hover:brightness-75 rounded-sm min-w-[20px] w-5 h-5 shadow-md bg-zinc-700 p-px transition-all"
-								onClick={() => (isEditable ? setIsEditable(false) : setIsEditable(true))}
-							>
-								<PencilIcon className="text-white" />
-							</button>
-						</div>
+						<Common.EditableText
+							value={name ?? "New Prefab"}
+							onChange={(e) => setName(e)}
+							handleNameBlur={handleNameBlur}
+							placeholder="New Prefab"
+						/>
 					) : (
 						<div className="invisible" />
 					)}
