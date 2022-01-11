@@ -1,9 +1,8 @@
 import dynamic from "next/dynamic";
 
-import { CashIcon, CubeTransparentIcon, DocumentTextIcon, EyeIcon } from "@heroicons/react/outline";
+import { CubeTransparentIcon, DocumentTextIcon, EyeIcon } from "@heroicons/react/outline";
 import { CameraIcon } from "@heroicons/react/solid";
 
-const Prefabs = dynamic(() => import("../components/PrefabCreator/Windows/Prefabs"), { ssr: false });
 const PreviewWindow = dynamic(() => import("../components/PrefabCreator/Windows/Preview"), { ssr: false });
 const PrefabWindow = dynamic(() => import("../components/PrefabCreator/Windows/ActivePrefab"), { ssr: false });
 const Assets = dynamic(() => import("../components/PrefabCreator/Windows/Assets"), { ssr: false });
@@ -19,15 +18,6 @@ type Window = {
 };
 
 const windows: Window[] = [
-	{
-		id: "toolbar-prefabs",
-		name: <>Prefabs</>,
-		component: <Prefabs />,
-		width: 400,
-		height: 300,
-		icon: <CashIcon />,
-		order: 1,
-	},
 	{
 		id: "toolbar-preview",
 		name: (
