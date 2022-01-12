@@ -19,6 +19,15 @@ type Window = {
 
 const windows: Window[] = [
 	{
+		id: "toolbar-active-prefab",
+		name: <>ActivePrefab</>,
+		component: <PrefabWindow />,
+		width: 720,
+		height: 450,
+		icon: <CubeTransparentIcon />,
+		order: 3,
+	},
+	{
 		id: "toolbar-preview",
 		name: (
 			<div className="flex items-center">
@@ -31,15 +40,6 @@ const windows: Window[] = [
 		height: 320,
 		icon: <EyeIcon />,
 		order: 7,
-	},
-	{
-		id: "toolbar-active-prefab",
-		name: <>ActivePrefab</>,
-		component: <PrefabWindow />,
-		width: 720,
-		height: 450,
-		icon: <CubeTransparentIcon />,
-		order: 3,
 	},
 	{
 		id: "toolbar-file-select",

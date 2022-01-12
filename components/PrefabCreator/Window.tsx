@@ -36,7 +36,7 @@ const Window: React.FC<Props> = ({ id, title, noContent, width, height, isActive
 	return (
 		<animated.div
 			className={cn(
-				`w-[${width}px] h-[${height}px] max-h-[${height}px] rounded-sm absolute border-zinc-200 select-none menu-card-pattern transition-opacity z-[1${order}]`,
+				`w-[${width}px] h-[${height}px] max-h-[${height}px] rounded-sm absolute border-zinc-200 select-none menu-card-pattern transition-opacity z-[1${order}] overflow-hidden`,
 				{
 					"pointer-events-none opacity-0": !isActive,
 				}

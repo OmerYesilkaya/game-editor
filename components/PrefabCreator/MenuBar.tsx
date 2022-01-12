@@ -2,8 +2,9 @@ import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import { Transition } from "@headlessui/react";
 
 import cn from "classnames";
+
 import { CubeTransparentIcon, FolderOpenIcon, MenuAlt2Icon, SaveAsIcon, SaveIcon } from "@heroicons/react/outline";
-import { usePrefabStore } from "store/usePrefabStore";
+import { usePrefabStore } from "@app/store";
 
 const Selection: React.FC<HTMLAttributes<HTMLButtonElement>> = ({ children, ...restProps }) => {
 	return (
@@ -16,7 +17,11 @@ const Selection: React.FC<HTMLAttributes<HTMLButtonElement>> = ({ children, ...r
 	);
 };
 
-const MenuBar: React.FC = () => {
+type Props = {
+	handleOpenClick: () => void;
+};
+
+const MenuBar: React.FC<Props> = ({ handleOpenClick }) => {
 	const prefab = usePrefabStore((state) => state.prefab);
 	const [isOpen, setIsOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
@@ -41,9 +46,15 @@ const MenuBar: React.FC = () => {
 	return (
 		<div className="absolute top-0 w-screen z-[20]">
 			<div className="flex items-center font-default font-light w-full bg-slate-100 text-sm h-5 shadow-md justify-between">
-				<button onClick={() => setIsOpen((prev) => !prev)} className="bg-inherit transition hover:brightness-90 cursor-pointer px-2">
-					<MenuAlt2Icon className="w-5 h-5" />
-				</button>
+				<div className="flex">
+					<button
+						onClick={() => setIsOpen((prev) => !prev)}
+						className="bg-inherit transition hover:brightness-90 cursor-pointer px-2 border-r"
+					>
+						File
+					</button>
+				</div>
+
 				<Transition
 					show={isOpen}
 					ref={menuRef}
@@ -67,7 +78,7 @@ const MenuBar: React.FC = () => {
 					<Selection onClick={() => console.log("Created")}>
 						<CubeTransparentIcon className="w-4 h-4" /> <span className="ml-2">Create New</span>
 					</Selection>
-					<Selection onClick={() => console.log("Opened")}>
+					<Selection onClick={handleOpenClick}>
 						<FolderOpenIcon className="w-4 h-4" /> <span className="ml-2">Open</span>
 					</Selection>
 				</Transition>

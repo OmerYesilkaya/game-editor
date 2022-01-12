@@ -62,24 +62,6 @@ const PrefabWindow: React.FC = () => {
 	return (
 		<div className="w-full flex h-[400px]">
 			<div className="flex flex-col h-full w-full">
-				<div className="flex items-center justify-between w-full font-default h-7 py-0.5 mt-0.5 mb-0.5 p-0.5 bg-zinc-800 rounded-sm">
-					{prefab ? (
-						<Common.EditableText
-							value={name ?? "New Prefab"}
-							onChange={(e) => setName(e)}
-							handleNameBlur={handleNameBlur}
-							placeholder="New Prefab"
-						/>
-					) : (
-						<div className="invisible" />
-					)}
-					<button
-						onClick={onSubmit}
-						className="bg-rose-500 h-full text-white rounded-sm text-sm font-bold transition-all hover:bg-rose-600 w-24"
-					>
-						SAVE
-					</button>
-				</div>
 				<div className="flex h-full mt-0.5 ">
 					<div className="flex flex-col w-full h-full ">
 						<div className="flex flex-col grow max-h-full">
