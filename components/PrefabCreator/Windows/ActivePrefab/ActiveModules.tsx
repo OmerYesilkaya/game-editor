@@ -14,7 +14,7 @@ const ActiveModules: React.FC<Props> = ({ prefab }) => {
 	return (
 		<>
 			{prefab ? (
-				<div className="flex flex-col grow mt-1 max-h-[342px] overflow-y-auto">
+				<div className="flex flex-col grow mt-1 max-h-full overflow-y-auto">
 					{prefab.modules.length > 0 ? (
 						<div className="flex flex-col gap-y-0.5 ">
 							{prefab.modules.map((module) => (

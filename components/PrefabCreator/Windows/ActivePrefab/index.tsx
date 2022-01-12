@@ -68,7 +68,7 @@ const PrefabWindow: React.FC = () => {
 							<div className=" bg-zinc-100 w-full rounded-sm">
 								<span className="ml-1 font-black uppercase font-default text-zinc-900">Available Modules</span>
 							</div>
-							<div className="max-h-[342px] overflow-y-auto">
+							<div className="max-h-full overflow-y-auto">
 								<AvailableModules />
 							</div>
 						</div>
