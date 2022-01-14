@@ -1,13 +1,14 @@
 import { HTMLAttributes, useRef, useState } from "react";
-import { Handle, Position } from "react-flow-renderer";
 
-import { usePrefabStore } from "@app/store";
-import { ApiModule } from "@app/types";
+import { Handle, Position } from "react-flow-renderer";
+import { CubeTransparentIcon, DuplicateIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 
 import cn from "classnames";
-import { DuplicateIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
-import { Common } from "..";
-import stringUtils from "utils/stringUtils";
+
+import { usePrefabStore, useCanvasStore } from "@app/store";
+import { ApiModule } from "@app/types";
+import { Common } from "@app/components";
+import { stringUtils } from "@app/utils";
 
 type Props = {
 	data: { name: string; modules: ApiModule[]; id: number; internalId: string };
@@ -40,7 +41,7 @@ const Button: React.FC<ButtonProps> = ({ children, themeColor, variant = "defaul
 const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 	const [name, setName] = useState<string>(data.name);
 	const [isEditable, setIsEditable] = useState(false);
-
+	const toggleActivation = useCanvasStore((state) => state.toggleActivation);
 	const { activePrefabId, setActivePrefabId, setPrefabName } = usePrefabStore((state) => ({
 		activePrefabId: state.activePrefabId,
 		setActivePrefabId: state.setActivePrefabId,
@@ -50,6 +51,7 @@ const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 	const themeColor = "rose";
 
 	const customHandleStyles = containerRef.current && {
+		zIndex: 2,
 		background: "white",
 		width: "15px",
 		height: "15px",
@@ -76,14 +78,17 @@ const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 			<Common.Header className="w-full px-1.5 py-1" id="drag-handle">
 				<div className="flex items-center w-full justify-between">
 					<Common.EditableText
-						value={name ?? "New Prefab"}
+						value={name ?? "Unnamed Prefab"}
 						onChange={(e) => setName(e)}
 						handleNameBlur={handleNameBlur}
-						placeholder="New Prefab"
+						placeholder="Unnamed Prefab"
 						isEditable={isEditable}
 						setIsEditable={setIsEditable}
 					/>
 					<div className="flex items-center">
+						<Button themeColor={themeColor} title="Rename" onClick={() => toggleActivation("toolbar-active-prefab")}>
+							<CubeTransparentIcon className="w-full h-full p-1" />
+						</Button>
 						<Button themeColor={themeColor} title="Rename" onClick={() => setIsEditable(true)} disabled={isEditable}>
 							<PencilAltIcon className="w-full h-full p-1" />
 						</Button>

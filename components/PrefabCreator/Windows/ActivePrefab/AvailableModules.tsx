@@ -41,6 +41,9 @@ const AvailableModules: React.FC = () => {
 
 	return (
 		<>
+			<div className=" bg-zinc-100 w-full rounded-sm">
+				<span className="ml-1 font-black uppercase font-default text-zinc-900">Available Modules</span>
+			</div>
 			<Common.SearchInput placeholder="Module Name" query={query} setQuery={setQuery} isLoading={isLoading} />
 			<div className="flex flex-col gap-y-0.5 mt-1">
 				{filteredModules.length > 0

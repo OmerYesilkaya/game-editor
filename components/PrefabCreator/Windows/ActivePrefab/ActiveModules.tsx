@@ -1,18 +1,20 @@
 import { CubeTransparentIcon, ViewGridAddIcon } from "@heroicons/react/outline";
 
-import { Prefab } from "@app/types";
+import { usePrefabStore } from "@app/store";
 
 import ModuleItem from "../../ModuleItem";
 
-type Props = {
-	prefab: Prefab | null;
-};
-
-const ActiveModules: React.FC<Props> = ({ prefab }) => {
+const ActiveModules: React.FC = () => {
 	const themeColor = "rose";
+	const { prefab } = usePrefabStore((state) => ({ prefab: state.prefab }));
 
 	return (
 		<>
+			<div className=" bg-zinc-100 w-full rounded-sm">
+				<div className="ml-1 font-black uppercase font-default text-zinc-900">
+					Active Modules <span className="italic text-zinc-600">{prefab?.name ? ` (${prefab?.name})` : ""}</span>
+				</div>
+			</div>
 			{prefab ? (
 				<div className="flex flex-col grow mt-1 max-h-full overflow-y-auto">
 					{prefab.modules.length > 0 ? (

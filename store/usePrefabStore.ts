@@ -38,7 +38,7 @@ export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
 		set(() => ({
 			prefab: {
 				id: 0,
-				name: "New Prefab",
+				name: "Unnamed Prefab",
 				modules: [],
 				internalId: uuid(),
 				position: {

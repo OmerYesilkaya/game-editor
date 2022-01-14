@@ -16,10 +16,7 @@ export const useCanvasStore = create<CanvasStoreTypes>((set) => ({
 	activeAssetInput: null,
 	activeWindowIds: [],
 	isPrefabsModalOpen: false,
-	setIsPrefabsModalOpen: (value) => {
-		console.log("setting to", value);
-		set(() => ({ isPrefabsModalOpen: value }));
-	},
+	setIsPrefabsModalOpen: (value) => set(() => ({ isPrefabsModalOpen: value })),
 	setActiveAssetInput: (value) => set(() => ({ activeAssetInput: value })),
 	setActiveWindowIds: (ids) => set(() => ({ activeWindowIds: ids })),
 	toggleActivation: (id) => {

@@ -3,8 +3,9 @@ import { Transition } from "@headlessui/react";
 
 import cn from "classnames";
 
-import { CubeTransparentIcon, FolderOpenIcon, MenuAlt2Icon, SaveAsIcon, SaveIcon } from "@heroicons/react/outline";
-import { usePrefabStore } from "@app/store";
+import { CubeTransparentIcon, FolderOpenIcon, SaveAsIcon, SaveIcon } from "@heroicons/react/outline";
+import { usePrefabStore, useCanvasStore, useInputStore } from "@app/store";
+import api from "hooks/api";
 
 const Selection: React.FC<HTMLAttributes<HTMLButtonElement>> = ({ children, ...restProps }) => {
 	return (
@@ -17,14 +18,27 @@ const Selection: React.FC<HTMLAttributes<HTMLButtonElement>> = ({ children, ...r
 	);
 };
 
-type Props = {
-	handleOpenClick: () => void;
-};
-
-const MenuBar: React.FC<Props> = ({ handleOpenClick }) => {
-	const prefab = usePrefabStore((state) => state.prefab);
+const MenuBar: React.FC = () => {
+	const { inputs, setInputs } = useInputStore((state) => ({ inputs: state.inputs, setInputs: state.setInputs }));
+	const { setIsPrefabsModalOpen } = useCanvasStore((state) => ({
+		setIsPrefabsModalOpen: state.setIsPrefabsModalOpen,
+	}));
+	const { prefab, createNewPrefab } = usePrefabStore((state) => ({ prefab: state.prefab, createNewPrefab: state.createNewPrefab }));
 	const [isOpen, setIsOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
+
+	const { mutate } = api.usePostPrefab();
+
+	function handleSave() {
+		if (!prefab) return;
+		const formattedData = {
+			name: prefab.name,
+			modules: inputs.map((module) => ({ arrayIndex: 0, modulePartId: module.id, value: module.value })),
+		};
+		console.log("f", formattedData);
+
+		// mutate(formattedData);
+	}
 
 	useEffect(() => {
 		const element = document.getElementById("react-flow-container");
@@ -67,7 +81,7 @@ const MenuBar: React.FC<Props> = ({ handleOpenClick }) => {
 					leaveFrom="opacity-100"
 					leaveTo="opacity-0"
 				>
-					<Selection onClick={() => console.log("Saved")}>
+					<Selection onClick={handleSave}>
 						<SaveIcon className="w-4 h-4" />
 						<span className="ml-2">Save</span>
 					</Selection>
@@ -75,10 +89,15 @@ const MenuBar: React.FC<Props> = ({ handleOpenClick }) => {
 						<SaveAsIcon className="w-4 h-4" />
 						<span className="ml-2">Save as...</span>
 					</Selection>
-					<Selection onClick={() => console.log("Created")}>
+					<Selection
+						onClick={() => {
+							setInputs([]);
+							createNewPrefab();
+						}}
+					>
 						<CubeTransparentIcon className="w-4 h-4" /> <span className="ml-2">Create New</span>
 					</Selection>
-					<Selection onClick={handleOpenClick}>
+					<Selection onClick={() => setIsPrefabsModalOpen(true)}>
 						<FolderOpenIcon className="w-4 h-4" /> <span className="ml-2">Open</span>
 					</Selection>
 				</Transition>

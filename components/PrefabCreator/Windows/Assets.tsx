@@ -8,7 +8,9 @@ const Sprites: React.FC = () => {
 	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
 	const sprites = useSpriteStore((state) => state.sprites);
 	const updateInput = useInputStore((state) => state.updateInput);
-	const { activeAssetInput, setActiveAssetInput } = useCanvasStore((state) => ({
+	const { activeAssetInput, setActiveAssetInput, activeWindowIds, setActiveWindowIds } = useCanvasStore((state) => ({
+		activeWindowIds: state.activeWindowIds,
+		setActiveWindowIds: state.setActiveWindowIds,
 		activeAssetInput: state.activeAssetInput,
 		setActiveAssetInput: state.setActiveAssetInput,
 	}));
@@ -17,6 +19,7 @@ const Sprites: React.FC = () => {
 		if (!activeAssetInput) return;
 		updateInput(activeAssetInput.id, id);
 		setActiveAssetInput(null);
+		setActiveWindowIds(activeWindowIds.filter((windowId) => !["toolbar-preview", "toolbar-file-select"].includes(windowId)));
 	}
 
 	function handlePointerEnter(id: number) {
@@ -53,7 +56,9 @@ const Animations: React.FC = () => {
 	const animations = useAnimationStore((state) => state.animations);
 	const sprites = useSpriteStore((state) => state.sprites);
 	const updateInput = useInputStore((state) => state.updateInput);
-	const { activeAssetInput, setActiveAssetInput } = useCanvasStore((state) => ({
+	const { activeAssetInput, setActiveAssetInput, activeWindowIds, setActiveWindowIds } = useCanvasStore((state) => ({
+		activeWindowIds: state.activeWindowIds,
+		setActiveWindowIds: state.setActiveWindowIds,
 		activeAssetInput: state.activeAssetInput,
 		setActiveAssetInput: state.setActiveAssetInput,
 	}));
@@ -62,6 +67,7 @@ const Animations: React.FC = () => {
 		if (!activeAssetInput) return;
 		updateInput(activeAssetInput.id, id);
 		setActiveAssetInput(null);
+		setActiveWindowIds(activeWindowIds.filter((windowId) => !["toolbar-preview", "toolbar-file-select"].includes(windowId)));
 	}
 
 	function handlePointerEnter(id: number) {

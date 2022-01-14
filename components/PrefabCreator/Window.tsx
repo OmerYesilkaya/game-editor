@@ -45,7 +45,7 @@ const Window: React.FC<Props> = ({ id, title, noContent, width, height, isActive
 		>
 			{children ? (
 				<div className="h-full w-full flex flex-col overflow-y-auto">
-					<Common.Header className="rounded-none border-4 border-zinc-900 px-2 py-0 text-xl sticky top-0 touch-none z-[2]" {...bind()}>
+					<Common.Header className="rounded-none border-4 border-zinc-900 px-1.5 py-0 text-xl sticky top-0 touch-none z-[2]" {...bind()}>
 						<div className="flex items-center justify-between">
 							{title}
 							<button
