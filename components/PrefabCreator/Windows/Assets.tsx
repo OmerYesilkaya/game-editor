@@ -6,6 +6,7 @@ import { ModuleValueType } from "types/module";
 
 const Sprites: React.FC = () => {
 	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
+	const setActivePreview = usePreviewStore((state) => state.setActivePreview);
 	const sprites = useSpriteStore((state) => state.sprites);
 	const updateInput = useInputStore((state) => state.updateInput);
 	const { activeAssetInput, setActiveAssetInput, activeWindowIds, setActiveWindowIds } = useCanvasStore((state) => ({
@@ -16,6 +17,9 @@ const Sprites: React.FC = () => {
 	}));
 
 	function handleSelect(id: number) {
+		const preview = sprites.find((sprite) => sprite.id === id);
+		if (!preview) return;
+		setActivePreview(preview);
 		if (!activeAssetInput) return;
 		updateInput(activeAssetInput.id, id);
 		setActiveAssetInput(null);
@@ -53,6 +57,7 @@ const Sprites: React.FC = () => {
 
 const Animations: React.FC = () => {
 	const setTemporaryPreview = usePreviewStore((state) => state.setTemporaryPreview);
+	const setActivePreview = usePreviewStore((state) => state.setActivePreview);
 	const animations = useAnimationStore((state) => state.animations);
 	const sprites = useSpriteStore((state) => state.sprites);
 	const updateInput = useInputStore((state) => state.updateInput);
@@ -64,6 +69,11 @@ const Animations: React.FC = () => {
 	}));
 
 	function handleSelect(id: number) {
+		const animation = animations.find((animation) => animation.id === id);
+		if (!animation) return;
+		const preview = sprites.filter((sprite) => animation.sprites.includes(sprite.id));
+		if (!preview) return;
+		setActivePreview(preview);
 		if (!activeAssetInput) return;
 		updateInput(activeAssetInput.id, id);
 		setActiveAssetInput(null);

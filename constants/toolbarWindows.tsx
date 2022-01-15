@@ -35,9 +35,9 @@ const windows: Window[] = [
 				<CameraIcon className="w-5 h-5 ml-0.5" />
 			</div>
 		),
-		component: <PreviewWindow width={392} height={276} />,
+		component: <PreviewWindow width={392} height={356} />,
 		width: 400,
-		height: 320,
+		height: 400,
 		icon: <EyeIcon />,
 		order: 7,
 	},

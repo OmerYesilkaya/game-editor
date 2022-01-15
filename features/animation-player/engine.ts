@@ -1,5 +1,6 @@
 import { useTextureStore, usePreviewStore } from "@app/store";
 import { Sprite } from "@app/types";
+
 import { EngineContext } from "./types/engineContext";
 
 // Gets called 24 frames per second
@@ -7,10 +8,12 @@ function update(context: EngineContext) {
 	const previewState = usePreviewStore.getState();
 	const activePreview = previewState.activePreview;
 	const temporaryPreview = previewState.temporaryPreview;
-	const textures = useTextureStore.getState().textures;
-	const frameCount = usePreviewStore.getState().currentFrame;
+	const frameCount = previewState.currentFrame;
+	const zoom = previewState.zoom;
 
-	usePreviewStore.getState().increaseCurrentFrame();
+	const textures = useTextureStore.getState().textures;
+
+	previewState.increaseCurrentFrame();
 
 	const preview = temporaryPreview ? temporaryPreview : activePreview;
 	const frame = Array.isArray(preview) ? frameCount % preview.length : 1;
@@ -20,11 +23,11 @@ function update(context: EngineContext) {
 	const texture = textures.find((texture) => texture.id === sprite.textureId);
 	if (!texture) return;
 
-	drawSprite(context, sprite, texture.image);
+	drawSprite(context, sprite, texture.image, zoom);
 }
 
 // Draws the given sprite to canvas. Sprite should be within texture boundaries
-function drawSprite(context: EngineContext, sprite: Sprite, texture: HTMLImageElement) {
+function drawSprite(context: EngineContext, sprite: Sprite, texture: HTMLImageElement, scale: number) {
 	const pivotX = sprite.pivot.x;
 	const pivotY = sprite.pivot.y;
 
@@ -34,24 +37,19 @@ function drawSprite(context: EngineContext, sprite: Sprite, texture: HTMLImageEl
 	const spriteX = sprite.rect.x;
 	const spriteY = sprite.rect.y;
 
-	const scale = Math.floor(context.canvasWidth / spriteWidth);
-	const scaledSpriteWidth = spriteWidth * scale;
-	const scaledSpriteHeight = spriteHeight * scale;
+	const pivotAdjustX = spriteWidth * scale * pivotX;
+	const pivotAdjustY = spriteHeight * scale - spriteHeight * scale * pivotY;
 
-	const pivotAdjustX = scaledSpriteWidth * pivotX;
-	const pivotAdjustY = scaledSpriteHeight - scaledSpriteHeight * pivotY;
+	const sx = spriteX;
+	const sy = texture.height - spriteHeight - spriteY;
+	const sw = spriteWidth;
+	const sh = spriteHeight;
+	const dx = context.canvasWidth / 2 - pivotAdjustX;
+	const dy = context.canvasHeight / 2 - pivotAdjustY;
+	const dw = spriteWidth * scale;
+	const dh = spriteHeight * scale;
 
-	context.canvas.drawImage(
-		texture,
-		spriteX,
-		texture.height - spriteHeight - spriteY,
-		spriteWidth,
-		spriteHeight,
-		context.canvasWidth / 2 - pivotAdjustX,
-		context.canvasHeight - pivotAdjustY - context.canvasHeight * 0.2,
-		Math.round(scaledSpriteWidth),
-		Math.round(scaledSpriteHeight)
-	);
+	context.canvas.drawImage(texture, sx, sy, sw, sh, dx, dy, dw, dh);
 }
 
 export default update;

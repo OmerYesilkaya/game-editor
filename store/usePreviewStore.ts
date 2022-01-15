@@ -9,6 +9,9 @@ type PreviewStoreTypes = {
 	currentFrame: number;
 	activePreview: Preview;
 	temporaryPreview: Preview;
+	zoom: number;
+	increaseZoom: (incrementValue: number) => void;
+	decreaseZoom: (decrementValue: number) => void;
 	setTemporaryPreview: (value: Preview) => void;
 	setActivePreview: (value: Preview) => void;
 	increaseCurrentFrame: () => void;
@@ -22,6 +25,9 @@ export const usePreviewStore = create<PreviewStoreTypes>((set, get) => ({
 	currentFrame: 0,
 	activePreview: null,
 	temporaryPreview: null,
+	zoom: 5,
+	increaseZoom: (incrementValue) => set((prev) => ({ zoom: Math.min(10, prev.zoom + incrementValue) })),
+	decreaseZoom: (decrementValue) => set((prev) => ({ zoom: Math.max(2, prev.zoom - decrementValue) })),
 	setTemporaryPreview: (value) => set(() => ({ temporaryPreview: value, currentFrame: 0 })),
 	setActivePreview: (value) => set(() => ({ activePreview: value, currentFrame: 0 })),
 	increaseCurrentFrame: () => {
