@@ -58,7 +58,7 @@ const MenuBar: React.FC = () => {
 	}, []);
 
 	return (
-		<div className="absolute top-0 w-screen z-[20]">
+		<div className="w-screen z-[20]">
 			<div className="flex items-center font-default font-light w-full bg-slate-100 text-sm h-5 shadow-md justify-between">
 				<div className="flex">
 					<button

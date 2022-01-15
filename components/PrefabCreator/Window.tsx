@@ -22,13 +22,15 @@ const Window: React.FC<Props> = ({ id, title, noContent, width, height, isActive
 	const toggleActivation = useCanvasStore((state) => state.toggleActivation);
 	const bounds = useWindowBounds();
 
+	const initialPositions = {};
+
 	const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }));
 	const borderWidth = 4;
 	const bind = useDrag(({ down, offset: [ox, oy] }) => api.start({ x: ox, y: oy, immediate: down }), {
 		bounds: {
 			left: bounds.left + (width / 2 + borderWidth),
 			right: bounds.right - (width / 2 + borderWidth),
-			top: bounds.top + (height / 2 + borderWidth),
+			top: bounds.top + (height / 2 + borderWidth) + 10, // 10 here is for top menu bar
 			bottom: bounds.bottom - (height / 2 + borderWidth),
 		},
 	});

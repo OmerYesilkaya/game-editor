@@ -42,8 +42,8 @@ export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
 				modules: [],
 				internalId: uuid(),
 				position: {
-					x: 0,
-					y: 0,
+					x: window.innerWidth / 2 - 220,
+					y: window.innerHeight / 2 - 50,
 				},
 			},
 			activePrefabId: null,

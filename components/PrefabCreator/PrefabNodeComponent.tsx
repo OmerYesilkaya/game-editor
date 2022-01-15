@@ -69,7 +69,7 @@ const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 		<div
 			onClick={() => setActivePrefabId(data.id)}
 			ref={containerRef}
-			className={cn(`w-[400px] p-1 my-4 overflow-y-auto  border-4 rounded-md bg-zinc-900`, {
+			className={cn(`w-[400px] p-1 my-4 overflow-y-auto  border-4 rounded-md bg-zinc-900 transition`, {
 				[`border-${themeColor}-600`]: activePrefabId === data.id,
 				[`border-${themeColor}-800`]: activePrefabId !== data.id,
 			})}

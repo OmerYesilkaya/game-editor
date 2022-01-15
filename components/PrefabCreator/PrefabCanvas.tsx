@@ -1,33 +1,60 @@
-import ReactFlow, { Background, BackgroundVariant, Elements } from "react-flow-renderer";
-import PrefabNodeComponent from "./PrefabNodeComponent";
-import { usePrefabStore } from "@app/store";
+import { useState } from "react";
 
-const PrefabCanvas: React.FC = () => {
-	const prefab = usePrefabStore((state) => state.prefab);
+import cn from "classnames";
 
-	const elements: Elements = prefab
-		? [
-				{
-					id: prefab.internalId,
-					type: "prefab",
-					position: prefab.position,
-					data: { name: prefab.name, modules: prefab.modules, id: prefab.id, internalId: prefab.internalId },
-					dragHandle: "#drag-handle",
-				},
-		  ]
-		: [];
+import PhysicsCanvas from "./PhysicsCanvas";
+import PositionCanvas from "./PositionCanvas";
 
-	//TODO(omer): also add children of the current prefab into flow canvas
+enum PrefabCanvasType {
+	Physics,
+	Position,
+}
 
-	const nodeTypes = {
-		prefab: PrefabNodeComponent,
-	};
+type Props = {
+	activeTabId: PrefabCanvasType;
+	tabId: PrefabCanvasType;
+	handleSelect: (id: PrefabCanvasType) => void;
+};
+
+const Tab: React.FC<Props> = ({ tabId, activeTabId, handleSelect, children }) => {
+	const selected = tabId === activeTabId;
 
 	return (
-		<div id="react-flow-container" className="w-full h-full">
-			<ReactFlow elements={elements} nodeTypes={nodeTypes}>
-				<Background variant={BackgroundVariant.Dots} gap={24} size={1} color="rgb(39,39,42)" />
-			</ReactFlow>
+		<button className="flex mt-px w-full" onClick={() => handleSelect(tabId)}>
+			<div
+				className={cn(
+					"flex w-full rounded-sm px-1 py-px justify-center text-sm font-default transition bg-zinc-900 text-white border-2 border-zinc-200",
+					{
+						" opacity-100": selected,
+						"opacity-25": !selected,
+					}
+				)}
+			>
+				{children}
+			</div>
+		</button>
+	);
+};
+
+const PrefabCanvas: React.FC = () => {
+	const [activeCanvas, setActiveCanvas] = useState(PrefabCanvasType.Position);
+
+	function handleSelect(id: PrefabCanvasType) {
+		setActiveCanvas(id);
+	}
+
+	return (
+		<div className="relative w-full h-full px-px">
+			<div className="w-full flex gap-x-px">
+				<Tab handleSelect={handleSelect} tabId={PrefabCanvasType.Physics} activeTabId={activeCanvas}>
+					PHYSICS
+				</Tab>
+				<Tab handleSelect={handleSelect} tabId={PrefabCanvasType.Position} activeTabId={activeCanvas}>
+					POSITION
+				</Tab>
+			</div>
+
+			{activeCanvas === PrefabCanvasType.Physics ? <PhysicsCanvas /> : <PositionCanvas />}
 		</div>
 	);
 };

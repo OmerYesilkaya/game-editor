@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useEffect } from "react";
 
 import { v4 as uuid } from "uuid";
+import Split from "react-split";
 
 import { Layout, PrefabCreator as PrefabCreatorComponents } from "@app/components";
 import { COLORS, WINDOWS } from "@app/constants";
@@ -11,9 +12,8 @@ import { GetPrefabResponse } from "@app/types";
 import { moduleUtils } from "@app/utils";
 
 const PrefabCreator: NextPage = () => {
-	const { prefab, createNewPrefab, activePrefabId, setPrefab } = usePrefabStore((state) => ({
+	const { prefab, activePrefabId, setPrefab } = usePrefabStore((state) => ({
 		prefab: state.prefab,
-		createNewPrefab: state.createNewPrefab,
 		activePrefabId: state.activePrefabId,
 		setPrefab: state.setPrefab,
 	}));
@@ -43,18 +43,12 @@ const PrefabCreator: NextPage = () => {
 			if ((document.activeElement && document.activeElement?.tagName === "INPUT") || document.activeElement?.tagName === "TEXTAREA") return;
 			switch (e.key) {
 				case "1":
-					toggleActivation("toolbar-prefabs");
-					break;
-				case "2":
-					toggleActivation("toolbar-modules");
-					break;
-				case "3":
 					toggleActivation("toolbar-preview");
 					break;
-				case "4":
+				case "2":
 					toggleActivation("toolbar-active-prefab");
 					break;
-				case "5":
+				case "3":
 					toggleActivation("toolbar-file-select");
 					break;
 				default:
@@ -66,12 +60,11 @@ const PrefabCreator: NextPage = () => {
 		return () => window.removeEventListener("keydown", handleShortcuts);
 	}, []);
 
-	return (
-		<Layout.Center className="relative w-full h-full flex gap-1" style={{ background: COLORS.BG_DARK }}>
-			{prefab ? (
+	return prefab ? (
+		<div className="w-full h-full flex flex-col" style={{ background: COLORS.BG_DARK }}>
+			<PrefabCreatorComponents.MenuBar />
+			<Layout.Center className="relative w-full h-full flex gap-1" style={{ background: COLORS.BG_DARK }}>
 				<>
-					<PrefabCreatorComponents.MenuBar />
-					<PrefabCreatorComponents.Toolbar />
 					{WINDOWS.map((window) => {
 						const isActive = activeWindowIds.includes(window.id);
 						return (
@@ -89,30 +82,36 @@ const PrefabCreator: NextPage = () => {
 							</PrefabCreatorComponents.Window>
 						);
 					})}
-					<PrefabCreatorComponents.PrefabCanvas />
-					{activeAssetInput && <PrefabCreatorComponents.Overlay />}
-					<PrefabCreatorComponents.Modals />
-				</>
-			) : (
-				<div className="w-1/2 h-2/3 flex flex-col items-center">
-					<h2 className="font-default font-bold text-3xl text-zinc-100 mb-3">Welcome to Prefab Editor</h2>
-					<div className="w-full h-px my-4 bg-zinc-900 shadow-md" />
-					<h4 className="text-zinc-500 my-3 font-default font-light text-sm">EDIT AN EXISTING PREFAB</h4>
-					<div className="w-full h-full bg-zinc-800 shadow-lg rounded-sm bg-opacity-20">
-						<PrefabCreatorComponents.Prefabs />
-					</div>
-					<h4 className="text-zinc-600 my-3 font-default font-light text-sm">OR</h4>
-					<button
-						onClick={() => {
-							setInputs([]);
-							createNewPrefab();
+					<Split
+						className="w-full h-full flex"
+						sizes={[75, 25]}
+						minSize={100}
+						expandToMin={false}
+						gutterSize={10}
+						gutterAlign="center"
+						snapOffset={30}
+						dragInterval={1}
+						direction="horizontal"
+						cursor="col-resize"
+						gutter={(index, direction) => {
+							const gutter = document.createElement("div");
+							gutter.className = `gutter gutter-${direction}`;
+							return gutter;
 						}}
-						className="px-5 py-3.5 rounded-sm shadow-lg bg-emerald-600 text-white font-default font-semibold text-sm transition hover:bg-emerald-700 border border-emerald-900 hover:border-emerald-400 active:bg-emerald-800 active:border-emerald-900 active:text-emerald-500"
 					>
-						CREATE A NEW ONE
-					</button>
-				</div>
-			)}
+						<PrefabCreatorComponents.FlowCanvas />
+						<PrefabCreatorComponents.PrefabCanvas />
+					</Split>
+
+					<PrefabCreatorComponents.Toolbar />
+					<PrefabCreatorComponents.Modals />
+					{activeAssetInput && <PrefabCreatorComponents.Overlay />}
+				</>
+			</Layout.Center>
+		</div>
+	) : (
+		<Layout.Center className="relative w-full h-full flex gap-1" style={{ background: COLORS.BG_DARK }}>
+			<PrefabCreatorComponents.WelcomePage />
 		</Layout.Center>
 	);
 };
