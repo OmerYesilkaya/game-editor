@@ -4,10 +4,10 @@ import { NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
 
 import { Footer, Navbar } from "@app/components";
-import { useTextureStore, useAnimationStore, useSpriteStore } from "@app/store";
+import { useTextureStore, useAssetStore } from "@app/store";
 import { RawTexture } from "@app/types";
 import { api } from "@app/hooks";
-import { URL } from "./constants";
+import { URL } from "@app/constants";
 
 async function loadTextures(textures: { id: number; name: string }[], setFiles: React.Dispatch<SetStateAction<RawTexture[]>>) {
 	const rawTextures = [] as RawTexture[];
@@ -34,8 +34,7 @@ const AppWrapper: NextPage = ({ children }) => {
 	const [files, setFiles] = useState<RawTexture[]>([]);
 
 	const setRawTextures = useTextureStore((state) => state.setRawTextures);
-	const setAnimations = useAnimationStore((state) => state.setAnimations);
-	const setSprites = useSpriteStore((state) => state.setSprites);
+	const { setAnimations, setSprites } = useAssetStore((state) => ({ setAnimations: state.setAnimations, setSprites: state.setSprites }));
 
 	const { isLoading: areTexturesLoading } = api.useGetTextures({
 		onSuccess: (data) => {

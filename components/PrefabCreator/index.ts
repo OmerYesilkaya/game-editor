@@ -7,5 +7,6 @@ import Prefabs from "./Prefabs";
 import Modals from "./Modals";
 import WelcomePage from "./WelcomePage";
 import PrefabCanvas from "./PrefabCanvas";
+import GenericAssetWindow from "./Windows/GenericAssets";
 
-export default { Overlay, FlowCanvas, Toolbar, Window, MenuBar, Modals, Prefabs, WelcomePage, PrefabCanvas };
+export default { Overlay, FlowCanvas, Toolbar, Window, MenuBar, Modals, Prefabs, WelcomePage, PrefabCanvas, GenericAssetWindow };

@@ -6,7 +6,7 @@ import { Common } from "@app/components";
 import { api, useDebounce } from "@app/hooks";
 import { usePrefabStore, useInputStore } from "@app/store";
 import { ApiModule } from "@app/types";
-import { moduleUtils } from "@app/utils";
+import { moduleUtils, stringUtils } from "@app/utils";
 
 const AvailableModules: React.FC = () => {
 	const [query, setQuery] = useState("");
@@ -45,7 +45,7 @@ const AvailableModules: React.FC = () => {
 				<span className="ml-1 font-black uppercase font-default text-zinc-900">Available Modules</span>
 			</div>
 			<Common.SearchInput placeholder="Module Name" query={query} setQuery={setQuery} isLoading={isLoading} />
-			<div className="flex flex-col gap-y-0.5 mt-1">
+			<div className="flex flex-col grow mt-1 max-h-full overflow-y-auto gap-y-0.5">
 				{filteredModules.length > 0
 					? filteredModules.map((module) => (
 							<button
@@ -54,7 +54,7 @@ const AvailableModules: React.FC = () => {
 								key={module.id}
 								onClick={() => api.getModuleById(module.id).then((result) => handleAddModule(result))}
 							>
-								<span className="font-default text-sm font-bold mr-2">{module.name.toUpperCase()}</span>
+								<span className="font-default text-sm font-bold mr-2 uppercase">{stringUtils.formatCamelCase(module.name)}</span>
 								{/* <div className="bg-orange-600 text-white font-default font-bold text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
 								<div className="bg-red-600 text-white font-default font-bold text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div> */}
 								<ChevronRightIcon className="w-4 h-4" />

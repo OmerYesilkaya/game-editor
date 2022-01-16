@@ -17,10 +17,11 @@ const PrefabCreator: NextPage = () => {
 		activePrefabId: state.activePrefabId,
 		setPrefab: state.setPrefab,
 	}));
-	const { activeAssetInput, activeWindowIds, toggleActivation } = useCanvasStore((state) => ({
+	const { activeAssetInput, activeWindowIds, toggleActivation, genericWindowData } = useCanvasStore((state) => ({
 		activeWindowIds: state.activeWindowIds,
 		toggleActivation: state.toggleActivation,
 		activeAssetInput: state.activeAssetInput,
+		genericWindowData: state.genericWindowData,
 	}));
 	const setInputs = useInputStore((state) => state.setInputs);
 
@@ -93,7 +94,7 @@ const PrefabCreator: NextPage = () => {
 						dragInterval={1}
 						direction="horizontal"
 						cursor="col-resize"
-						gutter={(index, direction) => {
+						gutter={(_, direction) => {
 							const gutter = document.createElement("div");
 							gutter.className = `gutter gutter-${direction}`;
 							return gutter;
@@ -105,7 +106,8 @@ const PrefabCreator: NextPage = () => {
 
 					<PrefabCreatorComponents.Toolbar />
 					<PrefabCreatorComponents.Modals />
-					{activeAssetInput && <PrefabCreatorComponents.Overlay />}
+					<PrefabCreatorComponents.GenericAssetWindow />
+					{(activeAssetInput || genericWindowData.assets.length > 0) && <PrefabCreatorComponents.Overlay />}
 				</>
 			</Layout.Center>
 		</div>

@@ -1,6 +1,6 @@
 import { DocumentTextIcon } from "@heroicons/react/solid";
 
-import { useCanvasStore, useAnimationStore, useSpriteStore, useInputStore } from "@app/store";
+import { useCanvasStore, useAssetStore, useInputStore } from "@app/store";
 import { array } from "@app/utils";
 import { ModuleValueType } from "@app/types";
 
@@ -15,16 +15,61 @@ const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, defaultV
 	const inputs = useInputStore((state) => state.inputs);
 	// A hacky/bad way to solve the issue of showing currently selected files data on inputs
 
-	const { setActiveAssetInput, setActiveWindowIds, activeWindowIds } = useCanvasStore((state) => ({
+	const { setActiveAssetInput, setActiveWindowIds, activeWindowIds, setGenericWindowData } = useCanvasStore((state) => ({
 		setActiveAssetInput: state.setActiveAssetInput,
 		setActiveWindowIds: state.setActiveWindowIds,
 		activeWindowIds: state.activeWindowIds,
+		setGenericWindowData: state.setGenericWindowData,
 	}));
-	const animations = useAnimationStore((state) => state.animations);
-	const sprites = useSpriteStore((state) => state.sprites);
+	const { animations, audios, itemPools, materialAnimations, materials, particleSystems, prefabs, sprites, trailSystems } = useAssetStore(
+		(state) => ({
+			animations: state.animations,
+			audios: state.audios,
+			itemPools: state.itemPools,
+			materialAnimations: state.materialAnimations,
+			materials: state.materials,
+			particleSystems: state.particleSystems,
+			prefabs: state.prefabs,
+			sprites: state.sprites,
+			trailSystems: state.trailSystems,
+		})
+	);
 
 	function handleFileClick() {
-		const windows = [...activeWindowIds, "toolbar-preview", "toolbar-file-select"];
+		let windowsToShow: string[] = [];
+		switch (type) {
+			case ModuleValueType.Animation:
+				windowsToShow = ["toolbar-preview", "toolbar-file-select"];
+				break;
+			case ModuleValueType.Sprite:
+				windowsToShow = ["toolbar-preview", "toolbar-file-select"];
+				break;
+			case ModuleValueType.Audio:
+				windowsToShow = ["toolbar-preview", "toolbar-file-select"];
+				break;
+			case ModuleValueType.ItemPool:
+				setGenericWindowData({ assets: itemPools, type: ModuleValueType.ItemPool });
+				break;
+			case ModuleValueType.Material:
+				setGenericWindowData({ assets: materials, type: ModuleValueType.Material });
+				break;
+			case ModuleValueType.MaterialAnimation:
+				setGenericWindowData({ assets: materialAnimations, type: ModuleValueType.MaterialAnimation });
+				break;
+			case ModuleValueType.ParticleSystem:
+				setGenericWindowData({ assets: particleSystems, type: ModuleValueType.ParticleSystem });
+				break;
+			case ModuleValueType.Prefab:
+				setGenericWindowData({ assets: prefabs, type: ModuleValueType.Prefab });
+				break;
+			case ModuleValueType.TrailSystem:
+				setGenericWindowData({ assets: trailSystems, type: ModuleValueType.TrailSystem });
+				break;
+			default:
+				break;
+		}
+
+		const windows = [...activeWindowIds, ...windowsToShow];
 		setActiveAssetInput({ id: moduleId, type });
 		setActiveWindowIds(windows.filter(array.onlyUniques));
 	}
@@ -40,6 +85,27 @@ const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, defaultV
 				break;
 			case ModuleValueType.Sprite:
 				selectedValue = sprites.find((sprite) => sprite.id === id)?.name;
+				break;
+			case ModuleValueType.Audio:
+				selectedValue = audios.find((audio) => audio.id === id)?.name;
+				break;
+			case ModuleValueType.ItemPool:
+				selectedValue = itemPools.find((itemPool) => itemPool.id === id)?.name;
+				break;
+			case ModuleValueType.Material:
+				selectedValue = materials.find((material) => material.id === id)?.name;
+				break;
+			case ModuleValueType.MaterialAnimation:
+				selectedValue = materialAnimations.find((materialAnimation) => materialAnimation.id === id)?.name;
+				break;
+			case ModuleValueType.ParticleSystem:
+				selectedValue = particleSystems.find((particleSystem) => particleSystem.id === id)?.name;
+				break;
+			case ModuleValueType.Prefab:
+				selectedValue = prefabs.find((prefab) => prefab.id === id)?.name;
+				break;
+			case ModuleValueType.TrailSystem:
+				selectedValue = trailSystems.find((trailSystem) => trailSystem.id === id)?.name;
 				break;
 			default:
 				break;

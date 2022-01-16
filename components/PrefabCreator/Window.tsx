@@ -10,7 +10,7 @@ import { useCanvasStore } from "store/useCanvasStore";
 
 type Props = {
 	title: JSX.Element;
-	noContent: React.ReactElement;
+	noContent: React.ReactElement | null;
 	width: number;
 	height: number;
 	isActive: boolean;

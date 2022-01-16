@@ -23,7 +23,7 @@ const Tab: React.FC<Props> = ({ tabId, activeTabId, handleSelect, children }) =>
 		<button className="flex mt-px w-full" onClick={() => handleSelect(tabId)}>
 			<div
 				className={cn(
-					"flex w-full rounded-sm px-1 py-px justify-center text-sm font-default transition bg-zinc-900 text-white border-2 border-zinc-200",
+					"flex w-full rounded-sm px-1 py-px justify-center text-sm font-default transition bg-zinc-900 text-white border-2 border-rose-600 hover:brightness-125",
 					{
 						" opacity-100": selected,
 						"opacity-25": !selected,
@@ -44,8 +44,8 @@ const PrefabCanvas: React.FC = () => {
 	}
 
 	return (
-		<div className="relative w-full h-full px-px">
-			<div className="w-full flex gap-x-px">
+		<div className="relative flex flex-col w-full h-full p-1">
+			<div className="w-full flex gap-x-1">
 				<Tab handleSelect={handleSelect} tabId={PrefabCanvasType.Physics} activeTabId={activeCanvas}>
 					PHYSICS
 				</Tab>
@@ -53,8 +53,9 @@ const PrefabCanvas: React.FC = () => {
 					POSITION
 				</Tab>
 			</div>
-
-			{activeCanvas === PrefabCanvasType.Physics ? <PhysicsCanvas /> : <PositionCanvas />}
+			<div className="grow flex flex-col text-white p-1 bg-zinc-900 rounded-sm mt-1 ">
+				{activeCanvas === PrefabCanvasType.Physics ? <PhysicsCanvas /> : <PositionCanvas />}
+			</div>
 		</div>
 	);
 };

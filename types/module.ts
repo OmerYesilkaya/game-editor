@@ -1,18 +1,28 @@
 export enum ModuleValueType {
-	Object,
+	Object = 0,
 	Range,
 	Color,
-	Animation,
-	Sprite,
+	Animation, // Asset
+	Sprite, // Asset
 	Percentage,
 	Vec2,
 	Vec3,
 	Vec4,
-	Nested,
+	Nested, // Deprecated
 	Bool,
 	Number,
 	Text,
 	TextArea,
+	Material, // Asset
+	ParticleSystem, // Asset
+	TrailSystem, // Asset
+	Audio, // Asset
+	Prefab, // Asset
+	ItemPool, // Asset
+	StatusEffect,
+	SpawnPrefab, // Refer to Spawnable.cs
+	SkillSpawnPrefab, // Refer to Spawnable.cs
+	MaterialAnimation, // Asset
 }
 
 export type Module = {
