@@ -68,7 +68,7 @@ const PreviewWindow: React.FC<Props> = ({ width, height }) => {
 
 	return (
 		<div ref={containerRef} className="canvas-pattern w-full h-full">
-			<Common.Player width={width} height={height} />
+			<Common.PreviewCanvas width={width} height={height} />
 			<div className="absolute right-2 top-10 flex gap-x-1">
 				<PlayRateControl />
 				<ZoomControl />

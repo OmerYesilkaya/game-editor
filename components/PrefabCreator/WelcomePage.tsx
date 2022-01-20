@@ -3,7 +3,7 @@ import Prefabs from "./Prefabs";
 
 const WelcomePage: React.FC = () => {
 	const createNewPrefab = usePrefabStore((state) => state.createNewPrefab);
-	const setInputs = useInputStore((state) => state.setInputs);
+	const resetInputStore = useInputStore((state) => state.resetInputStore);
 
 	return (
 		<div className="w-1/2 h-2/3 flex flex-col items-center">
@@ -16,7 +16,7 @@ const WelcomePage: React.FC = () => {
 			<h4 className="text-zinc-600 my-3 font-default font-light text-sm">OR</h4>
 			<button
 				onClick={() => {
-					setInputs([]);
+					resetInputStore();
 					createNewPrefab();
 				}}
 				className="px-5 py-3.5 rounded-sm shadow-lg bg-emerald-600 text-white font-default font-semibold text-sm transition hover:bg-emerald-700 border border-emerald-900 hover:border-emerald-400 active:bg-emerald-800 active:border-emerald-900 active:text-emerald-500"

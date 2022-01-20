@@ -36,7 +36,7 @@ const AvailableModules: React.FC = () => {
 
 	function handleAddModule(module: ApiModule) {
 		addModuleToPrefab(module);
-		addInputs(moduleUtils.getModuleInputs([module]));
+		addInputs(moduleUtils.getModuleInputs([module]), prefab?.id ? prefab?.id.toString() : prefab?.internalId ?? "");
 	}
 
 	return (

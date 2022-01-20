@@ -6,6 +6,7 @@ export type Prefab = {
 	modules: ApiModule[];
 	internalId: string;
 	position: { x: number; y: number };
+	children: Prefab[];
 };
 
 export type PostPrefabRequest = {
@@ -21,4 +22,6 @@ export type GetPrefabResponse = {
 	id: number;
 	modules: ApiModule[];
 	name: string;
+	position: { x: number; y: number };
+	children: GetPrefabResponse[];
 };

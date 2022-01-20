@@ -5,13 +5,13 @@ import { CubeTransparentIcon, DuplicateIcon, PencilAltIcon, TrashIcon } from "@h
 
 import cn from "classnames";
 
-import { usePrefabStore, useCanvasStore } from "@app/store";
+import { usePrefabStore, useCanvasStore, useInputStore } from "@app/store";
 import { ApiModule } from "@app/types";
 import { Common } from "@app/components";
 import { stringUtils } from "@app/utils";
 
 type Props = {
-	data: { name: string; modules: ApiModule[]; id: number; internalId: string };
+	data: { name: string; modules: ApiModule[]; id: string; internalId: string };
 };
 
 type ButtonProps = {
@@ -47,6 +47,10 @@ const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 		setActivePrefabId: state.setActivePrefabId,
 		setPrefabName: state.setName,
 	}));
+
+	const restoreActivePrefabInputs = useInputStore((state) => state.restoreActivePrefabInputs);
+	const storeActivePrefabInputs = useInputStore((state) => state.storeActivePrefabInputs);
+
 	const containerRef = useRef<HTMLDivElement>(null);
 	const themeColor = "rose";
 
@@ -67,11 +71,18 @@ const PrefabNodeComponent: React.FC<Props> = ({ data }) => {
 
 	return (
 		<div
-			onClick={() => setActivePrefabId(data.id)}
+			onClick={() => {
+				if (activePrefabId) {
+					storeActivePrefabInputs(activePrefabId);
+				}
+				const id = data.id ? data.id.toString() : data.internalId;
+				restoreActivePrefabInputs(id);
+				setActivePrefabId(id);
+			}}
 			ref={containerRef}
 			className={cn(`w-[400px] p-1 my-4 overflow-y-auto  border-4 rounded-md bg-zinc-900 transition`, {
-				[`border-${themeColor}-600`]: activePrefabId === data.id,
-				[`border-${themeColor}-800`]: activePrefabId !== data.id,
+				[`border-${themeColor}-600`]: activePrefabId === data.id || activePrefabId === data.internalId,
+				[`border-${themeColor}-800`]: activePrefabId !== data.id && activePrefabId !== data.internalId,
 			})}
 		>
 			<Handle type="target" position={Position.Top} style={{ transform: "translateY(14.5px) translateX(-7.5px)", ...customHandleStyles }} />

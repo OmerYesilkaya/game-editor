@@ -5,7 +5,7 @@ import cn from "classnames";
 
 import { CubeTransparentIcon, FolderOpenIcon, SaveAsIcon, SaveIcon } from "@heroicons/react/outline";
 import { usePrefabStore, useCanvasStore, useInputStore } from "@app/store";
-import api from "hooks/api";
+import { api } from "@app/hooks";
 
 const Selection: React.FC<HTMLAttributes<HTMLButtonElement>> = ({ children, ...restProps }) => {
 	return (
@@ -19,7 +19,7 @@ const Selection: React.FC<HTMLAttributes<HTMLButtonElement>> = ({ children, ...r
 };
 
 const MenuBar: React.FC = () => {
-	const { inputs, setInputs } = useInputStore((state) => ({ inputs: state.inputs, setInputs: state.setInputs }));
+	const { inputs, resetInputStore } = useInputStore((state) => ({ inputs: state.activePrefabInputs, resetInputStore: state.resetInputStore }));
 	const { setIsPrefabsModalOpen } = useCanvasStore((state) => ({
 		setIsPrefabsModalOpen: state.setIsPrefabsModalOpen,
 	}));
@@ -91,7 +91,7 @@ const MenuBar: React.FC = () => {
 					</Selection>
 					<Selection
 						onClick={() => {
-							setInputs([]);
+							resetInputStore();
 							createNewPrefab();
 						}}
 					>

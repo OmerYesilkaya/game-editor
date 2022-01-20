@@ -12,7 +12,7 @@ type Props = {
 };
 
 const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, defaultValue }) => {
-	const inputs = useInputStore((state) => state.inputs);
+	const inputs = useInputStore((state) => state.activePrefabInputs);
 	// A hacky/bad way to solve the issue of showing currently selected files data on inputs
 
 	const { setActiveAssetInput, setActiveWindowIds, activeWindowIds, setGenericWindowData } = useCanvasStore((state) => ({

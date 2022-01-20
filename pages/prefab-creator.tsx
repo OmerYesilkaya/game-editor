@@ -1,15 +1,17 @@
-import { NextPage } from "next";
-import { useEffect } from "react";
-
-import { v4 as uuid } from "uuid";
-import Split from "react-split";
-
 import { Layout, PrefabCreator as PrefabCreatorComponents } from "@app/components";
 import { COLORS, WINDOWS } from "@app/constants";
-import { useCanvasStore, usePrefabStore, useInputStore } from "@app/store";
 import { api } from "@app/hooks";
-import { GetPrefabResponse } from "@app/types";
-import { moduleUtils } from "@app/utils";
+import { useCanvasStore, useInputStore, usePrefabStore } from "@app/store";
+import { GetPrefabResponse, Prefab } from "@app/types";
+import { array as arrayUtils, moduleUtils } from "@app/utils";
+import { NextPage } from "next";
+import { useEffect } from "react";
+import Split from "react-split";
+import { v4 as uuid } from "uuid";
+
+function convertPrefabResponse(prefabResponse: GetPrefabResponse): Prefab {
+	return { ...prefabResponse, internalId: uuid(), children: prefabResponse.children.map((child) => convertPrefabResponse(child)) };
+}
 
 const PrefabCreator: NextPage = () => {
 	const { prefab, activePrefabId, setPrefab } = usePrefabStore((state) => ({
@@ -17,26 +19,36 @@ const PrefabCreator: NextPage = () => {
 		activePrefabId: state.activePrefabId,
 		setPrefab: state.setPrefab,
 	}));
-	const { activeAssetInput, activeWindowIds, toggleActivation, genericWindowData } = useCanvasStore((state) => ({
+	const { activeAssetInput, activeWindowIds, toggleActivation, genericWindowData, activateWindow, deactivateWindow } = useCanvasStore((state) => ({
 		activeWindowIds: state.activeWindowIds,
 		toggleActivation: state.toggleActivation,
 		activeAssetInput: state.activeAssetInput,
 		genericWindowData: state.genericWindowData,
+		activateWindow: state.activateWindow,
+		deactivateWindow: state.deactivateWindow,
 	}));
-	const setInputs = useInputStore((state) => state.setInputs);
+	const setInputs = useInputStore((state) => state.setActivePrefabInputs);
 
 	const { refetch } = api.useGetPrefabById({
 		params: { id: activePrefabId! },
-		enabled: !!activePrefabId,
+		enabled: !!Number(activePrefabId),
 		onSuccess: (data: GetPrefabResponse) => {
-			setPrefab({ ...data, internalId: uuid(), position: { x: 0, y: 0 } });
+			setPrefab(convertPrefabResponse(data));
 			setInputs(moduleUtils.getModuleInputs(data.modules));
 		},
 	});
 
 	useEffect(() => {
-		if (!activePrefabId) return;
+		if (!Number(activePrefabId)) return;
 		refetch();
+	}, [activePrefabId]);
+
+	useEffect(() => {
+		if (!activePrefabId) {
+			deactivateWindow("toolbar-active-prefab");
+		} else {
+			activateWindow("toolbar-active-prefab");
+		}
 	}, [activePrefabId]);
 
 	useEffect(() => {

@@ -19,6 +19,7 @@
 		"react-query": "^3.34.7",
 		"react-split": "^2.0.14",
 		"react-spring": "^9.4.0",
+		"use-resize-observer": "^8.0.0",
 		"uuidv4": "^6.2.12",
 		"zustand": "^3.6.4"
 	},

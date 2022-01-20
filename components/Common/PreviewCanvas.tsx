@@ -19,12 +19,12 @@ function draw(ctx: CanvasRenderingContext2D, time: number, canvasWidth: number, 
 	lastAnimationRequestID = window.requestAnimationFrame((time) => draw(ctx, time, canvasWidth, canvasHeight));
 }
 
-type AnimationPlayerProps = {
+type PreviewCanvasProps = {
 	width: number;
 	height: number;
 };
 
-const Player: React.FC<AnimationPlayerProps> = ({ width, height }) => {
+const PreviewCanvas: React.FC<PreviewCanvasProps> = ({ width, height }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
@@ -40,4 +40,4 @@ const Player: React.FC<AnimationPlayerProps> = ({ width, height }) => {
 	return <canvas className="z-[2]" ref={canvasRef} width={width} height={height} />;
 };
 
-export default Player;
+export default PreviewCanvas;

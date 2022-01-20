@@ -4,8 +4,8 @@ import { v4 as uuid } from "uuid";
 
 type PrefabStoreProps = {
 	prefab: Prefab | null;
-	activePrefabId: number | null;
-	setActivePrefabId: (id: number | null) => void;
+	activePrefabId: string | null;
+	setActivePrefabId: (id: string | null) => void;
 	addModuleToPrefab: (module: ApiModule) => void;
 	removeModuleFromPrefab: (moduleId: number) => void;
 	createNewPrefab: () => void;
@@ -45,6 +45,7 @@ export const usePrefabStore = create<PrefabStoreProps>((set, get) => ({
 					x: window.innerWidth / 2 - 220,
 					y: window.innerHeight / 2 - 50,
 				},
+				children: [],
 			},
 			activePrefabId: null,
 		}));

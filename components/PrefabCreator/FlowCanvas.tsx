@@ -26,7 +26,13 @@ const FlowCanvas: React.FC = () => {
 
 	return (
 		<div id="react-flow-container" className="w-full">
-			<ReactFlow elements={elements} nodeTypes={nodeTypes} onPaneClick={() => setActivePrefabId(null)}>
+			<ReactFlow
+				elements={elements}
+				nodeTypes={nodeTypes}
+				onPaneClick={() => {
+					setActivePrefabId(null);
+				}}
+			>
 				<Background variant={BackgroundVariant.Dots} gap={24} size={1} color="rgb(39,39,42)" />
 			</ReactFlow>
 		</div>

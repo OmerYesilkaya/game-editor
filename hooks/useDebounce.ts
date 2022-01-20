@@ -14,6 +14,7 @@ function useDebounce<T>(value: T, delay: number): { debouncedValue: T; isLoading
 			clearTimeout(handler);
 		};
 	}, [value, delay]);
+
 	return { debouncedValue, isLoading };
 }
 

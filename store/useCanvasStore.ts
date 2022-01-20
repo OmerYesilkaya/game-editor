@@ -12,6 +12,8 @@ type CanvasStoreTypes = {
 	setActiveWindowIds: (ids: string[]) => void;
 	setGenericWindowData: (data: { assets: GenericAsset[]; type: ModuleValueType }) => void;
 	toggleActivation: (id: string) => void;
+	activateWindow: (id: string) => void;
+	deactivateWindow: (id: string) => void;
 };
 
 export const useCanvasStore = create<CanvasStoreTypes>((set) => ({
@@ -31,6 +33,26 @@ export const useCanvasStore = create<CanvasStoreTypes>((set) => ({
 			} else {
 				prev.activeWindowIds.splice(index, 1);
 				return { activeWindowIds: prev.activeWindowIds };
+			}
+		});
+	},
+	activateWindow: (id) => {
+		set((prev) => {
+			const activeWindowIds = prev.activeWindowIds;
+			if (activeWindowIds.includes(id)) {
+				return { activeWindowIds };
+			} else {
+				return { activeWindowIds: [...activeWindowIds, id] };
+			}
+		});
+	},
+	deactivateWindow: (id) => {
+		set((prev) => {
+			const activeWindowIds = prev.activeWindowIds;
+			if (activeWindowIds.includes(id)) {
+				return { activeWindowIds: activeWindowIds.filter((activeWindowId) => activeWindowId !== id) };
+			} else {
+				return { activeWindowIds };
 			}
 		});
 	},

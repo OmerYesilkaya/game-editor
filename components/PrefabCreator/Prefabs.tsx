@@ -1,18 +1,20 @@
-import { usePrefabStore, useCanvasStore } from "@app/store";
 import { ChevronRightIcon } from "@heroicons/react/outline";
 
-import api from "hooks/api";
+import { usePrefabStore, useCanvasStore, useInputStore } from "@app/store";
+import { api } from "@app/hooks";
 
-const Prefab: React.FC<{ prefabId: number; prefabName: string }> = ({ prefabId, prefabName }) => {
+const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, prefabName }) => {
 	const { setActivePrefabId } = usePrefabStore((state) => ({
 		activePrefabId: state.activePrefabId,
 		setActivePrefabId: state.setActivePrefabId,
 		setPrefab: state.setPrefab,
 	}));
 	const setIsPrefabsModalOpen = useCanvasStore((state) => state.setIsPrefabsModalOpen);
+	const resetInputStore = useInputStore((state) => state.resetInputStore);
 
 	function handleClick() {
 		setActivePrefabId(prefabId);
+		resetInputStore();
 		setIsPrefabsModalOpen(false);
 	}
 
@@ -34,7 +36,7 @@ const Prefabs: React.FC = () => {
 		<div className="flex flex-col h-full w-full justify-between">
 			<div className="flex flex-col">
 				<div className="flex flex-col">
-					{prefabs && prefabs.map((prefab) => <Prefab key={prefab.id} prefabId={prefab.id} prefabName={prefab.name} />)}
+					{prefabs && prefabs.map((prefab) => <Prefab key={prefab.id} prefabId={prefab.id.toString()} prefabName={prefab.name} />)}
 				</div>
 			</div>
 		</div>
