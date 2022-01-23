@@ -7,7 +7,6 @@ const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, 
 	const { setActivePrefabId } = usePrefabStore((state) => ({
 		activePrefabId: state.activePrefabId,
 		setActivePrefabId: state.setActivePrefabId,
-		setPrefab: state.setPrefab,
 	}));
 	const setIsPrefabsModalOpen = useCanvasStore((state) => state.setIsPrefabsModalOpen);
 	const resetInputStore = useInputStore((state) => state.resetInputStore);
@@ -30,13 +29,15 @@ const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, 
 };
 
 const Prefabs: React.FC = () => {
-	const { data: prefabs } = api.useGetPrefabs();
+	const { data: prefabs } = api.useGetPrefabs({});
 
 	return (
 		<div className="flex flex-col h-full w-full justify-between">
 			<div className="flex flex-col">
 				<div className="flex flex-col">
-					{prefabs && prefabs.map((prefab) => <Prefab key={prefab.id} prefabId={prefab.id.toString()} prefabName={prefab.name} />)}
+					{prefabs &&
+						Array.isArray(prefabs) &&
+						prefabs.map((prefab) => <Prefab key={prefab.id} prefabId={prefab.id.toString()} prefabName={prefab.name} />)}
 				</div>
 			</div>
 		</div>

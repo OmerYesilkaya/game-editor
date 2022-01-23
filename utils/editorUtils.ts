@@ -1,4 +1,4 @@
-import { ApiModule, Input } from "@app/types";
+import { ApiModule, Input, Prefab } from "@app/types";
 
 // gets furthest branching modules of prefab
 function getModuleInputs(modules: ApiModule[]) {
@@ -23,4 +23,17 @@ function getModuleInputs(modules: ApiModule[]) {
 	return moduleInputs;
 }
 
-export default { getModuleInputs };
+function findPrefabInTree(internalId: string, prefab: Prefab): Prefab | null {
+	if (internalId === prefab.internalId) return prefab;
+	if (!prefab.children) return null;
+
+	for (let i = 0; i < prefab.children.length; i++) {
+		const child = prefab.children[i];
+		const result = findPrefabInTree(internalId, child);
+		if (!result) return result;
+	}
+
+	return null;
+}
+
+export default { getModuleInputs, findPrefabInTree };

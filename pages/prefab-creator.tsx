@@ -3,10 +3,9 @@ import { COLORS, WINDOWS } from "@app/constants";
 import { api } from "@app/hooks";
 import { useCanvasStore, useInputStore, usePrefabStore } from "@app/store";
 import { GetPrefabResponse, Prefab } from "@app/types";
-import { array as arrayUtils, moduleUtils } from "@app/utils";
+import { editorUtils } from "@app/utils";
 import { NextPage } from "next";
 import { useEffect } from "react";
-import Split from "react-split";
 import { v4 as uuid } from "uuid";
 
 function convertPrefabResponse(prefabResponse: GetPrefabResponse): Prefab {
@@ -29,19 +28,14 @@ const PrefabCreator: NextPage = () => {
 	}));
 	const setInputs = useInputStore((state) => state.setActivePrefabInputs);
 
-	const { refetch } = api.useGetPrefabById({
+	api.useGetPrefabById({
 		params: { id: activePrefabId! },
 		enabled: !!Number(activePrefabId),
 		onSuccess: (data: GetPrefabResponse) => {
 			setPrefab(convertPrefabResponse(data));
-			setInputs(moduleUtils.getModuleInputs(data.modules));
+			setInputs(editorUtils.getModuleInputs(data.modules));
 		},
 	});
-
-	useEffect(() => {
-		if (!Number(activePrefabId)) return;
-		refetch();
-	}, [activePrefabId]);
 
 	useEffect(() => {
 		if (!activePrefabId) {
@@ -95,28 +89,16 @@ const PrefabCreator: NextPage = () => {
 							</PrefabCreatorComponents.Window>
 						);
 					})}
-					<Split
-						className="w-full h-full flex"
-						sizes={[75, 25]}
-						minSize={100}
-						expandToMin={false}
-						gutterSize={10}
-						gutterAlign="center"
-						snapOffset={30}
-						dragInterval={1}
-						direction="horizontal"
-						cursor="col-resize"
-						gutter={(_, direction) => {
-							const gutter = document.createElement("div");
-							gutter.className = `gutter gutter-${direction}`;
-							return gutter;
-						}}
-					>
-						<PrefabCreatorComponents.FlowCanvas />
-						<PrefabCreatorComponents.PrefabCanvas />
-					</Split>
 
-					<PrefabCreatorComponents.Toolbar />
+					<div className="w-full h-full flex flex-col ">
+						<div className="w-full flex h-3/4 border-b border-white">
+							<PrefabCreatorComponents.FlowCanvas />
+							<PrefabCreatorComponents.PrefabCanvas />
+						</div>
+						<PrefabCreatorComponents.BottomBar />
+					</div>
+
+					{/* <PrefabCreatorComponents.Toolbar /> */}
 					<PrefabCreatorComponents.Modals />
 					<PrefabCreatorComponents.GenericAssetWindow />
 					{(activeAssetInput || genericWindowData.assets.length > 0) && <PrefabCreatorComponents.Overlay />}

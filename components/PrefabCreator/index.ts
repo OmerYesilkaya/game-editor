@@ -1,3 +1,4 @@
+import BottomBar from "./BottomBar";
 import Overlay from "./Overlay";
 import FlowCanvas from "./FlowCanvas";
 import Toolbar from "./Toolbar";
@@ -9,4 +10,4 @@ import WelcomePage from "./WelcomePage";
 import PrefabCanvas from "./PrefabCanvas";
 import GenericAssetWindow from "./Windows/GenericAssets";
 
-export default { Overlay, FlowCanvas, Toolbar, Window, MenuBar, Modals, Prefabs, WelcomePage, PrefabCanvas, GenericAssetWindow };
+export default { BottomBar, Overlay, FlowCanvas, Toolbar, Window, MenuBar, Modals, Prefabs, WelcomePage, PrefabCanvas, GenericAssetWindow };

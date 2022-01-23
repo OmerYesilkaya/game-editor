@@ -28,7 +28,6 @@ const Canvas: React.FC<CanvasProps> = ({ width, height }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
-		console.log("width or height changed");
 		if (!canvasRef.current) return;
 		const ctx = canvasRef.current.getContext("2d");
 		if (!ctx) return;

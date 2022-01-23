@@ -1,5 +1,5 @@
 import array from "./array";
-import moduleUtils from "./moduleUtils";
+import editorUtils from "./editorUtils";
 import stringUtils from "./stringUtils";
 
-export { array, moduleUtils, stringUtils };
+export { array, editorUtils, stringUtils };

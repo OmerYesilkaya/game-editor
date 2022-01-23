@@ -25,7 +25,7 @@ const FlowCanvas: React.FC = () => {
 	};
 
 	return (
-		<div id="react-flow-container" className="w-full">
+		<div id="react-flow-container" className="w-full border-r border-white">
 			<ReactFlow
 				elements={elements}
 				nodeTypes={nodeTypes}

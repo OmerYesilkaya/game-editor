@@ -6,7 +6,7 @@ import { Common } from "@app/components";
 import { api, useDebounce } from "@app/hooks";
 import { usePrefabStore, useInputStore } from "@app/store";
 import { ApiModule } from "@app/types";
-import { moduleUtils, stringUtils } from "@app/utils";
+import { editorUtils, stringUtils } from "@app/utils";
 
 const AvailableModules: React.FC = () => {
 	const [query, setQuery] = useState("");
@@ -36,7 +36,7 @@ const AvailableModules: React.FC = () => {
 
 	function handleAddModule(module: ApiModule) {
 		addModuleToPrefab(module);
-		addInputs(moduleUtils.getModuleInputs([module]), prefab?.id ? prefab?.id.toString() : prefab?.internalId ?? "");
+		addInputs(editorUtils.getModuleInputs([module]), prefab?.id ? prefab?.id.toString() : prefab?.internalId ?? "");
 	}
 
 	return (

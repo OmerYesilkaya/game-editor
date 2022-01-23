@@ -1,28 +1,27 @@
-import { useTextureStore, usePreviewStore } from "@app/store";
+import { useTextureStore, useTimelineStore } from "@app/store";
 import { Sprite } from "@app/types";
 
 import { EngineContext } from "./types/engineContext";
 
 // Gets called 24 frames per second
 function update(context: EngineContext) {
-	const previewState = usePreviewStore.getState();
-	const activePreview = previewState.activePreview;
-	const temporaryPreview = previewState.temporaryPreview;
-	const frameCount = previewState.currentFrame;
-	const zoom = previewState.zoom;
+	const timelineState = useTimelineStore.getState();
 
 	const textures = useTextureStore.getState().textures;
+	const prefabId = "123";
+	const timelines = timelineState.activeTimelines;
+	if (!timelines) return;
+	const animationId = timelines[prefabId];
 
-	previewState.increaseCurrentFrame();
-	const preview = temporaryPreview ? temporaryPreview : activePreview;
-	const frame = Array.isArray(preview) ? frameCount % preview.length : 1;
-	const sprite = Array.isArray(preview) ? preview[frame] : preview;
-	if (!sprite) return;
+	// const preview = temporaryPreview ? temporaryPreview : activePreview;
+	// const frame = Array.isArray(preview) ? frameCount % preview.length : 1;
+	// const sprite = Array.isArray(preview) ? preview[frame] : preview;
+	// if (!sprite) return;
 
-	const texture = textures.find((texture) => texture.id === sprite.textureId);
-	if (!texture) return;
+	// const texture = textures.find((texture) => texture.id === sprite.textureId);
+	// if (!texture) return;
 
-	drawSprite(context, sprite, texture.image, zoom);
+	// drawSprite(context, sprite, texture.image, 5);
 }
 
 // Draws the given sprite to canvas. Sprite should be within texture boundaries
