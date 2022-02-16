@@ -1,7 +1,8 @@
 import { ModuleValueType } from ".";
 
 export type Input = {
-	id: number;
-	value: any;
-	valueType: ModuleValueType;
+    rootModuleId: number;
+    id: number;
+    value: any;
+    valueType: ModuleValueType;
 };

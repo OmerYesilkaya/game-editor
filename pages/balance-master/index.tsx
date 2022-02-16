@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { createRef, MutableRefObject, useEffect, useRef, useState } from "react";
-import { BalanceMaster as BalanceMasterComponents } from "@app/components";
+import { BalanceMaster as BalanceMasterComponents } from "@balance-master/components";
 
 const allTags = ["Health", "Shield", "Armor", "JumpSpeed", "JumpDistance", "DamageOverTime"];
 

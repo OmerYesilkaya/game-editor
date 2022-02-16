@@ -1,6 +1,19 @@
 ## TODO
 
-#### Idea-3
+- Feat: Add transform module when a new prefab is created
+- Bug: State management problem!!
+- Minor: Prefab node drag/long click should not open module menu
+- Bug: Root prefab node should not have delete button
+- Feat: Duplicate button doesn't work
+- Minor: Pressing `esc` should close currently active menu
+- Minor: Number inputs should be adjustable via drag
+- Feat: Prefab scene window
+- Feat: Timeline top toolbar
+    - Window activation buttons
+- Feat: Play animation preview on hover
+- Minor: Animation scale and speed should decrement on right click.
+- Feat: Default value from backend
+
 
 ## DONE
 

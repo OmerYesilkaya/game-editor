@@ -1,37 +1,38 @@
 {
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@app/api": ["api"],
-			"@app/components": ["components"],
-			"@app/pages": ["pages"],
-			"@app/constants": ["constants"],
-			"@app/hooks": ["hooks"],
-			"@app/styles": ["styles"],
-			"@app/types": ["types"],
-			"@app/store": ["store"],
-			"@app/utils": ["utils"],
-			"@feature/animation-player": ["features/animation-player"]
-		},
-		"allowJs": true,
-		"alwaysStrict": true,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"lib": ["dom", "es2017"],
-		"module": "esnext",
-		"moduleResolution": "node",
-		"noEmit": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"resolveJsonModule": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"target": "esnext",
-		"incremental": true
-	},
-	"exclude": ["node_modules"],
-	"include": ["**/*.ts", "**/*.tsx"]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@app/types": ["types"],
+
+            "@core/*": ["core/*"],
+            "@asset-window/*": ["features/asset-window/*"],
+            "@balance-master/*": ["features/balance-master/*"],
+            "@prefab-editor/*": ["features/prefab-editor/*"],
+            "@prefab-scene/*": ["features/prefab-scene/*"],
+            "@prefab-tree/*": ["features/prefab-tree/*"],
+            "@prefab-window/*": ["features/prefab-window/*"],
+            "@preview-window/*": ["features/preview-window/*"],
+            "@timeline/*": ["features/timeline/*"]
+        },
+        "allowJs": true,
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "lib": ["dom", "es2017", "ES2021.String"],
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "esnext",
+        "incremental": true
+    },
+    "exclude": ["node_modules"],
+    "include": ["**/*.ts", "**/*.tsx"]
 }

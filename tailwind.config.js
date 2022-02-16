@@ -1,11 +1,17 @@
 module.exports = {
-	content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./layouts/**/*.{js,ts,jsx,tsx}"],
+	content: ["./pages/**/*.{js,ts,jsx,tsx}", "./core/**/*.{js,ts,jsx,tsx}", "./features/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		fontFamily: {
 			default: ["Kanit", "sans-serif"],
 			input: ["Montserrat\\ Alternates", "sans-serif"],
 		},
-		extend: {},
+		extend: {
+			backgroundColor: {
+				zinc: {
+					dark: "#0c0b0e",
+				},
+			},
+		},
 	},
 	corePlugins: {
 		preflight: false,

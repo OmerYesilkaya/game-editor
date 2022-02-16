@@ -1,53 +1,37 @@
-import { useTextureStore, useTimelineStore } from "@app/store";
-import { Sprite } from "@app/types";
+import { SceneEntity } from "@core/store/types";
+import { TextureInfo } from "types/texture";
+import CustomSpriteMaterial from "../../core/materials/CustomSpriteMaterial";
+import utils from "./utils";
 
-import { EngineContext } from "./types/engineContext";
+type SceneState = {
+    clock: number;
+    dt: number;
+    entities: SceneEntity[];
+    textureInfos: TextureInfo[];
+};
 
 // Gets called 24 frames per second
-function update(context: EngineContext) {
-	const timelineState = useTimelineStore.getState();
+function update(state: SceneState) {
+    if (state.clock > 0.05) {
+        for (let i = 0; i < state.entities.length; i++) {
+            const entity = state.entities[i];
+            const mat: any = entity.mat.current;
+            if (entity.sprites.length === 0) {
+                CustomSpriteMaterial.clearMaterialValues(mat);
+                continue;
+            }
 
-	const textures = useTextureStore.getState().textures;
-	const prefabId = "123";
-	const timelines = timelineState.activeTimelines;
-	if (!timelines) return;
-	const animationId = timelines[prefabId];
+            const sprite = entity.sprites[entity.spriteIndex % entity.sprites.length];
+            if (entity.textureId != sprite.textureId) {
+                entity.textureId = sprite.textureId;
+                utils.setTexture(mat, entity.textureId, state.textureInfos);
+            }
+            CustomSpriteMaterial.setMaterialValues(mat, sprite);
+            entity.spriteIndex++;
+        }
 
-	// const preview = temporaryPreview ? temporaryPreview : activePreview;
-	// const frame = Array.isArray(preview) ? frameCount % preview.length : 1;
-	// const sprite = Array.isArray(preview) ? preview[frame] : preview;
-	// if (!sprite) return;
-
-	// const texture = textures.find((texture) => texture.id === sprite.textureId);
-	// if (!texture) return;
-
-	// drawSprite(context, sprite, texture.image, 5);
-}
-
-// Draws the given sprite to canvas. Sprite should be within texture boundaries
-function drawSprite(context: EngineContext, sprite: Sprite, texture: HTMLImageElement, scale: number) {
-	const pivotX = sprite.pivot.x;
-	const pivotY = sprite.pivot.y;
-
-	const spriteWidth = sprite.rect.width;
-	const spriteHeight = sprite.rect.height;
-
-	const spriteX = sprite.rect.x;
-	const spriteY = sprite.rect.y;
-
-	const pivotAdjustX = spriteWidth * scale * pivotX;
-	const pivotAdjustY = spriteHeight * scale - spriteHeight * scale * pivotY;
-
-	const sx = spriteX;
-	const sy = texture.height - spriteHeight - spriteY;
-	const sw = spriteWidth;
-	const sh = spriteHeight;
-	const dx = context.canvasWidth / 2 - pivotAdjustX;
-	const dy = context.canvasHeight / 2 - pivotAdjustY;
-	const dw = spriteWidth * scale;
-	const dh = spriteHeight * scale;
-
-	context.canvas.drawImage(texture, sx, sy, sw, sh, dx, dy, dw, dh);
+        state.clock -= 0.05;
+    }
 }
 
 export default update;

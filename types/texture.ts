@@ -1,9 +1,10 @@
 export type RawTexture = {
-	id: number;
-	texture: string | File | ArrayBuffer | null;
+    id: number;
+    texture: string | File | ArrayBuffer | null;
 };
 
-export type Texture = {
-	id: number;
-	image: HTMLImageElement;
+export type TextureInfo = {
+    id: number;
+    image: HTMLImageElement;
+    texture: THREE.Texture;
 };
