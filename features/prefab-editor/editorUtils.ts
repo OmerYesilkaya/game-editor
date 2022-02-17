@@ -1,4 +1,5 @@
-import { ApiModule, Input, Prefab } from "@app/types";
+import { ApiModule, Input, Prefab, PostPrefabRequest } from "@app/types";
+import { usePrefabEditorStore } from "@core/store";
 
 function getPrefabInputs(prefab: Prefab): { [key: string]: Input[] } {
     const processingQueue: Prefab[] = [];
@@ -35,7 +36,7 @@ function getModuleInputs(modules: ApiModule[]) {
             if (child.children) {
                 processingQueue.push({ ...child, rootModuleId: module.rootModuleId });
             } else {
-                moduleInputs.push({ id: child.id, value: child.value, valueType: child.valueType, rootModuleId: module.rootModuleId });
+                moduleInputs.push({ id: child.id, value: child.value, valueType: child.valueType, rootModuleId: module.rootModuleId, arrayIndex: 0 });
             }
         });
     }
@@ -102,4 +103,22 @@ function getPrefabChildren(root: Prefab): PrefabNode[] {
     return children;
 }
 
-export default { deletePrefabInTree, findPrefabInTree, getModuleInputs, getPrefabChildren, getPrefabInputs };
+function mapToPrefabRequestData(root: Prefab): PostPrefabRequest {
+    const children = root.children.map((child) => mapToPrefabRequestData(child));
+    const inputs = usePrefabEditorStore.getState().inputs;
+
+    return {
+        name: root.name,
+        transform: { position: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1 }, rotation: 0 },
+        renderer: { isVisible: true },
+        colliders: [],
+        modules: inputs[root.internalId].map((input) => ({
+            arrayIndex: input.arrayIndex,
+            modulePartId: input.id,
+            value: input.value,
+        })),
+        children: children,
+    };
+}
+
+export default { mapToPrefabRequestData, deletePrefabInTree, findPrefabInTree, getModuleInputs, getPrefabChildren, getPrefabInputs };

@@ -6,7 +6,7 @@ import { useDebounce } from "@core/hooks";
 type Props = {
     prefabId: string;
     moduleId: number;
-    defaultValue: string;
+    defaultValue: number;
 };
 
 const Number: React.FC<Props> = ({ prefabId, moduleId, defaultValue }) => {
@@ -23,7 +23,7 @@ const Number: React.FC<Props> = ({ prefabId, moduleId, defaultValue }) => {
             type="number"
             className="w-full text-white rounded-sm pl-1 bg-zinc-700 shadow-md border border-zinc-200"
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => setValue(parseFloat(e.target.value))}
         />
     );
 };

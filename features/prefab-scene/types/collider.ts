@@ -1,9 +1,21 @@
-import { Vec2, Vec4 } from "@core/math/vector";
+import { Vec2 } from "@core/math/vector";
+
+export enum ColliderType {
+    Rect,
+    Circle,
+}
 
 export type CircleCollider = {
     center: Vec2;
+    radius: number;
 };
 
 export type RectCollider = {
-    bounds: Vec4;
+    bl: Vec2;
+    tr: Vec2;
+};
+
+export type PrefabCollider = {
+    type: ColliderType;
+    data: CircleCollider | RectCollider;
 };

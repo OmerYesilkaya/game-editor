@@ -1,14 +1,11 @@
-import { Vec2 } from "@core/math/vector";
+import { Vec2, Vec3 } from "@core/math/vector";
+import { PrefabCollider } from "@prefab-scene/types/collider";
 import { ApiModule } from ".";
 
 export type PrefabTransform = {
-    position: Vec2;
+    position: Vec3;
     scale: Vec2;
     rotation: number;
-};
-
-export type PrefabCollider = {
-    offset: Vec2;
 };
 
 export type Prefab = {
@@ -29,6 +26,10 @@ export type PostPrefabRequest = {
         modulePartId: number;
         value: any;
     }[];
+    children: PostPrefabRequest[];
+    transform: PrefabTransform;
+    renderer: { isVisible: boolean };
+    colliders: PrefabCollider[];
 };
 
 export type GetPrefabResponse = {
@@ -37,4 +38,8 @@ export type GetPrefabResponse = {
     name: string;
     position: { x: number; y: number };
     children: GetPrefabResponse[];
+    transform: PrefabTransform;
+    colliders: PrefabCollider[];
+    parentId: number;
+    renderer: { isVisible: boolean };
 };

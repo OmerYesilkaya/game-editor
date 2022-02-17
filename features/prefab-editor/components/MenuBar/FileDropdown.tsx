@@ -10,6 +10,8 @@ import { usePrefabEditorStore } from "@core/store";
 import { useSelectedInput } from "@prefab-editor/hooks";
 
 import { Option } from "./Option";
+import { PostPrefabRequest } from "types/prefab";
+import editorUtils from "@prefab-editor/editorUtils";
 
 type Props = {
     isOpen: boolean;
@@ -58,17 +60,9 @@ const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
     function handleSave() {
         if (!prefab) return;
-        const formattedData = {
-            name: prefab.name,
-            modules: selectedPrefabsInputs.map((module) => ({
-                arrayIndex: 0,
-                modulePartId: module.id,
-                value: module.value,
-            })),
-        };
-        console.log("f", formattedData);
 
-        // mutate(formattedData);
+        const formattedData = editorUtils.mapToPrefabRequestData(prefab);
+        mutate(formattedData);
     }
 
     useEffect(() => {

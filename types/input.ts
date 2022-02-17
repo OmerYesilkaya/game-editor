@@ -5,4 +5,5 @@ export type Input = {
     id: number;
     value: any;
     valueType: ModuleValueType;
+    arrayIndex: number;
 };

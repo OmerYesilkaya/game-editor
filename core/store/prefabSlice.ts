@@ -18,6 +18,8 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
                     modules: [], // TODO(selim): Set transform module
                     id: 0,
                     internalId: uuid(),
+                    colliders: [],
+                    transform: { position: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1 }, rotation: 0 },
                 },
             };
         }),
@@ -108,6 +110,8 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
             modules: [], // TODO(omer): Set transform module
             id: 0,
             internalId: uuid(),
+            colliders: [],
+            transform: { position: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1 }, rotation: 0 },
         });
 
         set(() => ({
