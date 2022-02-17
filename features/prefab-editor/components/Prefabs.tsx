@@ -1,22 +1,44 @@
-import { ChevronRightIcon } from "@heroicons/react/outline";
+import { useState } from "react";
+
+import { useRouter } from "next/dist/client/router";
+import { TrashIcon } from "@heroicons/react/outline";
+import cn from "classnames";
 
 import { api } from "@core/hooks";
-import { useRouter } from "next/dist/client/router";
 
 const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, prefabName }) => {
     const router = useRouter();
-
+    const [areDetailsShowing, setAreDetailsShowing] = useState(false);
     function handleClick() {
         router.push(`prefab-editor/${prefabId}`);
     }
 
+    function handleDeleteClick() {
+        // show some alert
+        // delete(prefabId);
+        return null;
+    }
+
     return (
         <div
+            onPointerOver={() => setAreDetailsShowing(true)}
+            onPointerOut={() => setAreDetailsShowing(false)}
             onClick={() => handleClick()}
-            className="px-2 py-1 text-sm shadow-md text-white min-h-5 w-full flex items-center cursor-pointer bg-zinc-800 transition hover:brightness-125 font-default"
+            className="px-2 py-1 text-sm shadow-md text-white min-h-5 w-full flex items-center cursor-pointer bg-zinc-800 transition hover:brightness-125 font-default justify-between"
         >
-            <ChevronRightIcon className="w-4 h-4 text-white mr-1" />
             <div>{prefabName.toUpperCase()}</div>
+            <button
+                onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteClick();
+                }}
+                className={cn("w-6 h-6 p-1 rounded-sm transition-all text-zinc-500 bg-inherit hover:brightness-125 active:brightness-75", {
+                    "opacity-0": !areDetailsShowing,
+                    "opacity-100": areDetailsShowing,
+                })}
+            >
+                <TrashIcon />
+            </button>
         </div>
     );
 };
@@ -27,7 +49,7 @@ const Prefabs: React.FC = () => {
     return (
         <div className="flex flex-col h-full w-full justify-between">
             <div className="flex flex-col">
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-y-px">
                     {prefabs &&
                         Array.isArray(prefabs) &&
                         prefabs.map((prefab) => <Prefab key={prefab.id} prefabId={prefab.id.toString()} prefabName={prefab.name} />)}
