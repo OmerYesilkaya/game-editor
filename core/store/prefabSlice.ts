@@ -26,10 +26,6 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
             speedIndex: 2,
             previewState: { activePreview: null, currentFrame: 0, temporaryPreview: null },
             isPrefabsModalOpen: false,
-            sprites: [],
-            animations: [],
-            animationMap: {},
-            spriteMap: {},
         }));
     },
     createNewRoot: () =>
@@ -58,10 +54,6 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
                 speedIndex: 2,
                 previewState: { activePreview: null, currentFrame: 0, temporaryPreview: null },
                 isPrefabsModalOpen: false,
-                sprites: [],
-                animations: [],
-                animationMap: {},
-                spriteMap: {},
             };
         }),
     selectedPrefabId: null,
