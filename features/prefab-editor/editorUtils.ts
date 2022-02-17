@@ -7,7 +7,7 @@ function getPrefabInputs(prefab: Prefab): { [key: string]: Input[] } {
     processingQueue.push(prefab);
     while (processingQueue.length > 0) {
         const prefab = processingQueue.pop();
-        if (prefab?.name) moduleInputs[prefab!.name] = getModuleInputs(prefab.modules);
+        if (prefab?.internalId) moduleInputs[prefab!.internalId] = getModuleInputs(prefab.modules);
         prefab?.children.forEach((child) => {
             processingQueue.push(child);
         });

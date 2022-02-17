@@ -28,7 +28,6 @@ const Edit: NextPage<Props> = ({ id }) => {
     const { isLoading } = api.useGetPrefabById({
         params: { id },
         onSuccess: (data: GetPrefabResponse) => {
-            console.log("data", data);
             const prefab = convertPrefabResponse(data);
             setPrefab(prefab);
             setInputs(prefab);
