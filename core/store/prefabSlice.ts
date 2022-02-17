@@ -1,13 +1,37 @@
+import React from "react";
+
 import assert from "assert";
 import { v4 as uuid } from "uuid";
 
 import editorUtils from "@prefab-editor/editorUtils";
 
 import { EditorSlice, PrefabSlice } from "./types";
+import { EditorMode } from "@prefab-scene/modes";
 
 export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
     rootPrefab: null,
-    setRootPrefab: (value) => set(() => ({ rootPrefab: value })),
+    setRootPrefab: (value) => {
+        set(() => ({
+            rootPrefab: value,
+            inputs: {},
+            selectedInputId: null,
+            mode: EditorMode.Default,
+            entities: {},
+            selectedEntity: null,
+            cameraRef: React.createRef(),
+            canvasRef: React.createRef(),
+            activeTimelines: {},
+            textures: [],
+            zoom: 5,
+            speedIndex: 2,
+            previewState: { activePreview: null, currentFrame: 0, temporaryPreview: null },
+            isPrefabsModalOpen: false,
+            sprites: [],
+            animations: [],
+            animationMap: {},
+            spriteMap: {},
+        }));
+    },
     createNewRoot: () =>
         set(() => {
             return {
@@ -21,6 +45,23 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
                     colliders: [],
                     transform: { position: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1 }, rotation: 0 },
                 },
+                inputs: {},
+                selectedInputId: null,
+                mode: EditorMode.Default,
+                entities: {},
+                selectedEntity: null,
+                cameraRef: React.createRef(),
+                canvasRef: React.createRef(),
+                activeTimelines: {},
+                textures: [],
+                zoom: 5,
+                speedIndex: 2,
+                previewState: { activePreview: null, currentFrame: 0, temporaryPreview: null },
+                isPrefabsModalOpen: false,
+                sprites: [],
+                animations: [],
+                animationMap: {},
+                spriteMap: {},
             };
         }),
     selectedPrefabId: null,

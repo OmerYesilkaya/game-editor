@@ -7,11 +7,10 @@ import shallow from "zustand/shallow";
 
 import { api } from "@core/hooks";
 import { usePrefabEditorStore } from "@core/store";
-import { useSelectedInput } from "@prefab-editor/hooks";
 
 import { Option } from "./Option";
-import { PostPrefabRequest } from "types/prefab";
 import editorUtils from "@prefab-editor/editorUtils";
+import { useRouter } from "next/dist/client/router";
 
 type Props = {
     isOpen: boolean;
@@ -19,7 +18,6 @@ type Props = {
 };
 
 const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
-    const { selectedPrefabsInputs } = useSelectedInput();
     const { prefab, createNewPrefab, setIsPrefabsModalOpen } = usePrefabEditorStore(
         (state) => ({
             prefab: state.rootPrefab,
@@ -28,7 +26,7 @@ const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         }),
         shallow
     );
-
+    const router = useRouter();
     const menuRef = useRef<HTMLDivElement>(null);
 
     useHotkeys(
@@ -43,7 +41,7 @@ const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         "ctrl+alt+n",
         (e) => {
             e.preventDefault();
-            createNewPrefab();
+            router.push("/prefab-editor/new");
         },
         { filterPreventDefault: true, filter: () => true }
     );

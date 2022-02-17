@@ -5,12 +5,16 @@ import { TrashIcon } from "@heroicons/react/outline";
 import cn from "classnames";
 
 import { api } from "@core/hooks";
+import { usePrefabEditorStore } from "@core/store";
 
 const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, prefabName }) => {
     const router = useRouter();
     const [areDetailsShowing, setAreDetailsShowing] = useState(false);
+    const setIsPrefabsModalOpen = usePrefabEditorStore((state) => state.setIsPrefabsModalOpen);
+
     function handleClick() {
-        router.push(`prefab-editor/${prefabId}`);
+        setIsPrefabsModalOpen(false);
+        router.push(`/prefab-editor/${prefabId}`);
     }
 
     function handleDeleteClick() {
@@ -45,14 +49,18 @@ const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, 
 
 const Prefabs: React.FC = () => {
     const { data: prefabs } = api.useGetPrefabs();
-
+    const rootPrefab = usePrefabEditorStore((state) => state.rootPrefab);
+    console.log("rootPrefab", rootPrefab);
+    console.log("prefab", prefabs);
     return (
         <div className="flex flex-col h-full w-full justify-between">
             <div className="flex flex-col">
                 <div className="flex flex-col gap-y-px">
                     {prefabs &&
                         Array.isArray(prefabs) &&
-                        prefabs.map((prefab) => <Prefab key={prefab.id} prefabId={prefab.id.toString()} prefabName={prefab.name} />)}
+                        prefabs
+                            .filter((prefab) => prefab.id !== rootPrefab?.id)
+                            .map((prefab) => <Prefab key={prefab.id} prefabId={prefab.id.toString()} prefabName={prefab.name} />)}
                 </div>
             </div>
         </div>

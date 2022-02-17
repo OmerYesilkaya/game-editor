@@ -8,6 +8,8 @@ import { GetPrefabResponse, Prefab } from "@app/types";
 import { api } from "@core/hooks";
 import { usePrefabEditorStore } from "@core/store";
 import { PrefabEditor } from "@prefab-editor/components";
+import { useEffect } from "react";
+import { useQueryClient } from "react-query";
 
 function convertPrefabResponse(prefabResponse: GetPrefabResponse): Prefab {
     return {
@@ -24,15 +26,21 @@ type Props = {
 const Edit: NextPage<Props> = ({ id }) => {
     // TODO(selim): Check if shallow is needed here
     const { setPrefab, setInputs } = usePrefabEditorStore((state) => ({ setPrefab: state.setRootPrefab, setInputs: state.setInputs }), shallow);
+    const queryClient = useQueryClient();
 
     const { isLoading } = api.useGetPrefabById({
         params: { id },
+
         onSuccess: (data: GetPrefabResponse) => {
             const prefab = convertPrefabResponse(data);
             setPrefab(prefab);
             setInputs(prefab);
         },
     });
+
+    useEffect(() => {
+        queryClient.invalidateQueries("useGetPrefabById");
+    }, [id]);
 
     // TODO(selim): Styling
     return isLoading ? <>Loading...</> : <PrefabEditor />;

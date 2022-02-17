@@ -31,6 +31,7 @@ function setMaterialValues(mat: any, sprite: Sprite) {
 }
 
 function clearMaterialValues(mat: any) {
+    if (!mat) return;
     mat.uSpriteRect.x = 0;
     mat.uSpriteRect.y = 0;
     mat.uSpriteRect.z = 0;
