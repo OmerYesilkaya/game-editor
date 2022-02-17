@@ -50,8 +50,6 @@ const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, 
 const Prefabs: React.FC = () => {
     const { data: prefabs } = api.useGetPrefabs();
     const rootPrefab = usePrefabEditorStore((state) => state.rootPrefab);
-    console.log("rootPrefab", rootPrefab);
-    console.log("prefab", prefabs);
     return (
         <div className="flex flex-col h-full w-full justify-between">
             <div className="flex flex-col">

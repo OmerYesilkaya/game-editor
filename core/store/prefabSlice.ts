@@ -18,9 +18,8 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
             mode: EditorMode.Default,
             entities: {},
             selectedEntity: null,
+            selectedPrefabId: null,
             activeTimelines: {},
-            zoom: 5,
-            speedIndex: 2,
         }));
     },
     createNewRoot: () =>
@@ -41,9 +40,8 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
                 mode: EditorMode.Default,
                 entities: {},
                 selectedEntity: null,
+                selectedPrefabId: null,
                 activeTimelines: {},
-                zoom: 5,
-                speedIndex: 2,
             };
         }),
     selectedPrefabId: null,

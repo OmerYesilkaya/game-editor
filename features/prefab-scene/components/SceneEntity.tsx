@@ -19,7 +19,6 @@ const EntityName: React.FC<EntityNameProps> = ({ prefabId, prefabName }) => {
             usePrefabEditorStore.subscribe(
                 (state) => state.rootPrefab,
                 (root) => {
-                    console.log("Updated");
                     const prefab = editorUtils.findPrefabInTree(prefabId, root!);
                     if (prefab && name !== prefab.name) setName(prefab.name);
                 }
