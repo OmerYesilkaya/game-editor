@@ -32,6 +32,20 @@ export type PostPrefabRequest = {
     colliders: PrefabCollider[];
 };
 
+export type PutPrefabRequest = {
+    id: number;
+    name: string;
+    modules: {
+        arrayIndex: number;
+        modulePartId: number;
+        value: any;
+    }[];
+    children: PutPrefabRequest[];
+    transform: PrefabTransform;
+    renderer: { isVisible: boolean };
+    colliders: PrefabCollider[];
+};
+
 export type GetPrefabResponse = {
     id: number;
     modules: ApiModule[];

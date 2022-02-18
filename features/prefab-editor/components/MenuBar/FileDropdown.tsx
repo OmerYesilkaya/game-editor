@@ -4,13 +4,15 @@ import { Transition } from "@headlessui/react";
 import { CubeTransparentIcon, FolderOpenIcon, SaveAsIcon, SaveIcon } from "@heroicons/react/outline";
 import { useHotkeys } from "react-hotkeys-hook";
 import shallow from "zustand/shallow";
+import { useRouter } from "next/dist/client/router";
 
 import { api } from "@core/hooks";
 import { usePrefabEditorStore } from "@core/store";
 
-import { Option } from "./Option";
 import editorUtils from "@prefab-editor/editorUtils";
-import { useRouter } from "next/dist/client/router";
+import { PutPrefabRequest } from "types/prefab";
+
+import { Option } from "./Option";
 
 type Props = {
     isOpen: boolean;
@@ -26,8 +28,12 @@ const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         }),
         shallow
     );
+
     const router = useRouter();
     const menuRef = useRef<HTMLDivElement>(null);
+
+    const query = router.query;
+    const id = query.id as string;
 
     useHotkeys(
         "ctrl+s",
@@ -37,6 +43,7 @@ const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         },
         { filterPreventDefault: true, filter: () => true }
     );
+
     useHotkeys(
         "ctrl+alt+n",
         (e) => {
@@ -45,6 +52,7 @@ const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         },
         { filterPreventDefault: true, filter: () => true }
     );
+
     useHotkeys(
         "ctrl+o",
         (e) => {
@@ -54,13 +62,19 @@ const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         { filterPreventDefault: true, filter: () => true }
     );
 
-    const { mutate } = api.usePostPrefab();
+    const { mutate: post } = api.usePostPrefab();
+    const { mutate: put } = api.usePutPrefab();
 
     function handleSave() {
         if (!prefab) return;
 
         const formattedData = editorUtils.mapToPrefabRequestData(prefab);
-        mutate(formattedData);
+
+        if (id) {
+            put(formattedData as PutPrefabRequest);
+        } else {
+            post(formattedData);
+        }
     }
 
     useEffect(() => {

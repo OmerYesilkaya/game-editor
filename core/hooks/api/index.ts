@@ -14,28 +14,30 @@ import useGetTextureById from "./useGetTextureById";
 import useGetTextures from "./useGetTextures";
 import useGetTrailSystems from "./useGetTrailSystems";
 import usePostPrefab from "./usePostPrefab";
+import usePutPrefab from "./usePutPrefab";
 
 //functions
 import { getModuleById } from "./useGetModuleById";
 
 export default {
-	// hooks
-	useGetAnimations,
-	useGetAudios,
-	useGetItemPools,
-	useGetMaterialAnimations,
-	useGetMaterials,
-	useGetModuleById,
-	useGetModules,
-	useGetParticleSystems,
-	useGetPrefabById,
-	useGetPrefabs,
-	useGetSprites,
-	useGetTextureById,
-	useGetTextures,
-	useGetTrailSystems,
-	usePostPrefab,
+    // hooks
+    useGetAnimations,
+    useGetAudios,
+    useGetItemPools,
+    useGetMaterialAnimations,
+    useGetMaterials,
+    useGetModuleById,
+    useGetModules,
+    useGetParticleSystems,
+    useGetPrefabById,
+    useGetPrefabs,
+    useGetSprites,
+    useGetTextureById,
+    useGetTextures,
+    useGetTrailSystems,
+    usePostPrefab,
+    usePutPrefab,
 
-	// functions
-	getModuleById,
+    // functions
+    getModuleById,
 };

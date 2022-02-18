@@ -1,5 +1,6 @@
 import { ApiModule, Input, Prefab, PostPrefabRequest } from "@app/types";
 import { usePrefabEditorStore } from "@core/store";
+import { PutPrefabRequest } from "types/prefab";
 
 function getPrefabInputs(prefab: Prefab): { [key: string]: Input[] } {
     const processingQueue: Prefab[] = [];
@@ -103,22 +104,42 @@ function getPrefabChildren(root: Prefab): PrefabNode[] {
     return children;
 }
 
-function mapToPrefabRequestData(root: Prefab): PostPrefabRequest {
+function mapToPrefabRequestData(root: Prefab): PostPrefabRequest | PutPrefabRequest {
     const children = root.children.map((child) => mapToPrefabRequestData(child));
     const inputs = usePrefabEditorStore.getState().inputs;
 
-    return {
-        name: root.name,
-        transform: { position: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1 }, rotation: 0 },
-        renderer: { isVisible: true },
-        colliders: [],
-        modules: inputs[root.internalId].map((input) => ({
-            arrayIndex: input.arrayIndex,
-            modulePartId: input.id,
-            value: input.value,
-        })),
-        children: children,
-    };
+    if (root.id && root.id !== 0) {
+        return {
+            id: root.id,
+            name: root.name,
+            transform: { position: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1 }, rotation: 0 },
+            renderer: { isVisible: true },
+            colliders: [],
+            modules: inputs[root.internalId]
+                ? inputs[root.internalId].map((input) => ({
+                      arrayIndex: input.arrayIndex,
+                      modulePartId: input.id,
+                      value: input.value,
+                  }))
+                : [],
+            children: children,
+        };
+    } else {
+        return {
+            name: root.name,
+            transform: { position: { x: 0, y: 0, z: 0 }, scale: { x: 1, y: 1 }, rotation: 0 },
+            renderer: { isVisible: true },
+            colliders: [],
+            modules: inputs[root.internalId]
+                ? inputs[root.internalId].map((input) => ({
+                      arrayIndex: input.arrayIndex,
+                      modulePartId: input.id,
+                      value: input.value,
+                  }))
+                : [],
+            children: children,
+        };
+    }
 }
 
 export default { mapToPrefabRequestData, deletePrefabInTree, findPrefabInTree, getModuleInputs, getPrefabChildren, getPrefabInputs };
