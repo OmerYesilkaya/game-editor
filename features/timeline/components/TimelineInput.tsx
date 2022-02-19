@@ -1,9 +1,10 @@
-import { Input } from "@app/types";
-import { usePrefabEditorStore } from "@core/store";
-import { ModuleValueType } from "types/module";
+import { useMemo } from "react";
+
 import shallow from "zustand/shallow";
 import cn from "classnames";
-import { useMemo } from "react";
+
+import { usePrefabEditorStore } from "@core/store";
+import { ModuleValueType, Input } from "@app/types";
 
 type Props = {
     input: Input;
