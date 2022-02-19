@@ -67,8 +67,9 @@ const FileDropdown: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
     function handleSave() {
         if (!prefab) return;
-
+        console.log("prefab", prefab);
         const formattedData = editorUtils.mapToPrefabRequestData(prefab);
+        console.log("formattedData", formattedData);
 
         if (id) {
             put(formattedData as PutPrefabRequest);

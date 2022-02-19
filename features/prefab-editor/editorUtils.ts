@@ -1,4 +1,5 @@
 import { ApiModule, Input, Prefab, PostPrefabRequest } from "@app/types";
+import { MODULE_DEFAULT_VALUES } from "@core/constants";
 import { usePrefabEditorStore } from "@core/store";
 import { PutPrefabRequest } from "types/prefab";
 
@@ -37,7 +38,8 @@ function getModuleInputs(modules: ApiModule[]) {
             if (child.children) {
                 processingQueue.push({ ...child, rootModuleId: module.rootModuleId });
             } else {
-                moduleInputs.push({ id: child.id, value: child.value, valueType: child.valueType, rootModuleId: module.rootModuleId, arrayIndex: 0 });
+                const value = child.value ? child.value : MODULE_DEFAULT_VALUES[child.valueType];
+                moduleInputs.push({ id: child.id, value: value, valueType: child.valueType, rootModuleId: module.rootModuleId, arrayIndex: 0 });
             }
         });
     }

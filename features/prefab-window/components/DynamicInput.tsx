@@ -3,9 +3,9 @@ import React from "react";
 import shallow from "zustand/shallow";
 
 import { ApiModule, ModuleValueType } from "@app/types";
-import { StatusEffect } from "types/enums";
 
 import { usePrefabEditorStore } from "@core/store";
+import { MODULE_DEFAULT_VALUES } from "@core/constants";
 
 import {
     BoolInput,
@@ -24,33 +24,6 @@ type DynamicInputPropTypes = {
     module: ApiModule;
 };
 
-const moduleTypeDefaultValues = {
-    [ModuleValueType.Animation]: null,
-    [ModuleValueType.Bool]: false,
-    [ModuleValueType.Color]: "#ffffff",
-    [ModuleValueType.Nested]: null,
-    [ModuleValueType.Number]: 0,
-    [ModuleValueType.Object]: null,
-    [ModuleValueType.Percentage]: 0.5,
-    [ModuleValueType.Range]: [0.3, 0.4],
-    [ModuleValueType.Sprite]: null,
-    [ModuleValueType.Text]: "",
-    [ModuleValueType.TextArea]: "",
-    [ModuleValueType.Vec2]: { x: 0, y: 0 },
-    [ModuleValueType.Vec3]: { x: 0, y: 0, z: 0 },
-    [ModuleValueType.Vec4]: { x: 0, y: 0, z: 0, w: 0 },
-    [ModuleValueType.Material]: null,
-    [ModuleValueType.ParticleSystem]: null,
-    [ModuleValueType.TrailSystem]: null,
-    [ModuleValueType.Audio]: null,
-    [ModuleValueType.Prefab]: null,
-    [ModuleValueType.ItemPool]: null,
-    [ModuleValueType.StatusEffect]: StatusEffect.None,
-    [ModuleValueType.SpawnPrefab]: { prefab: null, offset: { x: 0, y: 0, z: 0, w: 0 } },
-    [ModuleValueType.SkillSpawnPrefab]: { prefab: null, offset: { x: 0, y: 0, z: 0, w: 0 }, isProtected: false },
-    [ModuleValueType.MaterialAnimation]: null,
-};
-
 function DynamicInput({ module }: DynamicInputPropTypes) {
     const { selectedPrefabId, inputs } = usePrefabEditorStore(
         (state) => ({ selectedPrefabId: state.selectedPrefabId, inputs: state.inputs }),
@@ -59,7 +32,7 @@ function DynamicInput({ module }: DynamicInputPropTypes) {
 
     if (!selectedPrefabId || !inputs) return null;
     const input = inputs[selectedPrefabId].find((input) => input.id === module.id);
-    const defaultValue = input?.value ? input.value : module.value ? module.value : moduleTypeDefaultValues[module.valueType];
+    const defaultValue = input?.value ? input.value : module.value ? module.value : MODULE_DEFAULT_VALUES[module.valueType];
 
     function render() {
         let input;
