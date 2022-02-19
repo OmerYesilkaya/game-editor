@@ -11,6 +11,7 @@ const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, 
     const router = useRouter();
     const [areDetailsShowing, setAreDetailsShowing] = useState(false);
     const setIsPrefabsModalOpen = usePrefabEditorStore((state) => state.setIsPrefabsModalOpen);
+    const { mutate: deletePrefab } = api.useDeletePrefab();
 
     function handleClick() {
         setIsPrefabsModalOpen(false);
@@ -18,9 +19,9 @@ const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, 
     }
 
     function handleDeleteClick() {
-        // show some alert
-        // delete(prefabId);
-        return null;
+        deletePrefab({
+            id: parseInt(prefabId),
+        });
     }
 
     return (

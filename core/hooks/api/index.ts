@@ -13,6 +13,7 @@ import useGetSprites from "./useGetSprites";
 import useGetTextureById from "./useGetTextureById";
 import useGetTextures from "./useGetTextures";
 import useGetTrailSystems from "./useGetTrailSystems";
+import useDeletePrefab from "./useDeletePrefab";
 import usePostPrefab from "./usePostPrefab";
 import usePutPrefab from "./usePutPrefab";
 
@@ -35,6 +36,7 @@ export default {
     useGetTextureById,
     useGetTextures,
     useGetTrailSystems,
+    useDeletePrefab,
     usePostPrefab,
     usePutPrefab,
 

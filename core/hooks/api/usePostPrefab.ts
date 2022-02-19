@@ -1,4 +1,4 @@
-import { URL } from "@core/constants";
+import { KEYS, URL } from "@core/constants";
 import { useMutation, UseMutationResult } from "react-query";
 import { MutationOptionTypes } from "types/api";
 import { PostPrefabRequest } from "types/prefab";
@@ -13,5 +13,5 @@ async function postPrefab(data: PostPrefabRequest): Promise<PostPrefabRequest> {
 }
 
 export default function usePostPrefab(props?: MutationOptionTypes<PostPrefabRequest>): UseMutationResult<any, any, PostPrefabRequest> {
-    return useMutation("prefabs", (data) => postPrefab(data), props);
+    return useMutation(KEYS.PREFABS, (data) => postPrefab(data), props);
 }

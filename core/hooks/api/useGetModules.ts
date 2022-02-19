@@ -1,15 +1,15 @@
 import { useQuery, UseQueryResult } from "react-query";
-import { URL } from "@core/constants";
+import { KEYS, URL } from "@core/constants";
 import { QueryOptionTypes, ApiModule } from "@app/types";
 
 async function getModules(): Promise<ApiModule[]> {
-	const INIT: RequestInit = {
-		method: "GET",
-	};
+    const INIT: RequestInit = {
+        method: "GET",
+    };
 
-	return await fetch(URL.MODULES, INIT).then((result) => result.json());
+    return await fetch(URL.MODULES, INIT).then((result) => result.json());
 }
 
 export default function useGetModules(props?: QueryOptionTypes<ApiModule[]>): UseQueryResult<ApiModule[]> {
-	return useQuery("useGetModules", () => getModules(), props);
+    return useQuery(KEYS.MODULES, () => getModules(), props);
 }

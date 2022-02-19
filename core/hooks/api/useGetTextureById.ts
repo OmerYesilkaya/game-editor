@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from "react-query";
-import { URL } from "@core/constants";
+import { KEYS, URL } from "@core/constants";
 import { QueryOptionTypes, TextureInfo } from "@app/types";
 
 async function getTextureById(id?: number): Promise<TextureInfo> {
@@ -8,13 +8,6 @@ async function getTextureById(id?: number): Promise<TextureInfo> {
     }).then((result) => result.json());
 }
 
-export default function useGetTextureById({
-    params,
-    ...props
-}: QueryOptionTypes<TextureInfo, { id: number }>): UseQueryResult<TextureInfo> {
-    return useQuery(
-        ["useGetTextureById", params?.id],
-        () => getTextureById(params?.id),
-        props
-    ) as UseQueryResult<TextureInfo>;
+export default function useGetTextureById({ params, ...props }: QueryOptionTypes<TextureInfo, { id: number }>): UseQueryResult<TextureInfo> {
+    return useQuery([KEYS.TEXTURES, params?.id], () => getTextureById(params?.id), props) as UseQueryResult<TextureInfo>;
 }

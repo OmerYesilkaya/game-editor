@@ -1,4 +1,4 @@
-import { URL } from "@core/constants";
+import { KEYS, URL } from "@core/constants";
 import { useMutation, UseMutationResult } from "react-query";
 import { MutationOptionTypes } from "types/api";
 import { PutPrefabRequest } from "types/prefab";
@@ -12,12 +12,9 @@ async function putPrefab(data: PutPrefabRequest): Promise<PutPrefabRequest> {
         body: JSON.stringify(data),
     };
 
-    return await fetch(URL.PREFABS, INIT).then((result) => {
-        console.log("result", result);
-        return result.json();
-    });
+    return await fetch(URL.PREFABS, INIT).then((result) => result.json());
 }
 
 export default function usePutPrefab(props?: MutationOptionTypes<PutPrefabRequest>): UseMutationResult<any, any, PutPrefabRequest> {
-    return useMutation("prefabs", (data) => putPrefab(data), props);
+    return useMutation(KEYS.PREFABS, (data) => putPrefab(data), props);
 }

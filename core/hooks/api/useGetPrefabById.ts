@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from "react-query";
-import { URL } from "@core/constants";
+import { KEYS, URL } from "@core/constants";
 import { QueryOptionTypes, GetPrefabResponse } from "@app/types";
 
 async function getPrefabById(id: number): Promise<GetPrefabResponse> {
@@ -15,5 +15,5 @@ export default function useGetPrefabById({
     params,
     ...props
 }: QueryOptionTypes<GetPrefabResponse, { id: number }>): UseQueryResult<GetPrefabResponse> {
-    return useQuery(["useGetPrefabById", params!.id], () => getPrefabById(params!.id), props) as UseQueryResult<GetPrefabResponse>;
+    return useQuery([KEYS.PREFABS, params!.id], () => getPrefabById(params!.id), props) as UseQueryResult<GetPrefabResponse>;
 }
