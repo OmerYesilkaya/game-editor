@@ -10,6 +10,7 @@ import { usePrefabEditorStore } from "@core/store";
 import { PrefabEditor } from "@prefab-editor/components";
 import { useEffect } from "react";
 import { useQueryClient } from "react-query";
+import { KEYS } from "@core/constants";
 
 function convertPrefabResponse(prefabResponse: GetPrefabResponse): Prefab {
     return {
@@ -30,16 +31,19 @@ const Edit: NextPage<Props> = ({ id }) => {
 
     const { isLoading } = api.useGetPrefabById({
         params: { id },
-
         onSuccess: (data: GetPrefabResponse) => {
+            console.log("successfully gotten new prefab");
             const prefab = convertPrefabResponse(data);
             setPrefab(prefab);
             setInputs(prefab);
         },
     });
 
+    console.log("id changed", id);
+
     useEffect(() => {
-        queryClient.invalidateQueries("useGetPrefabById");
+        queryClient.invalidateQueries(KEYS.PREFABS);
+        console.log("id changed useEffect", id);
     }, [id]);
 
     // TODO(selim): Styling
