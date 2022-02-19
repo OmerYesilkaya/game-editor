@@ -147,7 +147,6 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
         const root = get().rootPrefab;
         assert(root);
         const isSuccess = editorUtils.deletePrefabInTree(id, root);
-        console.log("isSuccess", isSuccess);
 
         if (isSuccess) {
             set(() => ({ rootPrefab: { ...root } }));

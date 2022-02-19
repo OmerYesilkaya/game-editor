@@ -32,18 +32,14 @@ const Edit: NextPage<Props> = ({ id }) => {
     const { isLoading } = api.useGetPrefabById({
         params: { id },
         onSuccess: (data: GetPrefabResponse) => {
-            console.log("successfully gotten new prefab");
             const prefab = convertPrefabResponse(data);
             setPrefab(prefab);
             setInputs(prefab);
         },
     });
 
-    console.log("id changed", id);
-
     useEffect(() => {
         queryClient.invalidateQueries(KEYS.PREFABS);
-        console.log("id changed useEffect", id);
     }, [id]);
 
     // TODO(selim): Styling
