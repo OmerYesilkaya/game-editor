@@ -37,9 +37,6 @@ function DynamicInput({ module }: DynamicInputPropTypes) {
     function render() {
         let input;
         switch (module.valueType) {
-            case ModuleValueType.Animation:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
-                break;
             case ModuleValueType.Bool:
                 input = <BoolInput prefabId={selectedPrefabId!} moduleId={module.id} defaultValue={defaultValue} />;
                 break;
@@ -53,10 +50,7 @@ function DynamicInput({ module }: DynamicInputPropTypes) {
                 input = <PercentageInput prefabId={selectedPrefabId!} moduleId={module.id} defaultValue={defaultValue} />;
                 break;
             case ModuleValueType.Range:
-                input = <div>Range</div>;
-                break;
-            case ModuleValueType.Sprite:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
+                input = <input className="w-full text-white rounded-sm px-1 bg-zinc-700 shadow-md border border-zinc-200" placeholder="RANGE" />;
                 break;
             case ModuleValueType.Text:
                 input = <TextInput prefabId={selectedPrefabId!} moduleId={module.id} defaultValue={defaultValue} />;
@@ -73,24 +67,14 @@ function DynamicInput({ module }: DynamicInputPropTypes) {
             case ModuleValueType.Vec4:
                 input = <Vec4Input prefabId={selectedPrefabId!} moduleId={module.id} defaultValue={defaultValue} />;
                 break;
+            case ModuleValueType.Animation:
+            case ModuleValueType.Sprite:
             case ModuleValueType.Material:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
-                break;
             case ModuleValueType.ParticleSystem:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
-                break;
             case ModuleValueType.TrailSystem:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
-                break;
             case ModuleValueType.Audio:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
-                break;
             case ModuleValueType.Prefab:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
-                break;
             case ModuleValueType.ItemPool:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
-                break;
             case ModuleValueType.MaterialAnimation:
                 input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
                 break;
@@ -111,9 +95,7 @@ function DynamicInput({ module }: DynamicInputPropTypes) {
                         placeholder="SKILLSPAWNPREFAB"
                     />
                 );
-
                 break;
-
             default:
                 input = <input className="w-full text-white rounded-sm px-1 bg-zinc-700 shadow-md border border-zinc-200" placeholder="UNDEFINED" />;
         }
