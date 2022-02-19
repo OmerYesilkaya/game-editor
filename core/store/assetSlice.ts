@@ -1,7 +1,7 @@
 import { Sprite, Animation } from "@app/types";
 import { AssetSlice, EditorSlice } from "./types";
 
-export const createAssetSlice: EditorSlice<AssetSlice> = (set, get) => ({
+export const createAssetSlice: EditorSlice<AssetSlice> = (set) => ({
     sprites: [],
     animations: [],
     animationMap: {},

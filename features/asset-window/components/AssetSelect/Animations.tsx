@@ -10,8 +10,8 @@ type Props = {
 };
 
 const Animations: React.FC<Props> = ({ query }) => {
-    const { data: animations, isLoading: isAnimationsLoading } = api.useGetAnimations();
-    const { data: sprites, isLoading: isSpritesLoading } = api.useGetSprites();
+    const { data: animations } = api.useGetAnimations();
+    const { data: sprites } = api.useGetSprites();
 
     const { setActivePreview, setTemporaryPreview } = usePrefabEditorStore(
         (state) => ({ setActivePreview: state.setActivePreview, setTemporaryPreview: state.setTemporaryPreview }),

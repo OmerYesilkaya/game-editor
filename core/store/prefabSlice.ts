@@ -1,5 +1,3 @@
-import React from "react";
-
 import assert from "assert";
 import { v4 as uuid } from "uuid";
 
