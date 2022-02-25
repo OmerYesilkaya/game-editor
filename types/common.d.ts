@@ -5,3 +5,7 @@ type Dict<K, V> = {
 type Dictionary<T> = {
     [key: string]: T;
 };
+
+type NumberMap<T> = {
+    [key: number]: T;
+};

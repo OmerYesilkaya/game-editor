@@ -5,6 +5,8 @@ import editorUtils from "@prefab-editor/editorUtils";
 
 import { EditorSlice, PrefabSlice } from "./types";
 import { EditorMode } from "@prefab-scene/modes";
+import { MODULE_DEFAULT_VALUES } from "@core/constants";
+import { ApiModule } from "types/module";
 
 export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
     rootPrefab: null,
@@ -76,7 +78,15 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
             return;
         }
 
-        prefab.modules.push(module);
+        function convertApiModule(module: ApiModule): ApiModule {
+            return {
+                ...module,
+                arrayIndex: 0,
+                value: MODULE_DEFAULT_VALUES[module.valueType],
+                children: module.children ? module.children.map((child) => convertApiModule(child)) : [],
+            };
+        }
+        prefab.modules.push(convertApiModule(module));
 
         // Add new module inputs to prefab input array
         let inputs = { ...get().inputs };

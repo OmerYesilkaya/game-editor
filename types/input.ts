@@ -6,4 +6,5 @@ export type Input = {
     value: any;
     valueType: ModuleValueType;
     arrayIndex: number;
+    isArray: boolean;
 };

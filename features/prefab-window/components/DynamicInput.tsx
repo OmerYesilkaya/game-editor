@@ -22,9 +22,10 @@ import {
 
 type DynamicInputPropTypes = {
     module: ApiModule;
+    themeColor: string;
 };
 
-function DynamicInput({ module }: DynamicInputPropTypes) {
+function DynamicInput({ themeColor, module }: DynamicInputPropTypes) {
     const { selectedPrefabId, inputs } = usePrefabEditorStore(
         (state) => ({ selectedPrefabId: state.selectedPrefabId, inputs: state.inputs }),
         shallow
@@ -48,9 +49,6 @@ function DynamicInput({ module }: DynamicInputPropTypes) {
                 break;
             case ModuleValueType.Percentage:
                 input = <PercentageInput prefabId={selectedPrefabId!} moduleId={module.id} defaultValue={defaultValue} />;
-                break;
-            case ModuleValueType.Range:
-                input = <input className="w-full text-white rounded-sm px-1 bg-zinc-700 shadow-md border border-zinc-200" placeholder="RANGE" />;
                 break;
             case ModuleValueType.Text:
                 input = <TextInput prefabId={selectedPrefabId!} moduleId={module.id} defaultValue={defaultValue} />;
@@ -76,7 +74,10 @@ function DynamicInput({ module }: DynamicInputPropTypes) {
             case ModuleValueType.Prefab:
             case ModuleValueType.ItemPool:
             case ModuleValueType.MaterialAnimation:
-                input = <FileSelectInput type={module.valueType} themeColor="rose" moduleId={module.id} defaultValue={defaultValue} />;
+                input = <FileSelectInput type={module.valueType} themeColor={themeColor} moduleId={module.id} defaultValue={defaultValue} />;
+                break;
+            case ModuleValueType.Range:
+                input = <input className="w-full text-white rounded-sm px-1 bg-zinc-700 shadow-md border border-zinc-200" placeholder="RANGE" />;
                 break;
             case ModuleValueType.StatusEffect:
                 input = (

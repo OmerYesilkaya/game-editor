@@ -39,7 +39,14 @@ function getModuleInputs(modules: ApiModule[]) {
                 processingQueue.push({ ...child, rootModuleId: module.rootModuleId });
             } else {
                 const value = child.value ? child.value : MODULE_DEFAULT_VALUES[child.valueType];
-                moduleInputs.push({ id: child.id, value: value, valueType: child.valueType, rootModuleId: module.rootModuleId, arrayIndex: 0 });
+                moduleInputs.push({
+                    id: child.id,
+                    value: value,
+                    valueType: child.valueType,
+                    rootModuleId: module.rootModuleId,
+                    arrayIndex: child.arrayIndex,
+                    isArray: child.isArray,
+                });
             }
         });
     }
