@@ -13,7 +13,7 @@ const ModuleInput: React.FC<Props> = ({ themeColor, modules }) => {
     const hasChildren = module.valueType === ModuleValueType.Object;
 
     return (
-        <div className="flex flex-col w-full bg-zinc-900 rounded-sm p-0.5">
+        <div className="flex flex-col w-full bg-zinc-900 rounded-sm p-1">
             {hasChildren ? <ChildrenModule themeColor={themeColor} modules={modules} /> : <ValueModule themeColor={themeColor} modules={modules} />}
         </div>
     );

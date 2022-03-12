@@ -10,6 +10,12 @@ import { ApiModule } from "types/module";
 
 export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
     rootPrefab: null,
+    refresh: () => {
+        set((prev) => {
+            assert(prev.rootPrefab);
+            return { rootPrefab: { ...prev.rootPrefab } };
+        });
+    },
     setRootPrefab: (value) => {
         set(() => ({
             rootPrefab: value,

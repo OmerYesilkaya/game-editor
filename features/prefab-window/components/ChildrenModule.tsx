@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ChevronRightIcon } from "@heroicons/react/outline";
 import cn from "classnames";
 
+import { useSelectedPrefab } from "@prefab-editor/hooks";
 import { ApiModule } from "@app/types";
 import { stringUtils } from "@core/utils";
 import ModuleInput from "./ModuleInput";
@@ -14,6 +15,11 @@ type Props = {
 
 const ChildrenModule: React.FC<Props> = ({ themeColor, modules }) => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const { addToArrayInput } = useSelectedPrefab();
+
+    function handleAdd(moduleId: number) {
+        addToArrayInput(moduleId);
+    }
 
     function toggleExpand() {
         setIsExpanded((prev) => !prev);
@@ -21,6 +27,23 @@ const ChildrenModule: React.FC<Props> = ({ themeColor, modules }) => {
 
     return (
         <>
+            <div className="w-full flex items-center">
+                <span className="ml-1 w-full text-left uppercase text-sm font-bold">{stringUtils.formatCamelCase(modules[0].name)}</span>
+                <button
+                    type="button"
+                    className={`min-w-[20px] min-h-[20px] bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md mr-px`}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        toggleExpand();
+                    }}
+                >
+                    <ChevronRightIcon
+                        className={cn(`transition-transform`, {
+                            "rotate-90": isExpanded,
+                        })}
+                    />
+                </button>
+            </div>
             {modules.map((module) => {
                 const indexes = [...new Set(module.children?.map((child) => child.arrayIndex))];
                 const arrays: NumberMap<ApiModule[]> = indexes.reduce((acc, cur) => ({ ...acc, [cur]: [] }), {});
@@ -30,24 +53,6 @@ const ChildrenModule: React.FC<Props> = ({ themeColor, modules }) => {
 
                 return (
                     <div key={`${module.id}-${module.arrayIndex}`} className="w-full flex flex-col">
-                        <div className="w-full flex items-center">
-                            <span className="w-full text-left uppercase text-sm font-bold ml-1">{stringUtils.formatCamelCase(module.name)}</span>
-                            <button
-                                type="button"
-                                className={`min-w-[20px] min-h-[20px] bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md mr-px`}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleExpand();
-                                }}
-                            >
-                                <ChevronRightIcon
-                                    className={cn(`transition-transform`, {
-                                        "rotate-90": isExpanded,
-                                    })}
-                                />
-                            </button>
-                        </div>
-
                         {isExpanded && (
                             <div className="flex flex-col w-full h-full mt-0.5">
                                 {Object.keys(arrays).map((index) => {
@@ -55,8 +60,8 @@ const ChildrenModule: React.FC<Props> = ({ themeColor, modules }) => {
                                     return (
                                         <div key={index} className="flex h-full w-full items-center mt-0.5">
                                             {module.isArray && (
-                                                <div className="w-5 h-full rounded-sm bg-zinc-200 text-zinc-700 font-bold text-sm flex items-center justify-center ml-1">
-                                                    {Number(index) + 1}
+                                                <div className="w-5 h-full rounded-sm bg-zinc-200 text-zinc-700 font-bold text-sm flex items-center justify-center ">
+                                                    {module.arrayIndex + 1}
                                                 </div>
                                             )}
                                             <hr className="w-0.5 h-full bg-zinc-200 rounded-full my-0.5 ml-1" />
@@ -72,16 +77,19 @@ const ChildrenModule: React.FC<Props> = ({ themeColor, modules }) => {
                                         </div>
                                     );
                                 })}
-                                {module.isArray && (
-                                    <button className="mt-1 text-zinc-200 bg-emerald-800 flex w-full items-center justify-center rounded-sm font-default uppercase text-sm font-bold transition-all hover:bg-emerald-700 active:bg-emerald-900">
-                                        Add new item
-                                    </button>
-                                )}
                             </div>
                         )}
                     </div>
                 );
             })}
+            {isExpanded && modules[0].isArray && (
+                <button
+                    onClick={() => handleAdd(modules[0].id)}
+                    className="mt-1 text-zinc-200 bg-sky-700 flex w-full items-center justify-center rounded-sm font-default uppercase text-sm font-bold transition-all hover:bg-sky-800 active:bg-sky-900"
+                >
+                    Add new item
+                </button>
+            )}
         </>
     );
 };

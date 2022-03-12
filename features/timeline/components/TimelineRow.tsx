@@ -50,7 +50,7 @@ const TimelineRow: React.FC<Props> = ({ rootPrefab, prefabId, inputs }) => {
                 </div>
                 {availableInputs.map((input) => (
                     <TimelineInput
-                        key={input.id}
+                        key={`${input.arrayIndex}-${input.id}`}
                         input={input}
                         onClick={handleClick}
                         isActive={selectedAnimations.includes(input.value)}

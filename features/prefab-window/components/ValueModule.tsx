@@ -4,6 +4,7 @@ import { ApiModule } from "@app/types";
 import { stringUtils } from "@core/utils";
 
 import DynamicInput from "./DynamicInput";
+import { useSelectedPrefab } from "@prefab-editor/hooks";
 
 type Props = {
     modules: ApiModule[];
@@ -11,16 +12,22 @@ type Props = {
 };
 
 const ValueModule: React.FC<Props> = ({ modules, themeColor }) => {
+    const { addToArrayInput } = useSelectedPrefab();
     const isArray = modules[0].isArray;
+
+    function handleAdd(moduleId: number) {
+        addToArrayInput(moduleId);
+    }
+
     return (
         <div className="flex w-full flex-col">
             {modules[0].isArray && (
-                <span className="ml-1 w-full text-left uppercase text-sm font-bold">{stringUtils.formatCamelCase(modules[0].name)}</span>
+                <span className="ml-1 w-full text-left uppercase text-sm font-bold h-6">{stringUtils.formatCamelCase(modules[0].name)}</span>
             )}
             {modules.map((module, index) =>
                 module.isArray ? (
-                    <div key={`${module.id}-${module.arrayIndex}`} className="flex mt-0.5">
-                        <div className="mr-1 w-5  rounded-sm bg-zinc-200 text-zinc-700 font-bold text-sm flex items-center justify-center ml-1">
+                    <div key={`${module.id}-${module.arrayIndex}`} className={cn("flex", { "mt-1": index !== 0 })}>
+                        <div className="mr-1 w-5 rounded-sm bg-zinc-200 text-zinc-700 font-bold text-sm flex items-center justify-center">
                             {module.arrayIndex + 1}
                         </div>
                         <DynamicInput themeColor={themeColor} module={module} />
@@ -37,7 +44,10 @@ const ValueModule: React.FC<Props> = ({ modules, themeColor }) => {
                 )
             )}
             {isArray && (
-                <button className="mt-1 text-zinc-200 bg-emerald-800 flex w-full items-center justify-center rounded-sm font-default uppercase text-sm font-bold transition-all hover:bg-emerald-700 active:bg-emerald-900">
+                <button
+                    onClick={() => handleAdd(modules[0].id)}
+                    className="mt-1 text-zinc-200 bg-sky-700 flex w-full items-center justify-center rounded-sm font-default uppercase text-sm font-bold transition-all hover:bg-sky-800 active:bg-sky-900"
+                >
                     Add new item
                 </button>
             )}

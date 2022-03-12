@@ -43,4 +43,5 @@ export type ApiModule = {
     value: any | null;
     isArray: boolean;
     arrayIndex: number;
+    parentId: number;
 };

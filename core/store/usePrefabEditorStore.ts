@@ -23,7 +23,7 @@ export const usePrefabEditorStore = create<EditorState, SetState<EditorState>, G
     }))
 );
 
-// TODO(selim): Move all subscribtion code to a useEffect hook and unsubscribe on dismount
+// TODO(selim): Move all subscribtion code to a useEffect hook and unsubscribe on unmount
 const u1 = usePrefabEditorStore.subscribe(
     (state) => state.selectedPrefabId,
     (v) => console.log("Selected prefab id changed.", v)

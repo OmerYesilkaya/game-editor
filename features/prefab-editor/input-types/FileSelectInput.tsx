@@ -15,7 +15,7 @@ const FileSelectInput: React.FC<Props> = ({ type, themeColor, moduleId, defaultV
     return (
         <button
             type="button"
-            className={`w-full text-sm flex justify-center items-center rounded-sm my-px bg-${themeColor}-500 px-2 transition hover:bg-${themeColor}-600`}
+            className={`w-full h-full text-sm flex justify-center items-center rounded-sm bg-${themeColor}-500 px-2 transition hover:bg-${themeColor}-600`}
             onClick={() => selectInput(moduleId)}
         >
             <span title={defaultValue ? defaultValue.toString() : "Choose a file"} className="max-w-[112px] truncate">

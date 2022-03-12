@@ -113,6 +113,7 @@ export type PrefabSlice = {
     rootPrefab: Prefab | null;
     setRootPrefab: (value: Prefab) => void;
     createNewRoot: () => void;
+    refresh: () => void;
 
     // ! Internal Id. Module Part Id should not be used.
     selectedPrefabId: string | null;

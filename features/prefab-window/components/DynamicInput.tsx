@@ -34,6 +34,8 @@ function DynamicInput({ themeColor, module }: DynamicInputPropTypes) {
     if (!selectedPrefabId || !inputs) return null;
     const input = inputs[selectedPrefabId].find((input) => input.id === module.id);
     const defaultValue = input?.value ? input.value : module.value ? module.value : MODULE_DEFAULT_VALUES[module.valueType];
+    // const guid = input.guid -> Probably get guid from input here?
+    // const arrayIndex = input.arrayIndex -> Also arrayIndex?
 
     function render() {
         let input;

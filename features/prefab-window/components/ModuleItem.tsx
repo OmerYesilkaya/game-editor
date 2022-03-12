@@ -27,8 +27,6 @@ const ModuleItem: React.FC<{ themeColor: string; module: ApiModule }> = ({ theme
         arrays[child.name].push(child);
     });
 
-    console.log("arrays", arrays);
-
     return (
         <div className="bg-zinc-800  font-default  rounded-sm py-0.5 pl-1.5 pr-0.5 text-white flex items-center flex-col">
             <div

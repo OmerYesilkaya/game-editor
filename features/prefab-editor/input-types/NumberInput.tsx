@@ -16,6 +16,7 @@ const Number: React.FC<Props> = ({ prefabId, moduleId, defaultValue }) => {
 
     useEffect(() => {
         updateInput(prefabId, moduleId, debouncedValue);
+        // TODO(omer): Send both new guid and array index to updateInput function
     }, [debouncedValue]);
 
     return (

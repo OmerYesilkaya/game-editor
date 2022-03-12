@@ -4,7 +4,7 @@ import AvailableModules from "./AvailableModules";
 import ActiveModules from "./ActiveModules";
 import PrefabHeader from "./PrefabHeader";
 
-const Window: React.FC = () => {
+const PrefabWindow: React.FC = () => {
     const [isModuleWindowOpen, setIsModuleWindowOpen] = useState(false);
 
     function changeModuleWindowStatus(value: boolean) {
@@ -38,4 +38,4 @@ const Window: React.FC = () => {
     );
 };
 
-export default Window;
+export default PrefabWindow;

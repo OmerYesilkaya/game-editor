@@ -10,6 +10,7 @@ export const createInputSlice: EditorSlice<InputSlice> = (set, get) => ({
         const inputs = editorUtils.getPrefabInputs(value);
         set(() => ({ inputs: inputs }));
     },
+
     updateInputValue: (prefabId, inputId, value) =>
         set((prev) => {
             // TODO(selim): Instead of if checks add assertions

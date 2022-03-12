@@ -1,15 +1,20 @@
 import { useCallback, useMemo } from "react";
 
+import assert from "assert";
+
 import { ApiModule } from "@app/types";
 import { usePrefabEditorStore } from "@core/store";
+import { api } from "@core/hooks";
+import { MODULE_DEFAULT_VALUES } from "@core/constants";
 
 import editorUtils from "../editorUtils";
 
 export default function useSelectedPrefab() {
     // TODO(selim): Use shallow here! It is causing issues with module add and remove for some reason
-    const { root, selectedPrefabId, addModuleToPrefab, removeModuleFromPrefab, setPrefabName } = usePrefabEditorStore((state) => ({
+    const { root, selectedPrefabId, refresh, addModuleToPrefab, removeModuleFromPrefab, setPrefabName } = usePrefabEditorStore((state) => ({
         selectedPrefabId: state.selectedPrefabId,
         root: state.rootPrefab,
+        refresh: state.refresh,
         addModuleToPrefab: state.addModuleToPrefab,
         setPrefabName: state.setPrefabName,
         removeModuleFromPrefab: state.removeModuleFromPrefab,
@@ -42,5 +47,46 @@ export default function useSelectedPrefab() {
         [selectedPrefabId]
     );
 
-    return { selectedPrefab, addModule, removeModule, setPrefabName };
+    function addToArrayInput(moduleId: number) {
+        assert(selectedPrefab && moduleId);
+
+        function insertIntoModule(modules: ApiModule[], parentId: number, generatedModule: ApiModule) {
+            modules.forEach((module) => {
+                if (module.id === parentId) {
+                    generatedModule.arrayIndex = module.children ? module.children.length : 0;
+                    module.children?.push(generatedModule);
+                    refresh();
+                } else {
+                    if (module.children) insertIntoModule(module.children, module.parentId, generatedModule);
+                }
+            });
+        }
+
+        function convertChildren(children: ApiModule[]): ApiModule[] {
+            return children.map((child) => ({
+                ...child,
+                value: MODULE_DEFAULT_VALUES[child.valueType],
+                arrayIndex: 0,
+                children: child.children ? convertChildren(child.children) : [],
+            }));
+        }
+
+        api.getModuleById(moduleId).then((module) => {
+            const parentId = module.parentId;
+            const generatedModule = {
+                children: module.children ? convertChildren(module.children) : [],
+                id: module.id,
+                isArray: module.isArray,
+                name: module.name,
+                parentId: parentId,
+                value: MODULE_DEFAULT_VALUES[module.valueType],
+                valueType: module.valueType,
+                arrayIndex: 0,
+            };
+
+            insertIntoModule(selectedPrefab.modules, parentId, generatedModule);
+        });
+    }
+
+    return { selectedPrefab, addModule, removeModule, setPrefabName, addToArrayInput };
 }

@@ -1,3 +1,3 @@
-import PrefabWindow from "./Window";
+import PrefabWindow from "./PrefabWindow";
 
 export { PrefabWindow };
