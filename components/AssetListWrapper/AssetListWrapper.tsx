@@ -1,23 +1,16 @@
+import { useState } from "react";
+
 import { ModuleValueType, Input } from "@app/types";
 import Core from "@core/components";
-
-import Animations from "./Animations";
-import Sprites from "./Sprites";
-import Audios from "./Audios";
-import Materials from "./Materials";
-import ParticleSystems from "./ParticleSystems";
-import TrailSystems from "./TrailSystems";
-import ItemPools from "./ItemPools";
-import MaterialAnimations from "./MaterialAnimations";
-import Prefabs from "./Prefabs";
-import { useState } from "react";
 import { useDebounce } from "@core/hooks";
+
+import { AssetList } from "components";
 
 type Props = {
     selectedInput: Input | null;
 };
 
-const AssetSelect: React.FC<Props> = ({ selectedInput }) => {
+const Wrapper: React.FC<Props> = ({ selectedInput }) => {
     const [keyword, setKeyword] = useState("");
     const { debouncedValue, isLoading } = useDebounce(keyword, 300);
 
@@ -25,31 +18,31 @@ const AssetSelect: React.FC<Props> = ({ selectedInput }) => {
         let panel;
         switch (selectedInput?.valueType) {
             case ModuleValueType.Animation:
-                panel = <Animations query={debouncedValue} />;
+                panel = <AssetList.Animations query={debouncedValue} />;
                 break;
             case ModuleValueType.Sprite:
-                panel = <Sprites query={debouncedValue} />;
+                panel = <AssetList.Sprites query={debouncedValue} />;
                 break;
             case ModuleValueType.Audio:
-                panel = <Audios />;
+                panel = <AssetList.Audios />;
                 break;
             case ModuleValueType.Material:
-                panel = <Materials />;
+                panel = <AssetList.Materials />;
                 break;
             case ModuleValueType.ParticleSystem:
-                panel = <ParticleSystems />;
+                panel = <AssetList.ParticleSystems />;
                 break;
             case ModuleValueType.TrailSystem:
-                panel = <TrailSystems />;
+                panel = <AssetList.TrailSystems />;
                 break;
             case ModuleValueType.Prefab:
-                panel = <Prefabs />;
+                panel = <AssetList.Prefabs />;
                 break;
             case ModuleValueType.ItemPool:
-                panel = <ItemPools />;
+                panel = <AssetList.ItemPools />;
                 break;
             case ModuleValueType.MaterialAnimation:
-                panel = <MaterialAnimations />;
+                panel = <AssetList.MaterialAnimations />;
                 break;
             default:
                 panel = null;
@@ -68,4 +61,4 @@ const AssetSelect: React.FC<Props> = ({ selectedInput }) => {
     );
 };
 
-export default AssetSelect;
+export default Wrapper;

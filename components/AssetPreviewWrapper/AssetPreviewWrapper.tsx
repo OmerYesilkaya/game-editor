@@ -3,8 +3,8 @@ import { useEffect, useRef } from "react";
 import { ChevronDoubleRightIcon, ZoomInIcon } from "@heroicons/react/outline";
 
 import { ANIMATION_SPEEDS } from "@core/constants";
-import Canvas from "./Canvas";
 import { usePrefabEditorStore } from "@core/store";
+import { AssetPreview } from "components";
 
 const ZOOM_CHANGE_BASE_VALUE = 0.5;
 
@@ -46,7 +46,7 @@ type Props = {
     height: number;
 };
 
-const Preview: React.FC<Props> = ({ width, height }) => {
+const Wrapper: React.FC<Props> = ({ width, height }) => {
     const increaseZoom = usePrefabEditorStore((state) => state.increaseZoom);
     const decreaseZoom = usePrefabEditorStore((state) => state.decreaseZoom);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -70,7 +70,7 @@ const Preview: React.FC<Props> = ({ width, height }) => {
     return (
         <div ref={containerRef} className="canvas-pattern w-full h-full border-dashed border-2 border-white rounded-sm">
             {/* Subracting border and header space from canvas to prevent scrolling */}
-            <Canvas width={width - 6} height={height - 6} />
+            <AssetPreview.Canvas width={width - 6} height={height - 6} />
             <div className="absolute right-3 top-12 flex gap-x-1 ">
                 <PlayRateControl />
                 <ZoomControl />
@@ -79,4 +79,4 @@ const Preview: React.FC<Props> = ({ width, height }) => {
     );
 };
 
-export default Preview;
+export default Wrapper;
