@@ -1,11 +1,11 @@
 import Core from "@core/components";
-import { useSelectedInput } from "@prefab-editor/hooks";
 import { ModuleValueType } from "types/module";
 
 import { AssetList, AssetPreview } from "components";
+import { usePrefabEditorSelectedInput } from "hooks";
 
 const AssetWindow: React.FC = () => {
-    const { selectedInput } = useSelectedInput();
+    const { selectedInput } = usePrefabEditorSelectedInput();
 
     return (
         <Core.FloatingWindow
@@ -18,10 +18,10 @@ const AssetWindow: React.FC = () => {
         >
             <div className="flex gap-x-1">
                 <div className="w-[720px] h-[450px] pr-0 pl-1 py-0.5">
-                    <AssetList.Wrapper selectedInput={selectedInput} />
+                    <AssetList.Container selectedInput={selectedInput} />
                 </div>
                 <div className="w-[450px] h-[450px] pl-0 pr-1 py-0.5">
-                    <AssetPreview.Wrapper width={450} height={450} />
+                    <AssetPreview.Container width={450} height={450} />
                 </div>
             </div>
         </Core.FloatingWindow>

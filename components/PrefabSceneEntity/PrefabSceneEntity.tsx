@@ -1,11 +1,14 @@
+import { useCallback, useEffect, useState } from "react";
+
+import * as THREE from "three";
+import { Text } from "@react-three/drei";
+
 import CustomSpriteMaterial from "@core/materials/CustomSpriteMaterial";
 import { usePrefabEditorStore } from "@core/store";
-import { Text } from "@react-three/drei";
-import { useCallback, useEffect, useState } from "react";
-import Collider from "./Collider";
-import * as THREE from "three";
 import { onPrefabClick, onPrefabMiss } from "@prefab-scene/controls";
+
 import { editorutils } from "utils";
+import { PrefabScene } from "components";
 
 type EntityNameProps = {
     prefabId: string;
@@ -46,7 +49,7 @@ const SceneEntity: React.FC<Props> = ({ prefabId }) => {
     return (
         <group ref={entity.group}>
             <EntityName prefabId={prefabId} prefabName={prefab.name} />
-            <Collider entity={entity} />
+            <PrefabScene.Collider entity={entity} />
             <mesh
                 ref={entity.mesh}
                 onClick={() => onPrefabClick(prefabId)}
@@ -69,4 +72,4 @@ const SceneEntity: React.FC<Props> = ({ prefabId }) => {
     );
 };
 
-export { SceneEntity };
+export default SceneEntity;
