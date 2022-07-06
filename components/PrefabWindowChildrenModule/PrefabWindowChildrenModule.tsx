@@ -4,9 +4,9 @@ import { ChevronRightIcon } from "@heroicons/react/outline";
 import cn from "classnames";
 
 import { ApiModule } from "@app/types";
-import { stringUtils } from "@core/utils";
 import { usePrefabEditorSelectedPrefab } from "hooks";
 import { PrefabWindow } from "components";
+import { format } from "@core/string";
 
 type Props = {
     modules: ApiModule[];
@@ -28,7 +28,7 @@ const ChildrenModule: React.FC<Props> = ({ themeColor, modules }) => {
     return (
         <>
             <div className="w-full flex items-center">
-                <span className="ml-1 w-full text-left uppercase text-sm font-bold">{stringUtils.formatCamelCase(modules[0].name)}</span>
+                <span className="ml-1 w-full text-left uppercase text-sm font-bold">{format.camelCase(modules[0].name)}</span>
                 <button
                     type="button"
                     className={`min-w-[20px] min-h-[20px] bg-${themeColor}-600 border-2 border-white rounded-sm shadow-md mr-px`}

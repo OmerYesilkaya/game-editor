@@ -1,7 +1,7 @@
 import cn from "classnames";
 
 import { ApiModule } from "@app/types";
-import { stringUtils } from "@core/utils";
+import { format } from "@core/string";
 
 import { usePrefabEditorSelectedPrefab } from "hooks";
 import { PrefabWindow } from "components";
@@ -21,9 +21,7 @@ const ValueModule: React.FC<Props> = ({ modules, themeColor }) => {
 
     return (
         <div className="flex w-full flex-col">
-            {modules[0].isArray && (
-                <span className="ml-1 w-full text-left uppercase text-sm font-bold h-6">{stringUtils.formatCamelCase(modules[0].name)}</span>
-            )}
+            {modules[0].isArray && <span className="ml-1 w-full text-left uppercase text-sm font-bold h-6">{format.camelCase(modules[0].name)}</span>}
             {modules.map((module, index) =>
                 module.isArray ? (
                     <div key={`${module.id}-${module.arrayIndex}`} className={cn("flex", { "mt-1": index !== 0 })}>
@@ -38,7 +36,7 @@ const ValueModule: React.FC<Props> = ({ modules, themeColor }) => {
                             "mt-1": index !== 0,
                         })}
                     >
-                        <span className="ml-1 w-full text-left uppercase text-sm font-bold">{stringUtils.formatCamelCase(module.name)}</span>
+                        <span className="ml-1 w-full text-left uppercase text-sm font-bold">{format.camelCase(module.name)}</span>
                         <PrefabWindow.DynamicInput key={`${module.id}-${module.arrayIndex}`} themeColor={themeColor} module={module} />
                     </div>
                 )

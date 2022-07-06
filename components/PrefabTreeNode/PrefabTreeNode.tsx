@@ -7,10 +7,10 @@ import cn from "classnames";
 
 import { usePrefabEditorStore } from "@core/store";
 import { ApiModule } from "@app/types";
-import { stringUtils } from "@core/utils";
 import shallow from "zustand/shallow";
 
 import { Common } from "components";
+import { format } from "@core/string";
 
 type Props = {
     data: { name: string; modules: ApiModule[]; id: string; internalId: string };
@@ -68,7 +68,7 @@ const TreeNode: React.FC<Props> = ({ data }) => {
 
     function handleNameBlur() {
         if (!name) return;
-        setPrefabName(data.internalId, stringUtils.capitalize(name));
+        setPrefabName(data.internalId, format.capitalize(name));
     }
 
     return (

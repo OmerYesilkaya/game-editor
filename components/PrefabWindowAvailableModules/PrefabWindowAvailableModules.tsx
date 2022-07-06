@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-import { stringUtils } from "@core/utils";
-
 import { Common } from "components";
 import { useDebounce, usePrefabEditorSelectedPrefab } from "hooks";
 import api from "api";
+import { format } from "@core/string";
 
 const AvailableModules: React.FC = () => {
     const { data: rootModules } = api.useGetModules();
@@ -41,7 +40,7 @@ const AvailableModules: React.FC = () => {
                               key={module.id}
                               onClick={() => api.getModuleById(module.id).then((detailedModule) => addModule(detailedModule))}
                           >
-                              <span className="font-default text-sm font-bold mr-1 uppercase">{stringUtils.formatCamelCase(module.name)}</span>
+                              <span className="font-default text-sm font-bold mr-1 uppercase">{format.camelCase(module.name)}</span>
                               {/* <div className="bg-orange-600 text-white font-default font-bold text-xs px-1 rounded-sm ml-1 shadow-md">UTILITY</div>
 								<div className="bg-red-600 text-white font-default font-bold text-xs px-1 rounded-sm ml-1 shadow-md">ENEMY</div> */}
                           </button>

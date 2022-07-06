@@ -4,10 +4,10 @@ import cn from "classnames";
 import { ChevronRightIcon, TrashIcon } from "@heroicons/react/outline";
 
 import { ApiModule } from "@app/types";
-import { stringUtils } from "@core/utils";
 
 import { usePrefabEditorSelectedPrefab } from "hooks";
 import { PrefabWindow } from "components";
+import { format } from "@core/string";
 
 const ModuleItem: React.FC<{ themeColor: string; module: ApiModule }> = ({ themeColor, module }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -36,7 +36,7 @@ const ModuleItem: React.FC<{ themeColor: string; module: ApiModule }> = ({ theme
                 })}
                 onClick={() => toggleExpand()}
             >
-                <div className="text-sm font-bold uppercase mr-2">{stringUtils.formatCamelCase(module.name)}</div>
+                <div className="text-sm font-bold uppercase mr-2">{format.camelCase(module.name)}</div>
                 <div className="flex items-center">
                     <TrashIcon
                         className="bg-red-600 p-0.5 w-5 h-5 shadow-md rounded-sm text-sm font-bold font-defaulttransition-colors hover:bg-red-700 border-2 cursor-pointer"

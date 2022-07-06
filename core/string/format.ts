@@ -5,8 +5,8 @@ function capitalize(value: string) {
         .join(" ");
 }
 
-function formatCamelCase(value: string) {
+function camelCase(value: string) {
     return value.split(/(?<=[a-z])(?=[A-Z])/).join(" ");
 }
 
-export default { capitalize, formatCamelCase };
+export default { capitalize, camelCase };

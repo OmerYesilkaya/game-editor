@@ -5,10 +5,9 @@ import { CashIcon } from "@heroicons/react/outline";
 import assert from "assert";
 import cn from "classnames";
 
-import { stringUtils } from "@core/utils";
-
 import { Common } from "components";
 import { usePrefabEditorSelectedPrefab } from "hooks";
+import { format } from "@core/string";
 
 type Props = {
     isModuleWindowOpen: boolean;
@@ -25,7 +24,7 @@ const PrefabHeader: React.FC<Props> = ({ isModuleWindowOpen, changeModuleWindowS
     function handleNameBlur() {
         if (!name) return;
         assert(selectedPrefab);
-        setPrefabName(selectedPrefab.internalId, stringUtils.capitalize(name));
+        setPrefabName(selectedPrefab.internalId, format.capitalize(name));
     }
 
     useEffect(() => {
