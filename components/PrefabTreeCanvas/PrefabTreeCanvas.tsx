@@ -1,11 +1,10 @@
-import ReactFlow, { Background, BackgroundVariant, Elements } from "react-flow-renderer";
 import shallow from "zustand/shallow";
+import ReactFlow, { Background, BackgroundVariant, Elements } from "react-flow-renderer";
 
-import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorStore } from "@app/store";
 import { Prefab } from "@app/types";
-
-import { editorutils } from "utils";
-import { PrefabTree } from "components";
+import { editorutils } from "@app/utils";
+import { PrefabTree } from "@app/components";
 
 function generateReactFlowElements(prefab: Prefab | null): Elements {
     if (!prefab) return [];

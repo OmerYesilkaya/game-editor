@@ -3,10 +3,10 @@ import React from "react";
 import { NextPage } from "next";
 
 import { RawTexture } from "@app/types";
-import { URL } from "@core/constants";
-import { usePrefabEditorStore } from "@core/store";
+import { URL } from "@app/constants";
+import { usePrefabEditorStore } from "@app/store";
 
-import api from "api";
+import api from "@app/api";
 
 async function loadTextures(textures: { id: number; name: string }[]) {
     const rawTextures = [] as RawTexture[];

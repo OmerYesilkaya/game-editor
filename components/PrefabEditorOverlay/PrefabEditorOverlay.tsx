@@ -1,4 +1,4 @@
-import { usePrefabEditorSelectedInput } from "hooks";
+import { usePrefabEditorSelectedInput } from "@app/hooks";
 
 const Overylay: React.FC = () => {
     const { selectedInput, clearInputSelection } = usePrefabEditorSelectedInput();

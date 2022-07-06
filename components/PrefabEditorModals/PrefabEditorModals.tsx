@@ -1,9 +1,8 @@
 import shallow from "zustand/shallow";
 import { FolderOpenIcon } from "@heroicons/react/outline";
 
-import { usePrefabEditorStore } from "@core/store";
-
-import { Common, PrefabEditor } from "components";
+import { usePrefabEditorStore } from "@app/store";
+import { Common, PrefabEditor } from "@app/components";
 
 const Modals: React.FC = () => {
     const { isPrefabsModalOpen, setIsPrefabsModalOpen } = usePrefabEditorStore(

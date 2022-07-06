@@ -1,5 +1,6 @@
-import { SearchIcon } from "@heroicons/react/outline";
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
+
+import { SearchIcon } from "@heroicons/react/outline";
 
 type TagsPropTypes = {
     filteredTags: string[];

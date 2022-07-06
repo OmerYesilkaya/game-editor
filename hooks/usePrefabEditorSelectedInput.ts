@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import assert from "assert";
 import shallow from "zustand/shallow";
 
-import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorStore } from "@app/store";
 
 export default function useSelectedInput() {
     const { inputs, selectedPrefabId, selectedInputId, updateInputValue, clearInputSelection, selectInput } = usePrefabEditorStore(

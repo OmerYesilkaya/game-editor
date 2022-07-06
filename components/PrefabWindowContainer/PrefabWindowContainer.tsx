@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { PrefabWindow } from "components";
+import { PrefabWindow } from "@app/components";
 
 const Container: React.FC = () => {
     const [isModuleWindowOpen, setIsModuleWindowOpen] = useState(false);

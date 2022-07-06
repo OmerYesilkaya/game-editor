@@ -1,4 +1,4 @@
-import { ANIMATION_SPEEDS } from "@core/constants";
+import { ANIMATION_SPEEDS } from "@app/constants";
 import { EditorSlice, PreviewSlice } from "./types";
 
 export const createPreviewSlice: EditorSlice<PreviewSlice> = (set, get) => ({

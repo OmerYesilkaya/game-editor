@@ -1,17 +1,17 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 
-import { Transition } from "@headlessui/react";
-import { CubeTransparentIcon, FolderOpenIcon, SaveAsIcon, SaveIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/dist/client/router";
 import { useHotkeys } from "react-hotkeys-hook";
 import shallow from "zustand/shallow";
-import { useRouter } from "next/dist/client/router";
 
-import { usePrefabEditorStore } from "@core/store";
+import { Transition } from "@headlessui/react";
+import { CubeTransparentIcon, FolderOpenIcon, SaveAsIcon, SaveIcon } from "@heroicons/react/outline";
 
 import { PutPrefabRequest } from "types/prefab";
-import { Common } from "components";
-import { editorutils } from "utils";
-import api from "api";
+import { usePrefabEditorStore } from "@app/store";
+import { Common } from "@app/components";
+import { editorutils } from "@app/utils";
+import api from "@app/api";
 
 type Props = {
     isOpen: boolean;

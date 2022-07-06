@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { usePrefabEditorStore } from "@core/store";
-import { useDebounce } from "hooks";
+import { usePrefabEditorStore } from "@app/store";
+import { useDebounce } from "@app/hooks";
 
 const MAX_CHAR_LENGTH = 300;
 

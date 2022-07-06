@@ -1,12 +1,13 @@
 import { useState } from "react";
 
+import cn from "classnames";
+
 import { CursorClickIcon, HandIcon } from "@heroicons/react/solid";
 import { BiReset, BiScreenshot, BiShapeCircle, BiShapeSquare, BiShapeTriangle } from "react-icons/bi";
 
-import cn from "classnames";
+import { EditorMode } from "features/prefab-scene/modes";
 
-import { EditorMode } from "@prefab-scene/modes";
-import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorStore } from "@app/store";
 
 const Button: React.FC<any> = ({ name, icon, onClick, isActive }) => {
     return (

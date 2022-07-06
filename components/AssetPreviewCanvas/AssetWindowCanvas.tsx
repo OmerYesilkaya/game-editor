@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { update } from "features/preview-window";
-import { usePrefabEditorStore } from "@core/store";
+
+import { usePrefabEditorStore } from "@app/store";
 
 let lastAnimationRequestID = 0;
 let lastFrameTime = 0;

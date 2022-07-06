@@ -1,6 +1,6 @@
 import { Animation, Sprite } from "@app/types";
+import { Vec2 } from "@core/math/vector";
 import { EditorMode } from "@prefab-scene/modes";
-import { Vec2 } from "@prefab-scene/types/math";
 import { Camera } from "@react-three/fiber";
 import { RefObject } from "react";
 import { Input } from "types/input";

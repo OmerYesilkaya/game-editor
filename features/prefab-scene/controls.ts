@@ -1,8 +1,8 @@
-import { MouseState } from "@core/controls/mouse";
+import { MouseState } from "@core/input/mouse";
 import { triangulate } from "@core/graphics/procedural";
 import { Vec2 } from "@core/math/vector";
-import { usePrefabEditorStore } from "@core/store";
-import { EditorState } from "@core/store/types";
+import { usePrefabEditorStore } from "@app/store";
+import { EditorState } from "store/types";
 import { EditorMode } from "./modes";
 
 export function onPrefabClick(id: string) {

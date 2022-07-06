@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from "react-query";
-import { KEYS, URL } from "@core/constants";
+import { KEYS, URL } from "@app/constants";
 import { QueryOptionTypes, GetPrefabResponse } from "@app/types";
 
 async function getPrefabById(id: number): Promise<GetPrefabResponse> {

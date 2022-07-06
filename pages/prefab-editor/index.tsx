@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
 
-import { Common, PrefabEditor } from "components";
+import { Common, PrefabEditor } from "@app/components";
 
 const Welcome: NextPage = () => {
     return (

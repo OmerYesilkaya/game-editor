@@ -1,4 +1,4 @@
-import { KEYS, URL } from "@core/constants";
+import { KEYS, URL } from "@app/constants";
 import { useMutation, UseMutationResult } from "react-query";
 import { MutationOptionTypes } from "types/api";
 import { PostPrefabRequest } from "types/prefab";

@@ -1,8 +1,8 @@
 import { PhotographIcon } from "@heroicons/react/outline";
 
-import { usePrefabEditorStore } from "@core/store";
-import { usePrefabEditorSelectedInput } from "hooks";
-import api from "api";
+import { usePrefabEditorStore } from "@app/store";
+import { usePrefabEditorSelectedInput } from "@app/hooks";
+import api from "@app/api";
 
 type Props = {
     query: string;

@@ -1,12 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 
+import shallow from "zustand/shallow";
+import { useHotkeys } from "react-hotkeys-hook";
+
 import { Transition } from "@headlessui/react";
 import { SaveIcon, TrashIcon } from "@heroicons/react/outline";
-import { useHotkeys } from "react-hotkeys-hook";
-import shallow from "zustand/shallow";
 
-import { usePrefabEditorStore } from "@core/store";
-import { Common } from "components";
+import { usePrefabEditorStore } from "@app/store";
+import { Common } from "@app/components";
 
 type Props = {
     isOpen: boolean;

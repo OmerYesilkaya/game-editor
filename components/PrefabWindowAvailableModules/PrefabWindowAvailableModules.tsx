@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-import { Common } from "components";
-import { useDebounce, usePrefabEditorSelectedPrefab } from "hooks";
-import api from "api";
 import { format } from "@core/string";
+
+import { Common } from "@app/components";
+import { useDebounce, usePrefabEditorSelectedPrefab } from "@app/hooks";
+import api from "@app/api";
 
 const AvailableModules: React.FC = () => {
     const { data: rootModules } = api.useGetModules();

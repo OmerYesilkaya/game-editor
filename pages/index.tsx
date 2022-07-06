@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 import { AdjustmentsIcon, CubeTransparentIcon } from "@heroicons/react/outline";
 
-import { Common } from "components";
+import { Common } from "@app/components";
 
 const Home: NextPage = () => {
     return (

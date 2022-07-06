@@ -1,6 +1,6 @@
 import { Camera } from "@react-three/fiber";
 import { RefObject, useLayoutEffect, useRef } from "react";
-import { MouseState } from "@core/controls/mouse";
+import { MouseState } from "@core/input/mouse";
 import { getNormalizedPosition, projectScreenToWorld } from "@core/graphics/camera";
 
 /**
@@ -15,7 +15,7 @@ import { getNormalizedPosition, projectScreenToWorld } from "@core/graphics/came
  * ```
  * @param store Store to save to
  */
-export function useMouse(
+function useMouse(
     canvasRef: RefObject<HTMLCanvasElement>,
     cameraRef: RefObject<Camera>,
     onLeftClick: (state: MouseState) => void = () => {},
@@ -87,3 +87,5 @@ export function useMouse(
 
     return mouseRef;
 }
+
+export default useMouse;

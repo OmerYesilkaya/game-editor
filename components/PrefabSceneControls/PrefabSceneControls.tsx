@@ -1,8 +1,11 @@
-import { usePrefabEditorStore } from "@core/store";
-import { EditorMode } from "@prefab-scene/modes";
-import { TransformControls } from "@react-three/drei";
 import { useMemo } from "react";
+
 import shallow from "zustand/shallow";
+import { TransformControls } from "@react-three/drei";
+
+import { EditorMode } from "features/prefab-scene/modes";
+
+import { usePrefabEditorStore } from "@app/store";
 
 const Controls: React.FC = () => {
     const { entities, selectedEntity, mode } = usePrefabEditorStore(

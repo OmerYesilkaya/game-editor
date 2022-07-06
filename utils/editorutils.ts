@@ -1,6 +1,6 @@
 import { ApiModule, Input, Prefab, PostPrefabRequest } from "@app/types";
-import { MODULE_DEFAULT_VALUES } from "@core/constants";
-import { usePrefabEditorStore } from "@core/store";
+import { MODULE_DEFAULT_VALUES } from "@app/constants";
+import { usePrefabEditorStore } from "@app/store";
 import { PutPrefabRequest } from "types/prefab";
 
 function getPrefabInputs(prefab: Prefab): { [key: string]: Input[] } {

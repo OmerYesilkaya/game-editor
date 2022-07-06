@@ -1,7 +1,7 @@
 import { MicrophoneIcon } from "@heroicons/react/outline";
 
-import api from "api";
-import { usePrefabEditorSelectedInput } from "hooks";
+import api from "@app/api";
+import { usePrefabEditorSelectedInput } from "@app/hooks";
 
 const Audios: React.FC = () => {
     const { data: audios } = api.useGetAudios();

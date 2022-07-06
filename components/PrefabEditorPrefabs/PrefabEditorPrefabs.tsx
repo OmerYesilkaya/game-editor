@@ -4,8 +4,8 @@ import { useRouter } from "next/dist/client/router";
 import { TrashIcon } from "@heroicons/react/outline";
 import cn from "classnames";
 
-import { usePrefabEditorStore } from "@core/store";
-import api from "api";
+import { usePrefabEditorStore } from "@app/store";
+import api from "@app/api";
 
 const Prefab: React.FC<{ prefabId: string; prefabName: string }> = ({ prefabId, prefabName }) => {
     const router = useRouter();

@@ -1,6 +1,6 @@
-import { SceneEntity } from "@core/store/types";
+import { SceneEntity } from "store/types";
 import { TextureInfo } from "types/texture";
-import { prefabsceneutils } from "utils";
+import { prefabsceneutils } from "@app/utils";
 import CustomSpriteMaterial from "../../core/materials/CustomSpriteMaterial";
 
 type SceneState = {

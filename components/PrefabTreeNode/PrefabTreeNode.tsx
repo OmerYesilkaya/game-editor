@@ -1,16 +1,15 @@
 import { HTMLAttributes, useRef, useState } from "react";
 
+import cn from "classnames";
+import shallow from "zustand/shallow";
 import { Handle, Position } from "react-flow-renderer";
 import { CubeTransparentIcon, DuplicateIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 
-import cn from "classnames";
-
-import { usePrefabEditorStore } from "@core/store";
-import { ApiModule } from "@app/types";
-import shallow from "zustand/shallow";
-
-import { Common } from "components";
 import { format } from "@core/string";
+
+import { usePrefabEditorStore } from "@app/store";
+import { ApiModule } from "@app/types";
+import { Common } from "@app/components";
 
 type Props = {
     data: { name: string; modules: ApiModule[]; id: string; internalId: string };

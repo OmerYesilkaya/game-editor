@@ -1,7 +1,7 @@
 import { ModuleValueType } from "types/module";
 
-import { AssetList, AssetPreview, Common } from "components";
-import { usePrefabEditorSelectedInput } from "hooks";
+import { AssetList, AssetPreview, Common } from "@app/components";
+import { usePrefabEditorSelectedInput } from "@app/hooks";
 
 const AssetListFloatingWindow: React.FC = () => {
     const { selectedInput } = usePrefabEditorSelectedInput();

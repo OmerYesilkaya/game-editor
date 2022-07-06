@@ -1,12 +1,11 @@
 import assert from "assert";
 import { v4 as uuid } from "uuid";
 
-import editorUtils from "@prefab-editor/editorUtils";
-
 import { EditorSlice, PrefabSlice } from "./types";
 import { EditorMode } from "@prefab-scene/modes";
-import { MODULE_DEFAULT_VALUES } from "@core/constants";
+import { MODULE_DEFAULT_VALUES } from "@app/constants";
 import { ApiModule } from "types/module";
+import { editorutils } from "@app/utils";
 
 export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
     rootPrefab: null,
@@ -60,7 +59,7 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
             return;
         }
 
-        const prefab = editorUtils.findPrefabInTree(id, root);
+        const prefab = editorutils.findPrefabInTree(id, root);
         if (!prefab) {
             console.error("setPrefabName: Prefab with given id could not be found.");
             return;
@@ -78,7 +77,7 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
             console.error("Trying to set name but root is null. Should never happen!");
             return;
         }
-        const prefab = editorUtils.findPrefabInTree(id, root);
+        const prefab = editorutils.findPrefabInTree(id, root);
         if (!prefab) {
             console.error("setPrefabName: Prefab with given id could not be found.");
             return;
@@ -97,10 +96,10 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
         // Add new module inputs to prefab input array
         let inputs = { ...get().inputs };
         if (inputs.hasOwnProperty(prefab.internalId)) {
-            const newInputs = editorUtils.getModuleInputs([module]);
+            const newInputs = editorutils.getModuleInputs([module]);
             inputs[prefab.internalId] = [...inputs[prefab.internalId], ...newInputs];
         } else {
-            const newInputs = editorUtils.getModuleInputs([module]);
+            const newInputs = editorutils.getModuleInputs([module]);
             inputs = {
                 [prefab.internalId]: [...newInputs],
             };
@@ -117,7 +116,7 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
             return;
         }
 
-        const prefab = editorUtils.findPrefabInTree(id, root);
+        const prefab = editorutils.findPrefabInTree(id, root);
         if (!prefab) {
             console.error("setPrefabName: Prefab with given id could not be found.");
             return;
@@ -160,7 +159,7 @@ export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
         if (!id) return;
         const root = get().rootPrefab;
         assert(root);
-        const isSuccess = editorUtils.deletePrefabInTree(id, root);
+        const isSuccess = editorutils.deletePrefabInTree(id, root);
 
         if (isSuccess) {
             set(() => ({ rootPrefab: { ...root } }));

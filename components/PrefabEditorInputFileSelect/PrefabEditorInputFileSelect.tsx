@@ -1,7 +1,7 @@
 import { DocumentTextIcon } from "@heroicons/react/solid";
 
 import { ModuleValueType } from "@app/types";
-import { usePrefabEditorSelectedInput } from "hooks";
+import { usePrefabEditorSelectedInput } from "@app/hooks";
 
 type Props = {
     type: ModuleValueType;

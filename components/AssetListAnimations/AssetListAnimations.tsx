@@ -1,9 +1,9 @@
 import shallow from "zustand/shallow";
 import { FilmIcon } from "@heroicons/react/outline";
 
-import { usePrefabEditorStore } from "@core/store";
-import api from "api";
-import { usePrefabEditorSelectedInput } from "hooks";
+import { usePrefabEditorStore } from "@app/store";
+import { usePrefabEditorSelectedInput } from "@app/hooks";
+import api from "@app/api";
 
 type Props = {
     query: string;

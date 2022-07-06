@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
-import { Common, PrefabScene } from "components";
-import api from "api";
+import { Common, PrefabScene } from "@app/components";
+import api from "@app/api";
 
 const SceneCanvas = dynamic(() => import("../../components/PrefabSceneCanvas"), {
     ssr: false,

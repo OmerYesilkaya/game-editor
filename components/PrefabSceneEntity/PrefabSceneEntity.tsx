@@ -4,11 +4,11 @@ import * as THREE from "three";
 import { Text } from "@react-three/drei";
 
 import CustomSpriteMaterial from "@core/materials/CustomSpriteMaterial";
-import { usePrefabEditorStore } from "@core/store";
-import { onPrefabClick, onPrefabMiss } from "@prefab-scene/controls";
+import { onPrefabClick, onPrefabMiss } from "features/prefab-scene/controls";
 
-import { editorutils } from "utils";
-import { PrefabScene } from "components";
+import { usePrefabEditorStore } from "@app/store";
+import { editorutils } from "@app/utils";
+import { PrefabScene } from "@app/components";
 
 type EntityNameProps = {
     prefabId: string;

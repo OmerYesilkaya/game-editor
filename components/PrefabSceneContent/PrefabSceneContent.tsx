@@ -1,11 +1,15 @@
-import { useFrame } from "@react-three/fiber";
-import { usePrefabEditorStore } from "@core/store";
-import shallow from "zustand/shallow";
-import { useMouse } from "@core/controls/hooks/useMouse";
-import update from "@prefab-scene/engine";
 import { useMemo } from "react";
-import { onMouseClick, onMouseRelease } from "@prefab-scene/controls";
-import { PrefabScene } from "components";
+
+import { useFrame } from "@react-three/fiber";
+import shallow from "zustand/shallow";
+
+// TODO(omer): fix these
+import { onMouseClick, onMouseRelease } from "features/prefab-scene/controls";
+import update from "features/prefab-scene/engine";
+
+import { usePrefabEditorStore } from "@app/store";
+import { PrefabScene } from "@app/components";
+import { useMouse } from "@app/hooks";
 
 // Entry point for prefab scene, registers core actions and update loop
 const Scene: React.FC = () => {

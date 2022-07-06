@@ -1,7 +1,5 @@
 import { ApiModule, ModuleValueType } from "@app/types";
-
-import ChildrenModule from "./ChildrenModule";
-import ValueModule from "./ValueModule";
+import { PrefabWindow } from "@app/components";
 
 type Props = {
     modules: ApiModule[];
@@ -14,7 +12,11 @@ const ModuleInput: React.FC<Props> = ({ themeColor, modules }) => {
 
     return (
         <div className="flex flex-col w-full bg-zinc-900 rounded-sm p-1">
-            {hasChildren ? <ChildrenModule themeColor={themeColor} modules={modules} /> : <ValueModule themeColor={themeColor} modules={modules} />}
+            {hasChildren ? (
+                <PrefabWindow.ChildrenModule themeColor={themeColor} modules={modules} />
+            ) : (
+                <PrefabWindow.ValueModule themeColor={themeColor} modules={modules} />
+            )}
         </div>
     );
 };

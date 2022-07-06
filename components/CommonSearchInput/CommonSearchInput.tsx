@@ -1,4 +1,5 @@
 import { SetStateAction } from "react";
+
 import { SearchCircleIcon } from "@heroicons/react/outline";
 
 type SearchInputPropTypes = {

@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 import { ModuleValueType, Input } from "@app/types";
-
-import { AssetList, Common } from "components";
-import { useDebounce } from "hooks";
+import { AssetList, Common } from "@app/components";
+import { useDebounce } from "@app/hooks";
 
 type Props = {
     selectedInput: Input | null;

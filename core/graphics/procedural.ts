@@ -1,12 +1,12 @@
 import {
+    Edge,
+    Triangle,
     areEdgesEqual,
     createTriangle,
     doesShareVertex,
-    Edge,
     getTriangleEdgesInPlace,
     isCounterClockwise,
     isPointInCircumcircle,
-    Triangle,
 } from "@core/math/triangle";
 import { Vec2 } from "@core/math/vector";
 import { v4 as uuid } from "uuid";

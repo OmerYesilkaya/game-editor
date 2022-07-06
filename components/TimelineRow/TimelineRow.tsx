@@ -2,11 +2,11 @@ import { useCallback, useMemo } from "react";
 
 import shallow from "zustand/shallow";
 
-import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorStore } from "@app/store";
 import { Input, ModuleValueType, Prefab } from "@app/types";
 
-import { Timeline } from "components";
-import { editorutils } from "utils";
+import { Timeline } from "@app/components";
+import { editorutils } from "@app/utils";
 
 type Props = {
     rootPrefab: Prefab;

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { KEYS, URL } from "@core/constants";
+import { KEYS, URL } from "@app/constants";
 
 async function deletePrefab(data: { id: number }): Promise<{ Message: string }> {
     const INIT: RequestInit = {

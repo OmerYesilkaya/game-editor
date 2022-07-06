@@ -5,13 +5,13 @@ import shallow from "zustand/shallow";
 
 import { GetPrefabResponse, Prefab } from "@app/types";
 
-import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorStore } from "@app/store";
 import { useEffect } from "react";
 import { useQueryClient } from "react-query";
-import { KEYS } from "@core/constants";
+import { KEYS } from "@app/constants";
 
-import api from "api";
-import { PrefabEditor } from "components";
+import api from "@app/api";
+import { PrefabEditor } from "@app/components";
 
 function convertPrefabResponse(prefabResponse: GetPrefabResponse): Prefab {
     return {

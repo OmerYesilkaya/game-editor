@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 
 import { ChevronDoubleRightIcon, ZoomInIcon } from "@heroicons/react/outline";
 
-import { ANIMATION_SPEEDS } from "@core/constants";
-import { usePrefabEditorStore } from "@core/store";
-import { AssetPreview } from "components";
+import { ANIMATION_SPEEDS } from "@app/constants";
+import { usePrefabEditorStore } from "@app/store";
+import { AssetPreview } from "@app/components";
 
 const ZOOM_CHANGE_BASE_VALUE = 0.5;
 

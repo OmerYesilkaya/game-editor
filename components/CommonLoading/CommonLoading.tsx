@@ -1,5 +1,6 @@
-import { animated, useTransition, config } from "@react-spring/web";
 import { SetStateAction } from "react";
+
+import { animated, useTransition, config } from "@react-spring/web";
 
 type Props = {
     show: boolean;

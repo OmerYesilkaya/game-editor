@@ -4,10 +4,9 @@ import shallow from "zustand/shallow";
 
 import { ApiModule, ModuleValueType } from "@app/types";
 
-import { usePrefabEditorStore } from "@core/store";
-import { MODULE_DEFAULT_VALUES } from "@core/constants";
-
-import { PrefabEditor } from "components";
+import { usePrefabEditorStore } from "@app/store";
+import { MODULE_DEFAULT_VALUES } from "@app/constants";
+import { PrefabEditor } from "@app/components";
 
 type DynamicInputPropTypes = {
     module: ApiModule;

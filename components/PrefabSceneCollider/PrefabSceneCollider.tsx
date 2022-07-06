@@ -1,11 +1,12 @@
-import { usePrefabEditorStore } from "@core/store";
+import { createRef, useMemo } from "react";
+
+import * as THREE from "three";
+import shallow from "zustand/shallow";
 import { Circle } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { createRef, useMemo } from "react";
-import { Mesh } from "three";
-import shallow from "zustand/shallow";
-import * as THREE from "three";
-import { SceneEntity } from "@core/store/types";
+
+import { usePrefabEditorStore } from "@app/store";
+import { SceneEntity } from "store/types";
 
 type Props = {
     entity: SceneEntity;
@@ -21,7 +22,7 @@ const Collider: React.FC<Props> = ({ entity }) => {
     );
 
     const refs = useMemo(() => {
-        return colliderVertices.map((_) => createRef<Mesh>());
+        return colliderVertices.map((_) => createRef<THREE.Mesh>());
     }, [colliderVertices]);
 
     useFrame(() => {

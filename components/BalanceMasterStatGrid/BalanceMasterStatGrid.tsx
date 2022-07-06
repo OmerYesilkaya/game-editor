@@ -1,5 +1,6 @@
-import { ExclamationIcon } from "@heroicons/react/outline";
 import { Fragment } from "react";
+
+import { ExclamationIcon } from "@heroicons/react/outline";
 
 type StatGridPropTypes = {
     selectedTags: string[];

@@ -2,9 +2,9 @@ import { FilmIcon } from "@heroicons/react/outline";
 
 import shallow from "zustand/shallow";
 
-import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorStore } from "@app/store";
 
-import { Timeline } from "components";
+import { Timeline } from "@app/components";
 
 const Container: React.FC = () => {
     const { inputs, rootPrefab } = usePrefabEditorStore(

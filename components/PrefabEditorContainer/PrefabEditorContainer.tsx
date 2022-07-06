@@ -1,4 +1,4 @@
-import { Common, PrefabEditor, AssetList, PrefabScene, PrefabWindow, Timeline } from "components";
+import { Common, PrefabEditor, AssetList, PrefabScene, PrefabWindow, Timeline } from "@app/components";
 
 const Container: React.FC = () => {
     return (

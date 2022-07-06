@@ -1,5 +1,5 @@
 import { Sprite } from "@app/types";
-import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorStore } from "@app/store";
 
 import { EngineContext } from "./types/engineContext";
 

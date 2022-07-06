@@ -1,5 +1,5 @@
-import api from "api";
-import { usePrefabEditorSelectedInput } from "hooks";
+import api from "@app/api";
+import { usePrefabEditorSelectedInput } from "@app/hooks";
 
 const Prefabs: React.FC = () => {
     const { data: prefabs } = api.useGetPrefabs();

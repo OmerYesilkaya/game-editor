@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import shallow from "zustand/shallow";
 import cn from "classnames";
 
-import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorStore } from "@app/store";
 import { ModuleValueType, Input } from "@app/types";
 
 type Props = {

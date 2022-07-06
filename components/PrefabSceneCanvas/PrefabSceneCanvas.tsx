@@ -1,14 +1,13 @@
 import { Suspense } from "react";
 
+import shallow from "zustand/shallow";
+
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, OrthographicCamera } from "@react-three/drei";
 
-import shallow from "zustand/shallow";
-
 import { Sprite, Animation } from "@app/types";
-import { usePrefabEditorStore } from "@core/store";
-
-import { PrefabScene } from "components";
+import { usePrefabEditorStore } from "@app/store";
+import { PrefabScene } from "@app/components";
 
 type Props = {
     animations: Animation[];

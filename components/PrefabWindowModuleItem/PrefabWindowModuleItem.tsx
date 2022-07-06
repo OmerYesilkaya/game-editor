@@ -3,11 +3,11 @@ import { useState } from "react";
 import cn from "classnames";
 import { ChevronRightIcon, TrashIcon } from "@heroicons/react/outline";
 
-import { ApiModule } from "@app/types";
-
-import { usePrefabEditorSelectedPrefab } from "hooks";
-import { PrefabWindow } from "components";
 import { format } from "@core/string";
+
+import { ApiModule } from "@app/types";
+import { usePrefabEditorSelectedPrefab } from "@app/hooks";
+import { PrefabWindow } from "@app/components";
 
 const ModuleItem: React.FC<{ themeColor: string; module: ApiModule }> = ({ themeColor, module }) => {
     const [isExpanded, setIsExpanded] = useState(false);

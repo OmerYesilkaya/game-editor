@@ -3,8 +3,8 @@ import cn from "classnames";
 import { animated, useSpring } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 
-import { Common } from "components";
-import { useWindowBounds } from "hooks";
+import { Common } from "@app/components";
+import { useWindowBounds } from "@app/hooks";
 
 type Props = {
     title: string;

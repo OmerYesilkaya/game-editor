@@ -1,6 +1,7 @@
 import { ViewGridAddIcon } from "@heroicons/react/outline";
-import { Common, PrefabWindow } from "components";
-import { usePrefabEditorSelectedPrefab } from "hooks";
+
+import { Common, PrefabWindow } from "@app/components";
+import { usePrefabEditorSelectedPrefab } from "@app/hooks";
 
 const ActiveModules: React.FC = () => {
     const themeColor = "rose";

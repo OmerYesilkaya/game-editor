@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { usePrefabEditorStore } from "@core/store";
-import { PrefabEditor } from "components";
+import { usePrefabEditorStore } from "@app/store";
+import { PrefabEditor } from "@app/components";
 
 const MenuBar: React.FC = () => {
     const rootPrefab = usePrefabEditorStore((state) => state.rootPrefab);

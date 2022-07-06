@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { CashIcon } from "@heroicons/react/outline";
-
 import assert from "assert";
 import cn from "classnames";
 
-import { Common } from "components";
-import { usePrefabEditorSelectedPrefab } from "hooks";
 import { format } from "@core/string";
+
+import { Common } from "@app/components";
+import { usePrefabEditorSelectedPrefab } from "@app/hooks";
 
 type Props = {
     isModuleWindowOpen: boolean;

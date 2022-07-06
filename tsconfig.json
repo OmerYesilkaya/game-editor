@@ -2,17 +2,15 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
+            "@app/api": ["api"],
+            "@app/components": ["components"],
+            "@app/constants": ["constants"],
+            "@app/hooks": ["hooks"],
+            "@app/store": ["store"],
             "@app/types": ["types"],
+            "@app/utils": ["utils"],
 
-            "@core/*": ["core/*"],
-            "@asset-window/*": ["features/asset-window/*"],
-            "@balance-master/*": ["features/balance-master/*"],
-            "@prefab-editor/*": ["features/prefab-editor/*"],
-            "@prefab-scene/*": ["features/prefab-scene/*"],
-            "@prefab-tree/*": ["features/prefab-tree/*"],
-            "@prefab-window/*": ["features/prefab-window/*"],
-            "@preview-window/*": ["features/preview-window/*"],
-            "@timeline/*": ["features/timeline/*"]
+            "@core/*": ["core/*"]
         },
         "allowJs": true,
         "alwaysStrict": true,

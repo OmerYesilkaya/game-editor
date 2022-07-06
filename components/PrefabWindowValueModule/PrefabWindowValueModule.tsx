@@ -3,8 +3,8 @@ import cn from "classnames";
 import { ApiModule } from "@app/types";
 import { format } from "@core/string";
 
-import { usePrefabEditorSelectedPrefab } from "hooks";
-import { PrefabWindow } from "components";
+import { usePrefabEditorSelectedPrefab } from "@app/hooks";
+import { PrefabWindow } from "@app/components";
 
 type Props = {
     modules: ApiModule[];
