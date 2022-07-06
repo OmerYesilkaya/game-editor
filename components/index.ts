@@ -35,6 +35,20 @@ import PrefabSceneCollider from "./PrefabSceneCollider";
 import PrefabSceneControls from "./PrefabSceneControls";
 import PrefabSceneEntity from "./PrefabSceneEntity";
 import PrefabSceneToolbar from "./PrefabSceneToolbar";
+import PrefabTreeNode from "./PrefabTreeNode";
+import PrefabTreeCanvas from "./PrefabTreeCanvas";
+import PrefabWindowActiveModules from "./PrefabWindowActiveModules";
+import PrefabWindowAvailableModules from "./PrefabWindowAvailableModules";
+import PrefabWindowChildrenModule from "./PrefabWindowChildrenModule";
+import PrefabWindowContainer from "./PrefabWindowContainer";
+import PrefabWindowDynamicInput from "./PrefabWindowDynamicInput";
+import PrefabWindowHeader from "./PrefabWindowHeader";
+import PrefabWindowModuleInput from "./PrefabWindowModuleInput";
+import PrefabWindowModuleItem from "./PrefabWindowModuleItem";
+import PrefabWindowValueModule from "./PrefabWindowValueModule";
+import TimelineContainer from "./TimelineContainer";
+import TimelineInput from "./TimelineInput";
+import TimelineRow from "./TimelineRow";
 
 const AssetList = {
     Animations: AssetListAnimations,
@@ -91,4 +105,27 @@ const PrefabScene = {
     Toolbar: PrefabSceneToolbar,
 };
 
-export { AssetList, AssetPreview, BalanceMaster, Common, PrefabEditor, PrefabScene };
+const PrefabTree = {
+    Canvas: PrefabTreeCanvas,
+    Node: PrefabTreeNode,
+};
+
+const PrefabWindow = {
+    ActiveModules: PrefabWindowActiveModules,
+    AvailableModules: PrefabWindowAvailableModules,
+    ChildrenModule: PrefabWindowChildrenModule,
+    Container: PrefabWindowContainer,
+    DynamicInput: PrefabWindowDynamicInput,
+    Header: PrefabWindowHeader,
+    ModuleInput: PrefabWindowModuleInput,
+    ModuleItem: PrefabWindowModuleItem,
+    ValueModule: PrefabWindowValueModule,
+};
+
+const Timeline = {
+    Container: TimelineContainer,
+    Input: TimelineInput,
+    Row: TimelineRow,
+};
+
+export { AssetList, AssetPreview, BalanceMaster, Common, PrefabEditor, PrefabScene, PrefabTree, PrefabWindow, Timeline };

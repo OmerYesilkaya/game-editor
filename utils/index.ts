@@ -1,3 +1,4 @@
 import editorutils from "./editorutils";
+import prefabsceneutils from "./prefabsceneutils";
 
-export { editorutils };
+export { editorutils, prefabsceneutils };

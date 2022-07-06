@@ -1,7 +1,7 @@
 import { SceneEntity } from "@core/store/types";
 import { TextureInfo } from "types/texture";
+import { prefabsceneutils } from "utils";
 import CustomSpriteMaterial from "../../core/materials/CustomSpriteMaterial";
-import utils from "./utils";
 
 type SceneState = {
     clock: number;
@@ -24,7 +24,7 @@ function update(state: SceneState) {
             const sprite = entity.sprites[entity.spriteIndex % entity.sprites.length];
             if (entity.textureId != sprite.textureId) {
                 entity.textureId = sprite.textureId;
-                utils.setTexture(mat, entity.textureId, state.textureInfos);
+                prefabsceneutils.setTexture(mat, entity.textureId, state.textureInfos);
             }
             CustomSpriteMaterial.setMaterialValues(mat, sprite);
             entity.spriteIndex++;
