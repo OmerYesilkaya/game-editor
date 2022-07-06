@@ -1,5 +1,5 @@
 import { Vec2, Vec3 } from "@core/math/vector";
-import { PrefabCollider } from "@prefab-scene/types/collider";
+import { PrefabCollider } from "features/prefab-scene/types/collider";
 import { ApiModule } from ".";
 
 export type PrefabTransform = {
