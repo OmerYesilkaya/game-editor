@@ -4,10 +4,10 @@ import assert from "assert";
 
 import { ApiModule } from "@app/types";
 import { usePrefabEditorStore } from "@core/store";
-import { api } from "@core/hooks";
 import { MODULE_DEFAULT_VALUES } from "@core/constants";
 
 import { editorutils } from "utils";
+import api from "api";
 
 export default function useSelectedPrefab() {
     // TODO(selim): Use shallow here! It is causing issues with module add and remove for some reason

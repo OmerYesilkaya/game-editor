@@ -1,9 +1,9 @@
-import { api } from "@core/hooks";
-import { useSelectedInput } from "@prefab-editor/hooks";
+import api from "api";
+import { usePrefabEditorSelectedInput } from "hooks";
 
 const ParticleSystems: React.FC = () => {
     const { data: particleSystems } = api.useGetParticleSystems();
-    const { updateInput } = useSelectedInput();
+    const { updateInput } = usePrefabEditorSelectedInput();
 
     if (!particleSystems) return null;
 

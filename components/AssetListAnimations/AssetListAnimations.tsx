@@ -1,9 +1,9 @@
 import shallow from "zustand/shallow";
 import { FilmIcon } from "@heroicons/react/outline";
 
-import { api } from "@core/hooks";
-import { useSelectedInput } from "@prefab-editor/hooks";
 import { usePrefabEditorStore } from "@core/store";
+import api from "api";
+import { usePrefabEditorSelectedInput } from "hooks";
 
 type Props = {
     query: string;
@@ -17,7 +17,7 @@ const Animations: React.FC<Props> = ({ query }) => {
         (state) => ({ setActivePreview: state.setActivePreview, setTemporaryPreview: state.setTemporaryPreview }),
         shallow
     );
-    const { updateInput } = useSelectedInput();
+    const { updateInput } = usePrefabEditorSelectedInput();
 
     if (!animations || !sprites) return null;
 

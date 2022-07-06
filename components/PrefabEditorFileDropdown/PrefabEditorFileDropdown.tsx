@@ -6,12 +6,12 @@ import { useHotkeys } from "react-hotkeys-hook";
 import shallow from "zustand/shallow";
 import { useRouter } from "next/dist/client/router";
 
-import { api } from "@core/hooks";
 import { usePrefabEditorStore } from "@core/store";
 
 import { PutPrefabRequest } from "types/prefab";
 import { Common } from "components";
 import { editorutils } from "utils";
+import api from "api";
 
 type Props = {
     isOpen: boolean;

@@ -1,17 +1,18 @@
 import { PhotographIcon } from "@heroicons/react/outline";
 
-import { api } from "@core/hooks";
-import { useSelectedInput } from "@prefab-editor/hooks";
 import { usePrefabEditorStore } from "@core/store";
+import { usePrefabEditorSelectedInput } from "hooks";
+import api from "api";
 
 type Props = {
     query: string;
 };
+
 const Sprites: React.FC<Props> = ({ query }) => {
     const setTemporaryPreview = usePrefabEditorStore((state) => state.setTemporaryPreview);
     const setActivePreview = usePrefabEditorStore((state) => state.setActivePreview);
 
-    const { updateInput } = useSelectedInput();
+    const { updateInput } = usePrefabEditorSelectedInput();
 
     const { data: sprites, isLoading: isSpritesLoading } = api.useGetSprites();
     if (!sprites) return null;

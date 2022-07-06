@@ -1,14 +1,13 @@
-import Core from "@core/components";
 import { ModuleValueType } from "types/module";
 
-import { AssetList, AssetPreview } from "components";
+import { AssetList, AssetPreview, Common } from "components";
 import { usePrefabEditorSelectedInput } from "hooks";
 
-const AssetWindow: React.FC = () => {
+const AssetListFloatingWindow: React.FC = () => {
     const { selectedInput } = usePrefabEditorSelectedInput();
 
     return (
-        <Core.FloatingWindow
+        <Common.FloatingWindow
             width={720 + 450}
             height={450}
             order={6}
@@ -24,8 +23,8 @@ const AssetWindow: React.FC = () => {
                     <AssetPreview.Container width={450} height={450} />
                 </div>
             </div>
-        </Core.FloatingWindow>
+        </Common.FloatingWindow>
     );
 };
 
-export default AssetWindow;
+export default AssetListFloatingWindow;

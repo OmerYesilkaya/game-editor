@@ -6,12 +6,12 @@ import { ChevronRightIcon, TrashIcon } from "@heroicons/react/outline";
 import { ApiModule } from "@app/types";
 import { stringUtils } from "@core/utils";
 
-import { useSelectedPrefab } from "@prefab-editor/hooks";
-import ModuleInput from "./ModuleInput";
+import { usePrefabEditorSelectedPrefab } from "hooks";
+import { PrefabWindow } from "components";
 
 const ModuleItem: React.FC<{ themeColor: string; module: ApiModule }> = ({ themeColor, module }) => {
     const [isExpanded, setIsExpanded] = useState(false);
-    const { removeModule } = useSelectedPrefab();
+    const { removeModule } = usePrefabEditorSelectedPrefab();
     const hasChildren = module.children && module.children.length > 0;
 
     function toggleExpand() {
@@ -70,7 +70,11 @@ const ModuleItem: React.FC<{ themeColor: string; module: ApiModule }> = ({ theme
                     <div className="w-full flex flex-col px-0.5 pb-0.5">
                         <div className="flex flex-col w-full h-full items-start gap-y-px mt-1">
                             {Object.keys(arrays).map((moduleName) => (
-                                <ModuleInput themeColor={themeColor} key={`${module.id}-${module.arrayIndex}`} modules={arrays[moduleName]} />
+                                <PrefabWindow.ModuleInput
+                                    themeColor={themeColor}
+                                    key={`${module.id}-${module.arrayIndex}`}
+                                    modules={arrays[moduleName]}
+                                />
                             ))}
                         </div>
                     </div>

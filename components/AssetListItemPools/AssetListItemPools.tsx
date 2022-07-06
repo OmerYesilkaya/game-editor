@@ -1,9 +1,9 @@
-import { api } from "@core/hooks";
-import { useSelectedInput } from "@prefab-editor/hooks";
+import api from "api";
+import { usePrefabEditorSelectedInput } from "hooks";
 
 const ItemPools: React.FC = () => {
     const { data: itemPools } = api.useGetItemPools();
-    const { updateInput } = useSelectedInput();
+    const { updateInput } = usePrefabEditorSelectedInput();
 
     if (!itemPools) return null;
 

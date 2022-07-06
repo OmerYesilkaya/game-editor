@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-import Core from "@core/components";
-import { api, useDebounce } from "@core/hooks";
 import { stringUtils } from "@core/utils";
-import { usePrefabEditorSelectedPrefab } from "hooks";
+
+import { Common } from "components";
+import { useDebounce, usePrefabEditorSelectedPrefab } from "hooks";
+import api from "api";
 
 const AvailableModules: React.FC = () => {
     const { data: rootModules } = api.useGetModules();
@@ -30,7 +31,7 @@ const AvailableModules: React.FC = () => {
             <div className=" bg-zinc-100 w-full rounded-sm">
                 <span className="ml-1 font-black uppercase font-default text-zinc-900">Available Modules</span>
             </div>
-            <Core.SearchInput placeholder="Module Name" query={search} setQuery={setSearch} isLoading={isLoading} />
+            <Common.SearchInput placeholder="Module Name" query={search} setQuery={setSearch} isLoading={isLoading} />
             <div className="flex flex-col grow mt-1 max-h-full overflow-y-auto gap-y-0.5">
                 {filteredModules.length > 0
                     ? filteredModules.map((module) => (

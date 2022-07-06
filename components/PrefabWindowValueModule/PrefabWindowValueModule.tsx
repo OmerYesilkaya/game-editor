@@ -3,8 +3,8 @@ import cn from "classnames";
 import { ApiModule } from "@app/types";
 import { stringUtils } from "@core/utils";
 
-import DynamicInput from "./DynamicInput";
-import { useSelectedPrefab } from "@prefab-editor/hooks";
+import { usePrefabEditorSelectedPrefab } from "hooks";
+import { PrefabWindow } from "components";
 
 type Props = {
     modules: ApiModule[];
@@ -12,7 +12,7 @@ type Props = {
 };
 
 const ValueModule: React.FC<Props> = ({ modules, themeColor }) => {
-    const { addToArrayInput } = useSelectedPrefab();
+    const { addToArrayInput } = usePrefabEditorSelectedPrefab();
     const isArray = modules[0].isArray;
 
     function handleAdd(moduleId: number) {
@@ -30,7 +30,7 @@ const ValueModule: React.FC<Props> = ({ modules, themeColor }) => {
                         <div className="mr-1 w-5 rounded-sm bg-zinc-200 text-zinc-700 font-bold text-sm flex items-center justify-center">
                             {module.arrayIndex + 1}
                         </div>
-                        <DynamicInput themeColor={themeColor} module={module} />
+                        <PrefabWindow.DynamicInput themeColor={themeColor} module={module} />
                     </div>
                 ) : (
                     <div
@@ -39,7 +39,7 @@ const ValueModule: React.FC<Props> = ({ modules, themeColor }) => {
                         })}
                     >
                         <span className="ml-1 w-full text-left uppercase text-sm font-bold">{stringUtils.formatCamelCase(module.name)}</span>
-                        <DynamicInput key={`${module.id}-${module.arrayIndex}`} themeColor={themeColor} module={module} />
+                        <PrefabWindow.DynamicInput key={`${module.id}-${module.arrayIndex}`} themeColor={themeColor} module={module} />
                     </div>
                 )
             )}

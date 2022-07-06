@@ -8,8 +8,9 @@ import cn from "classnames";
 import { usePrefabEditorStore } from "@core/store";
 import { ApiModule } from "@app/types";
 import { stringUtils } from "@core/utils";
-import Core from "@core/components";
 import shallow from "zustand/shallow";
+
+import { Common } from "components";
 
 type Props = {
     data: { name: string; modules: ApiModule[]; id: string; internalId: string };
@@ -82,9 +83,9 @@ const TreeNode: React.FC<Props> = ({ data }) => {
             })}
         >
             <Handle type="target" position={Position.Top} style={{ transform: "translateY(14.5px) translateX(-7.5px)", ...customHandleStyles }} />
-            <Core.Header className="w-full px-1.5 py-1" id="drag-handle">
+            <Common.Header className="w-full px-1.5 py-1" id="drag-handle">
                 <div className="flex items-center w-full justify-between">
-                    <Core.EditableText
+                    <Common.EditableText
                         value={name ?? "Unnamed Prefab"}
                         onChange={(e) => setName(e)}
                         handleNameBlur={handleNameBlur}
@@ -108,7 +109,7 @@ const TreeNode: React.FC<Props> = ({ data }) => {
                         </Button>
                     </div>
                 </div>
-            </Core.Header>
+            </Common.Header>
             <Handle type="source" position={Position.Bottom} style={{ transform: "translateY(-14.5px) translateX(-7.5px)", ...customHandleStyles }} />
         </div>
     );

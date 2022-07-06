@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { useDebounce } from "@core/hooks";
 import { usePrefabEditorStore } from "@core/store";
+import { useDebounce } from "hooks";
 
 type Props = {
     prefabId: string;

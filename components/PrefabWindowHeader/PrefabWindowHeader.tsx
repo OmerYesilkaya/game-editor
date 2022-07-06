@@ -5,9 +5,10 @@ import { CashIcon } from "@heroicons/react/outline";
 import assert from "assert";
 import cn from "classnames";
 
-import Core from "@core/components";
-import { useSelectedPrefab } from "@prefab-editor/hooks";
 import { stringUtils } from "@core/utils";
+
+import { Common } from "components";
+import { usePrefabEditorSelectedPrefab } from "hooks";
 
 type Props = {
     isModuleWindowOpen: boolean;
@@ -17,7 +18,7 @@ type Props = {
 const PrefabHeader: React.FC<Props> = ({ isModuleWindowOpen, changeModuleWindowStatus }) => {
     const [isEditable, setIsEditable] = useState(false);
 
-    const { selectedPrefab, setPrefabName } = useSelectedPrefab();
+    const { selectedPrefab, setPrefabName } = usePrefabEditorSelectedPrefab();
 
     const [name, setName] = useState<string | null>(null);
 
@@ -36,7 +37,7 @@ const PrefabHeader: React.FC<Props> = ({ isModuleWindowOpen, changeModuleWindowS
     return (
         <div className="navbar-pattern mb-1 p-1 rounded-sm h-9 flex items-center font-default">
             {selectedPrefab ? (
-                <Core.EditableText
+                <Common.EditableText
                     value={name ?? ""}
                     onChange={(e) => setName(e)}
                     handleNameBlur={handleNameBlur}

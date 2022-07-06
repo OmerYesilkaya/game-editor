@@ -1,16 +1,15 @@
 import { useState } from "react";
 
 import { ModuleValueType, Input } from "@app/types";
-import Core from "@core/components";
-import { useDebounce } from "@core/hooks";
 
-import { AssetList } from "components";
+import { AssetList, Common } from "components";
+import { useDebounce } from "hooks";
 
 type Props = {
     selectedInput: Input | null;
 };
 
-const Wrapper: React.FC<Props> = ({ selectedInput }) => {
+const Container: React.FC<Props> = ({ selectedInput }) => {
     const [keyword, setKeyword] = useState("");
     const { debouncedValue, isLoading } = useDebounce(keyword, 300);
 
@@ -54,11 +53,11 @@ const Wrapper: React.FC<Props> = ({ selectedInput }) => {
     return (
         <div className="flex flex-col h-full">
             <div className="flex gap-x-1">
-                <Core.SearchInput query={keyword} setQuery={setKeyword} isLoading={isLoading} placeholder="Search..." />
+                <Common.SearchInput query={keyword} setQuery={setKeyword} isLoading={isLoading} placeholder="Search..." />
             </div>
             <div className="mt-1 flex flex-col overflow-y-auto font-default text-white grow">{getPanel()}</div>
         </div>
     );
 };
 
-export default Wrapper;
+export default Container;

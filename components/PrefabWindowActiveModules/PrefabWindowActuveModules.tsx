@@ -1,6 +1,5 @@
-import Core from "@core/components";
 import { ViewGridAddIcon } from "@heroicons/react/outline";
-import { PrefabWindow } from "components";
+import { Common, PrefabWindow } from "components";
 import { usePrefabEditorSelectedPrefab } from "hooks";
 
 const ActiveModules: React.FC = () => {
@@ -26,7 +25,7 @@ const ActiveModules: React.FC = () => {
                     )}
                 </div>
             ) : (
-                <Core.NoPrefab />
+                <Common.NoPrefab />
             )}
         </>
     );

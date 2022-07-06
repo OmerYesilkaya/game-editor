@@ -1,9 +1,9 @@
-import { api } from "@core/hooks";
-import { useSelectedInput } from "@prefab-editor/hooks";
+import api from "api";
+import { usePrefabEditorSelectedInput } from "hooks";
 
 const MaterialAnimations: React.FC = () => {
     const { data: materialAnimations } = api.useGetMaterialAnimations();
-    const { updateInput } = useSelectedInput();
+    const { updateInput } = usePrefabEditorSelectedInput();
 
     if (!materialAnimations) return null;
 

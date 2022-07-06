@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { NextPage } from "next";
 
 import { usePrefabEditorStore } from "@core/store";
-import { PrefabEditor } from "@prefab-editor/components";
+import { PrefabEditor } from "components";
 
 const New: NextPage = () => {
     const createNewRoot = usePrefabEditorStore((state) => state.createNewRoot);
@@ -11,7 +11,7 @@ const New: NextPage = () => {
         createNewRoot();
     }, []);
 
-    return <PrefabEditor />;
+    return <PrefabEditor.Container />;
 };
 
 export default New;

@@ -5,12 +5,13 @@ import shallow from "zustand/shallow";
 
 import { GetPrefabResponse, Prefab } from "@app/types";
 
-import { api } from "@core/hooks";
 import { usePrefabEditorStore } from "@core/store";
-import { PrefabEditor } from "@prefab-editor/components";
 import { useEffect } from "react";
 import { useQueryClient } from "react-query";
 import { KEYS } from "@core/constants";
+
+import api from "api";
+import { PrefabEditor } from "components";
 
 function convertPrefabResponse(prefabResponse: GetPrefabResponse): Prefab {
     return {
@@ -43,7 +44,7 @@ const Edit: NextPage<Props> = ({ id }) => {
     }, [id]);
 
     // TODO(selim): Styling
-    return isLoading ? <>Loading...</> : <PrefabEditor />;
+    return isLoading ? <>Loading...</> : <PrefabEditor.Container />;
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {

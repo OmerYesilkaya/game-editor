@@ -1,9 +1,9 @@
-import { api } from "@core/hooks";
-import { useSelectedInput } from "@prefab-editor/hooks";
+import api from "api";
+import { usePrefabEditorSelectedInput } from "hooks";
 
 const TrailSystems: React.FC = () => {
     const { data: trailSystems } = api.useGetTrailSystems();
-    const { updateInput } = useSelectedInput();
+    const { updateInput } = usePrefabEditorSelectedInput();
 
     if (!trailSystems) return null;
 
