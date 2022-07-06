@@ -2,10 +2,11 @@ import assert from "assert";
 import { v4 as uuid } from "uuid";
 
 import { EditorSlice, PrefabSlice } from "./types";
-import { EditorMode } from "@prefab-scene/modes";
-import { MODULE_DEFAULT_VALUES } from "@app/constants";
 import { ApiModule } from "types/module";
+import { MODULE_DEFAULT_VALUES } from "@app/constants";
 import { editorutils } from "@app/utils";
+
+import { EditorMode } from "features/prefab-scene/modes";
 
 export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
     rootPrefab: null,

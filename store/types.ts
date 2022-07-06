@@ -1,13 +1,16 @@
-import { Animation, Sprite } from "@app/types";
-import { Vec2 } from "@core/math/vector";
-import { EditorMode } from "@prefab-scene/modes";
-import { Camera } from "@react-three/fiber";
 import { RefObject } from "react";
+import { Camera } from "@react-three/fiber";
+import { SetState, GetState } from "zustand";
+
+import { EditorMode } from "features/prefab-scene/modes";
+
+import { Vec2 } from "@core/math/vector";
+
+import { Animation, Sprite } from "@app/types";
 import { Input } from "types/input";
 import { ApiModule } from "types/module";
 import { Prefab } from "types/prefab";
 import { TextureInfo, RawTexture } from "types/texture";
-import { SetState, GetState } from "zustand";
 
 export type EditorState = PrefabSlice & SceneSlice & InputSlice & TimelineSlice & TextureSlice & PreviewSlice & ModalSlice & AssetSlice;
 

@@ -1,5 +1,5 @@
-import editorUtils from "@prefab-editor/editorUtils";
 import { EditorSlice, InputSlice } from "./types";
+import { editorutils } from "@app/utils";
 
 export const createInputSlice: EditorSlice<InputSlice> = (set, get) => ({
     inputs: {},
@@ -7,7 +7,7 @@ export const createInputSlice: EditorSlice<InputSlice> = (set, get) => ({
     selectInput: (id) => set(() => ({ selectedInputId: id })),
     clearInputSelection: () => set(() => ({ selectedInputId: null })),
     setInputs: (value) => {
-        const inputs = editorUtils.getPrefabInputs(value);
+        const inputs = editorutils.getPrefabInputs(value);
         set(() => ({ inputs: inputs }));
     },
 

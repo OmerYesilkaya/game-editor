@@ -1,1 +1,1 @@
-export { default } "./AssetListAudios"
+export { default } from "./AssetListAudios";

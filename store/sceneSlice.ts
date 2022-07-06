@@ -1,7 +1,8 @@
 import React from "react";
-import utils from "@prefab-scene/utils";
 import { EditorSlice, SceneSlice } from "./types";
-import { EditorMode } from "@prefab-scene/modes";
+import prefabsceneutils from "utils/prefabsceneutils";
+
+import { EditorMode } from "features/prefab-scene/modes";
 
 export const createSceneSlice: EditorSlice<SceneSlice> = (set) => ({
     mode: EditorMode.Default,
@@ -27,7 +28,7 @@ export const createSceneSlice: EditorSlice<SceneSlice> = (set) => ({
                     textureId: -1,
                     spriteIndex: 0,
                     bufferIndex: 0,
-                    buffer: utils.createBufferAttribute(),
+                    buffer: prefabsceneutils.createBufferAttribute(),
                     geom: React.createRef(),
                     mat: React.createRef(),
                     group: React.createRef(),
