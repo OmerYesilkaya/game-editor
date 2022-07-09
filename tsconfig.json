@@ -9,6 +9,7 @@
             "@app/store": ["store"],
             "@app/types": ["types"],
             "@app/utils": ["utils"],
+            "@app/canvas": ["canvas"],
 
             "@core/*": ["core/*"]
         },

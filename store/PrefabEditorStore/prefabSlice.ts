@@ -5,8 +5,7 @@ import { EditorSlice, PrefabSlice } from "./types";
 import { ApiModule } from "types/module";
 import { MODULE_DEFAULT_VALUES } from "@app/constants";
 import { editorutils } from "@app/utils";
-
-import { EditorMode } from "features/prefab-scene/modes";
+import { EditorMode } from "@app/types";
 
 export const createPrefabSlice: EditorSlice<PrefabSlice> = (set, get) => ({
     rootPrefab: null,

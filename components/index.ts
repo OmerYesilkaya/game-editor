@@ -133,7 +133,7 @@ const PrefabScene = {
     Container: PrefabSceneContainer,
     Controls: PrefabSceneControls,
     Entity: PrefabSceneEntity,
-    Scene: PrefabSceneContent,
+    Content: PrefabSceneContent,
     Toolbar: PrefabSceneToolbar,
 };
 

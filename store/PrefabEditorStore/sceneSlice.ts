@@ -1,8 +1,9 @@
 import React from "react";
-import { EditorSlice, SceneSlice } from "./types";
-import prefabsceneutils from "utils/prefabsceneutils";
 
-import { EditorMode } from "features/prefab-scene/modes";
+import { prefabsceneutils } from "@app/utils";
+import { EditorMode } from "@app/types";
+
+import { EditorSlice, SceneSlice } from "./types";
 
 export const createSceneSlice: EditorSlice<SceneSlice> = (set) => ({
     mode: EditorMode.Default,

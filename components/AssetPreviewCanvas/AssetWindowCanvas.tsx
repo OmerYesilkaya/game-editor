@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { update } from "features/preview-window";
+import { previewCanvas } from "@app/canvas";
 
 import { usePrefabEditorStore } from "@app/store";
 
@@ -14,7 +14,7 @@ function draw(ctx: CanvasRenderingContext2D, time: number, canvasWidth: number, 
     }
 
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    update({ canvas: ctx, canvasWidth, canvasHeight });
+    previewCanvas.update({ canvas: ctx, canvasWidth, canvasHeight });
 
     lastFrameTime = time;
     lastAnimationRequestID = window.requestAnimationFrame((time) => draw(ctx, time, canvasWidth, canvasHeight));

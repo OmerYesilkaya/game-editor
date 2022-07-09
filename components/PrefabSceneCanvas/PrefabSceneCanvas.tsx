@@ -38,7 +38,7 @@ const SceneCanvas: React.FC<Props> = () => {
             >
                 <OrthographicCamera ref={cameraRef} makeDefault near={0.5} far={1000} zoom={100} position={[0, 0, 8]} />
                 <Suspense fallback={null}>
-                    <PrefabScene.Scene />
+                    <PrefabScene.Content />
                 </Suspense>
                 <OrbitControls enableRotate={false} />
             </Canvas>

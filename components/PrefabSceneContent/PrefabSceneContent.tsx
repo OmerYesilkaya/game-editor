@@ -3,16 +3,13 @@ import { useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import shallow from "zustand/shallow";
 
-// TODO(omer): fix these
-import { onMouseClick, onMouseRelease } from "features/prefab-scene/controls";
-import update from "features/prefab-scene/engine";
-
+import { prefabCanvas } from "@app/canvas";
 import { usePrefabEditorStore } from "@app/store";
 import { PrefabScene } from "@app/components";
 import { useMouse } from "@app/hooks";
 
 // Entry point for prefab scene, registers core actions and update loop
-const Scene: React.FC = () => {
+const Content: React.FC = () => {
     const { canvasRef, cameraRef, entityMap, textureInfos } = usePrefabEditorStore(
         (state) => ({
             canvasRef: state.canvasRef,
@@ -25,7 +22,7 @@ const Scene: React.FC = () => {
     const entities = useMemo(() => Object.keys(entityMap).map((key) => entityMap[key]), [entityMap]);
 
     // Controls
-    useMouse(canvasRef, cameraRef, onMouseClick, onMouseRelease);
+    useMouse(canvasRef, cameraRef, prefabCanvas.onMouseClick, prefabCanvas.onMouseRelease);
     // TODO(selim): Add keyboard and right click inputs here
 
     // Main Update Loop
@@ -38,7 +35,7 @@ const Scene: React.FC = () => {
     useFrame(({}, dt) => {
         state.clock += dt;
         state.dt = dt;
-        update(state);
+        prefabCanvas.update(state);
     });
 
     return (
@@ -51,4 +48,4 @@ const Scene: React.FC = () => {
     );
 };
 
-export default Scene;
+export default Content;

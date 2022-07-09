@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { Text } from "@react-three/drei";
 
 import CustomSpriteMaterial from "@core/materials/CustomSpriteMaterial";
-import { onPrefabClick, onPrefabMiss } from "features/prefab-scene/controls";
+import { prefabCanvas } from "@app/canvas";
 
 import { usePrefabEditorStore } from "@app/store";
 import { editorutils } from "@app/utils";
@@ -52,8 +52,8 @@ const SceneEntity: React.FC<Props> = ({ prefabId }) => {
             <PrefabScene.Collider entity={entity} />
             <mesh
                 ref={entity.mesh}
-                onClick={() => onPrefabClick(prefabId)}
-                onPointerMissed={(e) => e.type === "click" && onPrefabMiss()}
+                onClick={() => prefabCanvas.onPrefabClick(prefabId)}
+                onPointerMissed={(e) => e.type === "click" && prefabCanvas.onPrefabMiss()}
                 position={[0, 0, 5]}
             >
                 <planeBufferGeometry args={[2, 2]} />

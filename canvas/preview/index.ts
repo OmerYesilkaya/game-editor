@@ -1,3 +1,3 @@
 import update from "./engine";
 
-export { update };
+export default { update };

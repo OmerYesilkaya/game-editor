@@ -1,5 +1,5 @@
 import { Vec2, Vec3 } from "@core/math/vector";
-import { PrefabCollider } from "features/prefab-scene/types/collider";
+import { PrefabCollider } from "canvas/prefab/types/collider"; // TODO(omer): This type shouldn't be used like this. Maybe move type outside of canvas?
 import { ApiModule } from ".";
 
 export type PrefabTransform = {

@@ -5,9 +5,8 @@ import cn from "classnames";
 import { CursorClickIcon, HandIcon } from "@heroicons/react/solid";
 import { BiReset, BiScreenshot, BiShapeCircle, BiShapeSquare, BiShapeTriangle } from "react-icons/bi";
 
-import { EditorMode } from "features/prefab-scene/modes";
-
 import { usePrefabEditorStore } from "@app/store";
+import { EditorMode } from "@app/types";
 
 const Button: React.FC<any> = ({ name, icon, onClick, isActive }) => {
     return (

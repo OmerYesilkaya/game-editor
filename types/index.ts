@@ -1,5 +1,5 @@
 import { QueryOptionTypes, MutationOptionTypes } from "./api";
-import { AnimationPriority, AnimationTransitionType } from "./enums";
+import { AnimationPriority, AnimationTransitionType, EditorMode } from "./enums";
 import { Module, ModuleValueType, ApiModule } from "./module";
 import { Animation, Sprite, Audio, Generic as GenericAsset } from "./assets";
 import { Prefab, PostPrefabRequest, GetPrefabResponse } from "./prefab";
@@ -22,4 +22,4 @@ export type {
     TextureInfo,
     Sprite,
 };
-export { ModuleValueType, AnimationPriority, AnimationTransitionType };
+export { ModuleValueType, AnimationPriority, AnimationTransitionType, EditorMode };

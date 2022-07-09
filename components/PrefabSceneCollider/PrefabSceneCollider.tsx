@@ -5,8 +5,7 @@ import shallow from "zustand/shallow";
 import { Circle } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
-import { usePrefabEditorStore } from "@app/store";
-import { SceneEntity } from "store/types";
+import { usePrefabEditorStore, SceneEntity } from "@app/store";
 
 type Props = {
     entity: SceneEntity;
